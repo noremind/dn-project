@@ -1,0 +1,66 @@
+@use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
+
+.white {
+  background-color: var(--white) !important;
+}
+.white-fixed {
+  background-color: var(--white-fixed) !important;
+}
+.black {
+  background-color: var(--black) !important;
+}
+.blue-500 {
+  background-color: $blue-500 !important;
+}
+.green-500 {
+  background-color: $green-500 !important;
+}
+.green-400 {
+  background-color: $green-400 !important;
+}
+.orange-500 {
+  background-color: $orange-500 !important;
+}
+.red-300 {
+  background-color: $red-300 !important;
+}
+.yellow-400 {
+  background-color: $yellow-400 !important;
+}
+.priramy-accent {
+  background-color: $primary-color !important;
+}
+.secondary-accent {
+  background-color: $primary-color !important;
+}
+.tertiary-accent {
+  background-color: $tertiary-color !important;
+}
+.status-new-color {
+  background-color: $blue-700 !important;
+}
+.status-moderation-color {
+  background-color: $violet-700 !important;
+}
+.status-processing-color {
+  background-color: $amber-700 !important;
+}
+.status-needs-revision-color {
+  background-color: $yellow-700 !important;
+}
+.status-completed-color {
+  background-color: $green-700 !important;
+}
+.status-rated-color {
+  background-color: $lime-700 !important;
+}
+.status-rejected-color {
+  background-color: $red-700 !important;
+}
+.surface-200 {
+  background-color: var(--surface-200) !important;
+}
+.surface-400 {
+  background-color: var(--surface-400) !important;
+}

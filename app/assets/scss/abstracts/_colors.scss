@@ -1,0 +1,100 @@
+//Main colors
+$primary-color: #00a0e3; // PINE TREE
+$secondary-color: #606c38; // OLIVE
+$tertiary-color: #fefae0; // CORNSILK
+
+// Surface
+$surface-75: #f9fcff;
+$surface-100: #f6f8fa;
+$surface-150: #f2f2f7;
+$surface-200: #e5e5ea;
+$surface-250: #d1d1d6;
+$surface-300: #aeaeb2;
+$surface-400: #8e8e93;
+$surface-500: #9c9591;
+$surface-600: #404040;
+
+// Base color
+$white: #ffffff;
+$white-fixed: #ffffff;
+$black: #000000;
+
+//Blue
+$blue-400: #00a0e3;
+$blue-500: #0646ff;
+$blue-100: #dbeafe;
+$blue-700: #1d4ed8;
+
+// Orange
+$orange-500: #e84e10;
+$orange-600: #bc6c25;
+
+// Red
+$red-100: #fee2e2;
+$red-300: #ff5757;
+$red-500: #b23a48;
+$red-700: #b91c1c;
+
+// Green
+$green-100: #dcfce7;
+$green-500: #22c55e;
+$green-400: #4db988;
+$green-600: #3a7d44;
+$green-700: #15803d;
+$green-750: #196b3c;
+
+// Yellow
+$yellow-100: #fde68a;
+$yellow-400: #ffcc00;
+$yellow-500: #f5d586;
+$yellow-700: #92400e;
+
+// Violet
+$violet-100: #ede9fe;
+$violet-700: #6d28d9;
+
+// Amber
+$amber-100: #fef3c7;
+$amber-700: #b45309;
+
+// Lime
+$lime-100: #ecfccb;
+$lime-700: #4d7c0f;
+
+// Olive
+$olive-500: #606c38;
+
+:root {
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --tertiary-color: #{$tertiary-color};
+
+  --surface-75: #{$surface-75};
+  --surface-100: #{$surface-100};
+  --surface-150: #{$surface-150};
+  --surface-200: #{$surface-200};
+  --surface-250: #{$surface-250};
+  --surface-300: #{$surface-300};
+  --surface-400: #{$surface-400};
+  --surface-500: #{$surface-500};
+  --surface-600: #{$surface-600};
+
+  --white: #{$white};
+  --white-fixed: #{$white-fixed};
+  --black: #{$black};
+}
+
+html.dark {
+  --surface-75: #0f1115;
+  --surface-100: #14171d;
+  --surface-150: #181b22;
+  --surface-200: #232733;
+  --surface-250: #2e3442;
+  --surface-300: #3a4050;
+  --surface-400: #8e8e93;
+  --surface-500: #b5b5b5;
+  --surface-600: #f5f5f5;
+
+  --white: #181b22;
+  --black: #f5f5f5;
+}

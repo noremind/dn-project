@@ -1,0 +1,26 @@
+{
+	"local": {
+		"login": "Логин",
+		"send": "Отправить",
+		"do_not_you_have_an_account": "У вас нет аккаунта?",
+		"register": "Зарегистрироваться",
+		"phone_number": "Номер телефона",
+		"password": "Пароль",
+		"email": "E-mail",
+		"edit_profile": "Редактировать профиль",
+		"profile": "Профиль",
+		"logout": "Выйти",
+		"first_name": "Имя",
+		"second_name": "Фамилия",
+		"birth_date": "День рождение",
+		"profile_has_been_successfully_updated": "Профиль был успешно обновлен",
+		"success": "Успех",
+		"oops": "Упс",
+		"main": "Главная",
+		"courses": "Курсы",
+		"general": "Основные",
+		"start": "Начать",
+		"loading": "Загрузка",
+		"still_empty": "Пока ничего нету"
+	}
+}

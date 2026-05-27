@@ -1,0 +1,220 @@
+@use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
+
+// Button
+.primary-btn {
+  background-color: $primary-color;
+  color: var(--white-fixed);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid transparent;
+  font-weight: 500;
+  transition: 0.4s ease-in-out;
+  white-space: nowrap;
+  width: fit-content;
+  border-radius: $border-r-md;
+
+  & .icon {
+    background-color: var(--white);
+  }
+}
+
+.secondary-btn {
+  background-color: transparent;
+  display: flex;
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $primary-color;
+  font-weight: 500;
+  transition: 0.4s ease-in-out;
+  white-space: nowrap;
+  color: $primary-color;
+
+  & .icon {
+    background-color: var(--white);
+  }
+  &--hover {
+    &:hover {
+      background-color: transparent;
+      border: 1px solid $primary-color;
+      background-color: $primary-color;
+      color: var(--white);
+      font-weight: 500;
+    }
+  }
+}
+
+.tertiary-btn {
+  background-color: $tertiary-color;
+  display: flex;
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $primary-color;
+  font-weight: 500;
+  transition: 0.4s ease-in-out;
+  white-space: nowrap;
+  color: var(--surface-600);
+
+  & .icon {
+    background-color: var(--white);
+  }
+}
+
+//Hidden
+.hidden {
+  visibility: hidden;
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+// Title
+.title-lg {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.title-md {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.title-sm {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.title-point {
+  position: relative;
+  margin-left: 20px;
+  &::before {
+    position: absolute;
+    left: -20px;
+    top: 7px;
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: $primary-color;
+  }
+}
+
+// Transitions
+// Cards
+.card-list-enter-from {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.card-list-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+.card-list-enter-active {
+  transition: all 0.5s ease;
+}
+.card-list-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+.card-list-leave-to {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.card-list-leave-active {
+  transition: all 0.5s ease;
+}
+.card-list-move {
+  transition: transform 0.5s ease;
+}
+
+// Blocks
+.block-list-enter-from {
+  opacity: 0;
+  transform: translateX(40px);
+}
+.block-list-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+.block-list-enter-active {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+.block-list-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+.block-list-leave-to {
+  opacity: 0;
+  transform: translateX(40px);
+}
+.block-list-leave-active {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+.block-list-move {
+  transition: transform 0.5s ease;
+}
+
+// Slide Down
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: all 0.2s ease-out;
+}
+
+.slide-down-enter-from {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.slide-down-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+//Up fade
+.up-fade-enter-active,
+.up-fade-leave-active {
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.up-fade-enter-from,
+.up-fade-leave-to {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+// Loading dots
+.loading-dots::after {
+  content: "";
+  animation: loading-dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes loading-dots {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+  100% {
+    content: "";
+  }
+}

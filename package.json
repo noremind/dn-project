@@ -1,0 +1,33 @@
+{
+  "name": "dn-project",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "cap:sync": "npm run generate && npx cap sync",
+    "cap:android": "npm run generate && npx cap sync android && npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.3.3",
+    "@capacitor/browser": "^8.0.3",
+    "@capacitor/core": "^8.3.3",
+    "@capacitor/ios": "^8.3.3",
+    "@capacitor/local-notifications": "^8.1.0",
+    "@capacitor/preferences": "^8.0.1",
+    "@capacitor/push-notifications": "^8.0.4",
+    "@nuxt/image": "^2.0.0",
+    "@nuxtjs/i18n": "^10.3.0",
+    "@pinia/nuxt": "^0.11.3",
+    "capacitor-secure-storage-plugin": "^0.13.0",
+    "maska": "^2.1.11",
+    "nuxt": "^4.4.5",
+    "vue": "^3.5.33",
+    "vue-router": "^5.0.6"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.3.3",
+    "sass-embedded": "^1.99.0"
+  }
+}
