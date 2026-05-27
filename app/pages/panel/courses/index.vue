@@ -35,6 +35,7 @@ const courses = ref(null);
 
 const pagination = ref(null);
 const currentPage = ref(+route.query?.page || 1);
+
 const status = ref(null);
 
 const getCourses = async () => {
