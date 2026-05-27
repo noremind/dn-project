@@ -28,6 +28,7 @@ const route = useRoute();
 
 useSeo({
   title: t("local.courses"),
+  description: t("local.courses"),
 });
 
 const courses = ref(null);
