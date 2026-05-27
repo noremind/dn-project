@@ -145,3 +145,13 @@ i.icon {
   -webkit-mask-image: url("@/assets/icons/monitor-i.svg");
   mask-image: url("@/assets/icons/monitor-i.svg");
 }
+.module-i {
+  @extend i, .icon;
+  -webkit-mask-image: url("@/assets/icons/module-i.svg");
+  mask-image: url("@/assets/icons/module-i.svg");
+}
+.circle-i {
+  @extend i, .icon;
+  -webkit-mask-image: url("@/assets/icons/circle-i.svg");
+  mask-image: url("@/assets/icons/circle-i.svg");
+}

@@ -7,13 +7,26 @@
         :src="info.image"
         alt="Preview"
       />
-      <UiNoImage v-else class="card__no-image" />
+      <UiNoImage v-else class="card__no-image" border-radius="none" />
 
       <div class="card__content">
         <h3 class="card__title title-sm">{{ info.name }}</h3>
         <p class="card__description">{{ info.description }}</p>
 
-        <div class="card__btns">
+        <div class="card__info">
+          <div
+            class="card__box"
+            v-for="item in infos"
+            :key="item.id"
+            v-show="item.show"
+          >
+            <UiIcon :icon="item.icon" size="size-16" />
+            <p class="card__info-text">{{ item.text }}</p>
+          </div>
+        </div>
+
+        <div class="card__footer">
+          <p class="card__price">{{ formatDigits(10000) }} ₸</p>
           <UiButton
             tag="a"
             :href="`/panel/course/${info.slug}`"
@@ -31,6 +44,21 @@ const { t } = useI18n();
 const props = defineProps({
   info: Object,
 });
+
+const infos = computed(() => [
+  {
+    id: 1,
+    icon: "module-i",
+    text: `${props.info.modules_count} ${props.info.modules_count > 0 ? t("local.modules").toLocaleLowerCase() : t("local.module").toLocaleLowerCase()}`,
+    show: props.info.modules_count > 0,
+  },
+  {
+    id: 2,
+    icon: "circle-i",
+    text: `${props.info.lessons_count} ${props.info.lessons_count ? t("local.lesson").toLocaleLowerCase() : t("local.lessons").toLocaleLowerCase()}`,
+    show: props.info.lessons_count > 0,
+  },
+]);
 </script>
 
 <style lang="scss" scoped>
@@ -40,11 +68,15 @@ const props = defineProps({
     flex-direction: column;
     gap: $gap-md;
     box-shadow: $box-shadow;
-    border-radius: $border-r-md;
+    border-radius: $border-r-xl;
     border: 1px solid var(--surface-200);
+    background-color: var(--surface-100);
   }
   &__description {
     color: $surface-400;
+    font-size: 14px;
+    padding-bottom: $padding-md;
+    border-bottom: 1.5px solid var(--surface-200);
   }
   &__content {
     padding: 0 $padding-md $padding-md;
@@ -52,11 +84,31 @@ const props = defineProps({
     flex-direction: column;
     gap: $gap-sm;
   }
-  &__btns {
+  &__no-image,
+  &__preview {
+    border-top-left-radius: $border-r-lg;
+    border-top-right-radius: $border-r-lg;
+  }
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: $gap-md;
+    &-text {
+      font-size: 14px;
+      color: var(--surface-400);
+    }
+  }
+  &__box {
+    display: flex;
+    align-items: center;
+    gap: $gap-xs;
+  }
+  &__footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: $gap-md;
+    margin-top: 12px;
   }
   &__btn {
     &--start {

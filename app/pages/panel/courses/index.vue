@@ -3,7 +3,12 @@
     <div class="courses__wrapper">
       <h2 class="courses__title hidden">{{ t("local.courses") }}</h2>
 
-      <transition-group tag="div" name="card-list" class="courses__cards">
+      <transition-group
+        tag="div"
+        name="card-list"
+        class="courses__cards"
+        :class="{ 'courses__cards--aside': asideStore.isOpen }"
+      >
         <TheCoursesCard
           v-for="course in courses"
           :key="course.id"
@@ -24,6 +29,7 @@
 
 <script setup>
 const { t } = useI18n();
+const asideStore = useAsideStore();
 const route = useRoute();
 
 useSeo({
@@ -72,10 +78,46 @@ getCourses();
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: $gap-md;
+    &--aside {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
   &__preview {
     object-fit: cover;
     border-radius: $border-r-md;
+  }
+}
+
+@media (max-width: 1024px) {
+  .courses {
+    &__cards {
+      grid-template-columns: repeat(2, 1fr);
+      &--aside {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .courses {
+    &__cards {
+      grid-template-columns: repeat(2, 1fr);
+      &--aside {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}
+
+@media (max-width: 560px) {
+  .courses {
+    &__cards {
+      grid-template-columns: repeat(1, 1fr);
+      &--aside {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
   }
 }
 </style>

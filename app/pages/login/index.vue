@@ -12,6 +12,7 @@
         v-model="email"
         :max-length="255"
         :is-error="!!errorMessage"
+        @key.enter="postAuthLogin"
       />
       <UiInput
         :label="t('local.password')"
@@ -20,6 +21,7 @@
         v-model="password"
         :max-length="255"
         :is-error="!!errorMessage"
+        @key.enter="postAuthLogin"
       />
       <p class="login__error">{{ errorMessage }}</p>
       <!-- <p class="login__text">
@@ -34,7 +36,6 @@
           class="login__btn primary-btn"
           :is-loading="isLoading"
           @action="postAuthLogin"
-          @key.enter="postAuthLogin"
         />
       </div>
     </div>
@@ -105,8 +106,8 @@ watch(
     display: flex;
     flex-direction: column;
     gap: $gap-md;
-    width: 500px;
-    box-shadow: $box-shadow;
+    width: 480px;
+    box-shadow: $box-shadow-md;
     background-color: var(--white);
     padding: $padding-xxl $padding-md $padding-md $padding-md;
     border-radius: $border-r-md;

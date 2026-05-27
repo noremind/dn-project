@@ -21,6 +21,10 @@
 		"general": "Основные",
 		"start": "Начать",
 		"loading": "Загрузка",
-		"still_empty": "Пока ничего нету"
+		"still_empty": "Пока ничего нету",
+		"modules": "Модулей",
+		"lessons": "Уроков",
+		"module": "Модуль",
+		"lesson": "Урок"
 	}
 }

@@ -22,17 +22,36 @@ export const useAuthStore = defineStore('auth', () => {
 		secure: process.env.NODE_ENV === 'production'
 	})
 
+	const userCookie = useCookie(USER, {
+		maxAge: 60 * 60 * 24 * 30,
+		path: '/',
+		sameSite: 'lax',
+		secure: process.env.NODE_ENV === 'production'
+	})
+
 	const isAuth = computed(() => !!(token.value && user.value))
 	const isToken = computed(() => !!token.value)
 	const getToken = computed(() => token.value)
 	const getUser = computed(() => user.value)
 
+	const isWeb = computed(() => !isNative)
+
 	const storageGet = async (key) => {
-		if (!isNative && key === ACCESS) {
-			return accessCookie.value || null
+		if (isWeb.value) {
+			if (key === ACCESS) {
+				return accessCookie.value || null
+			}
+
+			if (key === USER) {
+				return userCookie.value || null
+			}
+
+			return null
 		}
 
-		if (!import.meta.client || !isNative) { return null }
+		if (!import.meta.client) {
+			return null
+		}
 
 		try {
 			const res = await SecureStoragePlugin.get({ key })
@@ -44,12 +63,23 @@ export const useAuthStore = defineStore('auth', () => {
 	}
 
 	const storageSet = async (key, value) => {
-		if (!isNative && key === ACCESS) {
-			accessCookie.value = value
+		if (isWeb.value) {
+			if (key === ACCESS) {
+				accessCookie.value = value
+				return
+			}
+
+			if (key === USER) {
+				userCookie.value = value
+				return
+			}
+
 			return
 		}
 
-		if (!import.meta.client || !isNative) { return }
+		if (!import.meta.client) {
+			return
+		}
 
 		try {
 			await SecureStoragePlugin.set({ key, value })
@@ -59,12 +89,23 @@ export const useAuthStore = defineStore('auth', () => {
 	}
 
 	const storageRemove = async (key) => {
-		if (!isNative && key === ACCESS) {
-			accessCookie.value = null
+		if (isWeb.value) {
+			if (key === ACCESS) {
+				accessCookie.value = null
+				return
+			}
+
+			if (key === USER) {
+				userCookie.value = null
+				return
+			}
+
 			return
 		}
 
-		if (!import.meta.client || !isNative) { return }
+		if (!import.meta.client) {
+			return
+		}
 
 		try {
 			await SecureStoragePlugin.remove({ key })
@@ -73,24 +114,38 @@ export const useAuthStore = defineStore('auth', () => {
 		await Preferences.remove({ key })
 	}
 
+	const parseUser = (value) => {
+		if (!value) {
+			return null
+		}
+
+		if (typeof value === 'object') {
+			return value
+		}
+
+		try {
+			return JSON.parse(value)
+		} catch {
+			return null
+		}
+	}
+
 	const init = async () => {
-		if (initPromise) { return initPromise }
-		if (initialized.value && (user.value || (!token.value && !(import.meta.client && isNative)))) { return }
+		if (initPromise) {
+			return initPromise
+		}
+
+		if (initialized.value) {
+			return
+		}
 
 		initPromise = (async () => {
 			try {
 				const storedToken = await storageGet(ACCESS)
-				token.value = storedToken || token.value || null
+				const storedUser = await storageGet(USER)
 
-				if (import.meta.client && isNative && !user.value) {
-					const storedUser = await storageGet(USER)
-
-					try {
-						user.value = storedUser ? JSON.parse(storedUser) : null
-					} catch {
-						user.value = null
-					}
-				}
+				token.value = storedToken || null
+				user.value = parseUser(storedUser)
 
 				if (!user.value && token.value) {
 					try {
@@ -157,19 +212,24 @@ export const useAuthStore = defineStore('auth', () => {
 	}
 
 	const logout = async () => {
-		token.value = null
-		user.value = null
-
 		try {
 			await useApi().client({
 				url: '/auth/logout',
 				method: 'post'
 			})
-		} catch { }
+		} catch (error) {
+			console.error('[auth] logout request failed', error)
+		}
+
+		token.value = null
+		user.value = null
 
 		await storageRemove(ACCESS)
 		await storageRemove(USER)
-		globalThis.localStorage?.removeItem('threadId')
+
+		if (import.meta.client) {
+			globalThis.localStorage?.removeItem('threadId')
+		}
 
 		router.push('/login')
 	}

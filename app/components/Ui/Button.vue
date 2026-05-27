@@ -82,7 +82,7 @@ const checkState = () => {
   display: flex;
   gap: $gap-xs;
   align-items: center;
-  padding: $padding-md;
+  padding: $padding-sm $padding-md;
   &__btn {
     font-size: inherit;
     color: inherit;

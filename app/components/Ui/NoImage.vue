@@ -1,5 +1,5 @@
 <template>
-  <div class="load">
+  <div class="load" :class="{ 'load--borderless': borderRadius === 'none' }">
     <div class="load__wrapper">
       <img
         class="load__image"
@@ -10,19 +10,26 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const props = defineProps({
+  borderRadius: String,
+});
+</script>
 
 <style lang="scss" scoped>
 .load {
   width: 100%;
   max-width: 100%;
   height: 100%;
+  border-radius: $border-r-md;
+  background-color: var(--surface-200);
+  &--borderless {
+    border-radius: 0px;
+  }
   &__wrapper {
     width: 100%;
     max-width: 100%;
     height: 100%;
-    background-color: var(--surface-200);
-    border-radius: $border-r-md;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,6 +38,7 @@
     // width: 100%;
     margin: auto;
     height: 200px;
+    overflow: hidden;
   }
 }
 </style>
