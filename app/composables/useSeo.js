@@ -1,9 +1,12 @@
+import { useProjectStore } from "~/stores/project";
+
 export function useSeo({ title, description, image }) {
-	let preview = "https://cityhelp-diploma-yij7.vercel.app/assets/images/logo/logo-full.png";
+	const project = useProjectStore()
+	let preview = `${project.domainURL}/assets/images/logo/DN-Project-Rounded.png`;
 
 	useSeoMeta({
-		title: `DN Project - ${title}`,
-		ogTitle: `DN Project - ${title}`,
+		title: `${project.projectName} - ${title}`,
+		ogTitle: `${project.projectName} - ${title}`,
 		description: description,
 		ogDescription: description,
 		image: image || preview,

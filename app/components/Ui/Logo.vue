@@ -7,7 +7,7 @@
     >
       <NuxtImg
         src="/assets/images/logo/DN-Project.png"
-        alt="DN Project"
+        :alt="project.projectName"
         class="logo__preview"
         :style="{ width: width }"
         preload
@@ -21,6 +21,7 @@
 </template>
 
 <script setup>
+const project = useProjectStore();
 const props = defineProps({
   width: String,
   type: {

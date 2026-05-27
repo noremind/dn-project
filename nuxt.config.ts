@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   },
 	app: {
     head: {
-      title: 'DN Project',
+      title: process.env.NUXT_PROJECT_NAME,
       meta: [
         {
           name: 'viewport',
@@ -29,14 +29,16 @@ export default defineNuxtConfig({
   },
 	runtimeConfig: {
 		public: {
-			baseURL: process.env.NUXT_BASE_URL
+			baseURL: process.env.NUXT_BASE_URL,
+			domainURL: process.env.NUXT_DOMAIN_URL,
+			projectName: process.env.NUXT_PROJECT_NAME,
 		}
 	},
 	i18n: {
 		defaultLocale: 'kz',
 		locales: [
-      { code: 'ru', name: 'Ru', file: 'ru.json', flag: "https://cityhelp-diploma-yij7.vercel.app/assets/images/content/ru-flag.png" },
-      { code: 'kz', name: 'Kz', file: 'kz.json', flag: "https://cityhelp-diploma-yij7.vercel.app/assets/images/content/kz-flag.png" },
+      { code: 'ru', name: 'Ru', file: 'ru.json', flag: `${ process.env.NUXT_DOMAIN_URL}/assets/images/content/ru-flag.png` },
+      { code: 'kz', name: 'Kz', file: 'kz.json', flag: `${ process.env.NUXT_DOMAIN_URL}/assets/images/content/kz-flag.png` },
     ],
 		vueI18n: "./i18n.config.ts",
   },
