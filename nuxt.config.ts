@@ -41,10 +41,12 @@ export default defineNuxtConfig({
 		vueI18n: "./i18n.config.ts",
   },
 	nitro: {
+    preset: 'vercel',
     prerender: {
-      crawlLinks: true,
-      routes: ['/']
-    }
+      failOnError: false,
+      crawlLinks: false,
+      routes: [],
+    },
   },
 	experimental: {
     payloadExtraction: false
