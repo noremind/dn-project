@@ -11,7 +11,9 @@
 
       <div class="card__content">
         <h3 class="card__title title-sm">{{ info.name }}</h3>
-        <p class="card__description">{{ info.description }}</p>
+        <p class="card__description" v-if="info.description">
+          {{ info.description }}
+        </p>
 
         <div class="card__info">
           <div
@@ -49,13 +51,13 @@ const infos = computed(() => [
   {
     id: 1,
     icon: "module-i",
-    text: `${props.info.modules_count} ${props.info.modules_count > 0 ? t("local.modules").toLocaleLowerCase() : t("local.module").toLocaleLowerCase()}`,
+    text: `${props.info.modules_count} ${props.info.modules_count === 1 ? t("local.module").toLocaleLowerCase() : t("local.modules").toLocaleLowerCase()}`,
     show: props.info.modules_count > 0,
   },
   {
     id: 2,
     icon: "circle-i",
-    text: `${props.info.lessons_count} ${props.info.lessons_count ? t("local.lesson").toLocaleLowerCase() : t("local.lessons").toLocaleLowerCase()}`,
+    text: `${props.info.lessons_count} ${props.info.lessons_count === 1 ? t("local.lesson").toLocaleLowerCase() : t("local.lessons").toLocaleLowerCase()}`,
     show: props.info.lessons_count > 0,
   },
 ]);
@@ -76,7 +78,6 @@ const infos = computed(() => [
     color: $surface-400;
     font-size: 14px;
     padding-bottom: $padding-md;
-    border-bottom: 1.5px solid var(--surface-200);
   }
   &__content {
     padding: 0 $padding-md $padding-md;
@@ -93,6 +94,8 @@ const infos = computed(() => [
     display: flex;
     align-items: center;
     gap: $gap-md;
+    border-top: 1.5px solid var(--surface-200);
+    padding-top: $padding-md;
     &-text {
       font-size: 14px;
       color: var(--surface-400);

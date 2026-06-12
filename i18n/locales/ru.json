@@ -25,6 +25,9 @@
 		"modules": "Модулей",
 		"lessons": "Уроков",
 		"module": "Модуль",
-		"lesson": "Урок"
+		"lesson": "Урок",
+		"course_program": "Программа курса",
+		"continue": "Продолжить",
+		"buy": "Купить"
 	}
 }

@@ -42,7 +42,7 @@
       />
       <UiIcon
         v-else-if="type === 'password'"
-        :icon="typeInput === 'password' ? 'eye-i' : 'eye-open-i'"
+        :icon="typeInput === 'password' ? 'eye-close-i' : 'eye-i'"
         @click="changeType"
         :color="iconColor"
         :size="iconSize"

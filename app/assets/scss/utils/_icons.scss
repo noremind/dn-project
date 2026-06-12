@@ -155,3 +155,18 @@ i.icon {
   -webkit-mask-image: url("@/assets/icons/circle-i.svg");
   mask-image: url("@/assets/icons/circle-i.svg");
 }
+.eye-i {
+  @extend i, .icon;
+  -webkit-mask-image: url("@/assets/icons/eye-i.svg");
+  mask-image: url("@/assets/icons/eye-i.svg");
+}
+.eye-close-i {
+  @extend i, .icon;
+  -webkit-mask-image: url("@/assets/icons/eye-close-i.svg");
+  mask-image: url("@/assets/icons/eye-close-i.svg");
+}
+.play-i {
+  @extend i, .icon;
+  -webkit-mask-image: url("@/assets/icons/play-i.svg");
+  mask-image: url("@/assets/icons/play-i.svg");
+}

@@ -3,7 +3,6 @@
     <div class="layouts__wrapper">
       <BaseHeader />
 
-      <!-- <h2 class="layouts__title">{{ titleStore.currentTitle }}</h2> -->
       <div class="layouts__content">
         <BaseAside
           class="layouts__aside"

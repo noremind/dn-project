@@ -6,6 +6,6 @@ export default defineNuxtRouteMiddleware(async () => {
 	}
 
 	if (!authStore.isToken) {
-		return navigateTo('/login')
+		// return navigateTo('/login')
 	}
 })

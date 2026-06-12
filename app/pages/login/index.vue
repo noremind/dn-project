@@ -18,7 +18,9 @@
         :label="t('local.password')"
         placeholder=""
         name="password"
+        type="password"
         v-model="password"
+        icon-size="size-20"
         :max-length="255"
         :is-error="!!errorMessage"
         @key.enter="postAuthLogin"
@@ -102,11 +104,13 @@ watch(
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: $padding-md;
   &__wrapper {
     display: flex;
     flex-direction: column;
     gap: $gap-md;
-    width: 480px;
+    max-width: 480px;
+    width: 100%;
     box-shadow: $box-shadow-md;
     background-color: var(--white);
     padding: $padding-xxl $padding-md $padding-md $padding-md;
