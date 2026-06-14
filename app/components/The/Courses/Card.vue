@@ -30,10 +30,25 @@
         <div class="card__footer">
           <p class="card__price">{{ formatDigits(10000) }} ₸</p>
           <UiButton
+            v-if="info.user_status === 'start'"
             tag="a"
             :href="`/panel/course/${info.slug}`"
             :label="t('local.start')"
             class="card__btn card__btn--start primary-btn"
+          />
+          <UiButton
+            v-else-if="info.user_status === 'continue'"
+            tag="a"
+            :href="`/panel/course/${info.slug}`"
+            :label="t('local.continue')"
+            class="card__btn card__btn--start primary-btn"
+          />
+          <UiButton
+            v-else-if="info.user_status === 'buy'"
+            tag="a"
+            :href="`/panel/course/${info.slug}`"
+            :label="t('local.buy')"
+            class="card__btn card__btn--start primary-btn primary-btn--green"
           />
         </div>
       </div>

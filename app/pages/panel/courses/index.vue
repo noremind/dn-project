@@ -24,6 +24,8 @@
         :total="pagination?.total"
       />
     </div>
+
+    <pre>{{ courses }}</pre>
   </section>
 </template>
 
