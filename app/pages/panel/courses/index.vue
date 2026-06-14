@@ -3,11 +3,14 @@
     <div class="courses__wrapper">
       <h2 class="courses__title hidden">{{ t("local.courses") }}</h2>
 
+      <UiTabs :tabs="tabs" v-model="oneTab" type="line-border" />
+
       <transition-group
         tag="div"
         name="card-list"
         class="courses__cards"
         :class="{ 'courses__cards--aside': asideStore.isOpen }"
+        v-if="courses?.length"
       >
         <TheCoursesCard
           v-for="course in courses"
@@ -32,6 +35,18 @@ const { t } = useI18n();
 const asideStore = useAsideStore();
 const route = useRoute();
 
+const tabs = computed(() => [
+  {
+    id: 1,
+    name: t("local.all_courses"),
+  },
+  {
+    id: 2,
+    name: t("local.my_courses"),
+  },
+]);
+const oneTab = ref(tabs.value[0]);
+
 useSeo({
   title: t("local.courses"),
   description: t("local.courses"),
@@ -45,6 +60,7 @@ const currentPage = ref(+route.query?.page || 1);
 const status = ref(null);
 
 const getCourses = async () => {
+  courses.value = null;
   status.value = "pending";
   await useApi()
     .client({
@@ -65,6 +81,40 @@ const getCourses = async () => {
     });
 };
 getCourses();
+
+const getAuthProfileCourses = async () => {
+  courses.value = null;
+  status.value = "pending";
+  await useApi()
+    .client({
+      url: "/auth/profile/courses",
+      method: "get",
+      query: {
+        per_page: 12,
+        page: currentPage.value,
+      },
+    })
+    .then((res) => {
+      courses.value = res.data;
+      pagination.value = res.meta;
+      courses.value?.length ? (status.value = "completed") : "empty";
+    })
+    .catch(() => {
+      status.value = "error";
+    });
+};
+
+watch(
+  () => oneTab.value,
+  (newVal) => {
+    if (newVal.id === 1) {
+      getCourses();
+    }
+    if (newVal.id === 2) {
+      getAuthProfileCourses();
+    }
+  },
+);
 </script>
 
 <style lang="scss" scoped>

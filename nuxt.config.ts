@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	modules: ['@nuxt/image', '@nuxtjs/i18n', '@pinia/nuxt'],
-	plugins: ["~/plugins/maska.js"],
+	plugins: ["~/plugins/maska.js", "~/plugins/plyr.client.js"],
 	css: ['@/assets/scss/index.scss'],
 	vite: {
 		css: {
@@ -35,10 +35,11 @@ export default defineNuxtConfig({
 		}
 	},
 	i18n: {
-		defaultLocale: 'kz',
+		defaultLocale: 'ru',
 		locales: [
       { code: 'ru', name: 'Ru', file: 'ru.json', flag: `${ process.env.NUXT_DOMAIN_URL}/assets/images/content/ru-flag.png` },
       { code: 'kz', name: 'Kz', file: 'kz.json', flag: `${ process.env.NUXT_DOMAIN_URL}/assets/images/content/kz-flag.png` },
+			{ code: 'en', name: 'En', file: 'en.json', flag: `${ process.env.NUXT_DOMAIN_URL}/assets/images/content/en-flag.png` },
     ],
 		vueI18n: "./i18n.config.ts",
   },

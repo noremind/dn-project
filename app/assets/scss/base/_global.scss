@@ -17,7 +17,7 @@
   height: fit-content;
 
   & .icon {
-    background-color: var(--white);
+    background-color: $white;
   }
   &--green {
     background-color: $green-500;
@@ -197,6 +197,52 @@
 .up-fade-leave-to {
   opacity: 0;
   transform: translateY(24px);
+}
+
+//Plyr player
+.plyr--video {
+  background-color: $white !important;
+  border-radius: 8px !important;
+}
+
+.plyr__control--overlaid {
+  background-color: $primary-color !important;
+  width: 48px !important;
+  height: 48px !important;
+  z-index: 200 !important;
+}
+
+.plyr__control--overlaid svg {
+  width: 24px !important;
+  height: 24px !important;
+  left: 50% !important;
+  transform: translateX(-40%);
+}
+
+.plyr__video-wrapper,
+.plyr__poster {
+  background-color: $white !important;
+}
+
+.plyr__controls__item .plyr__control svg {
+  background-color: $primary-color;
+  border-radius: $border-r-md;
+}
+
+.plyr--paused {
+  pointer-events: all !important;
+}
+
+.plyr__video-wrapper :deep(a) {
+  pointer-events: none !important;
+}
+
+.plyr__video-wrapper {
+  pointer-events: none !important;
+}
+
+.plyr__controls {
+  pointer-events: all !important;
 }
 
 // Loading dots

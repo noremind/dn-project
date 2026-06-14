@@ -23,6 +23,7 @@
     "capacitor-secure-storage-plugin": "^0.13.0",
     "maska": "^2.1.11",
     "nuxt": "^4.4.5",
+    "plyr": "^3.8.3",
     "vue": "^3.5.33",
     "vue-router": "^5.0.6"
   },

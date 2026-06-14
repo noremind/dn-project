@@ -20,11 +20,11 @@
           class="accordion__content-link"
           v-for="lesson in info.lessons"
           :key="lesson.id"
-          :to="`/lesson/${lesson.slug}`"
+          :to="`/panel/lesson/${lesson.slug}`"
           :class="{ 'accordion__content-link--active': info.is_completed }"
         >
           <UiIcon
-            icon="play-i"
+            :icon="info.is_completed ? 'checkmark-i' : 'play-i'"
             size="size-16"
             :color="info.is_completed ? 'white' : 'black'"
           />
@@ -63,6 +63,7 @@ const toggleOpen = () => {
     justify-content: space-between;
     align-items: center;
     gap: $gap-md;
+    cursor: pointer;
   }
   &__box {
     display: flex;

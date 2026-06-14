@@ -5,7 +5,7 @@ export async function useFetchClient(options = {}) {
 	const headers = {
 		Accept: "application/json",
 		// "Content-Type": options?.content_type || "application/json",
-		"X-Localization": options.locale,
+		"Accept-Language": options.locale,
 		"Authorization": `Bearer ${authStore.getToken || ""}`,
 		...options?.headers,
 	};

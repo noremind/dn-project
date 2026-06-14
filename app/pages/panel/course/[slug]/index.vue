@@ -13,6 +13,11 @@
           />
           <UiNoImage v-else class="course__no-image" />
 
+          <TheCourseInfo
+            class="course__info course__info--mobile"
+            :info="course"
+          />
+
           <section class="course__program">
             <div class="course__program-header">
               <h3 class="course__program-title">
@@ -41,26 +46,7 @@
             </div>
           </section>
         </div>
-        <div class="course__info">
-          <UiButton
-            v-if="course.user_status === 'buy'"
-            class="course__info-btn primary-btn primary-btn--green"
-            :label="t('local.buy')"
-          />
-          <UiButton
-            v-else-if="course.user_status === 'start'"
-            class="course__info-btn primary-btn"
-            @action="redirectToLesson(course.current_lesson_slug)"
-            :label="t('local.start')"
-          />
-          <UiButton
-            v-else-if="course.user_status === 'continue'"
-            class="course__info-btn primary-btn"
-            :label="t('local.continue')"
-            @action="redirectToLesson(course.current_lesson_slug)"
-          />
-          <hr class="course__hr" />
-        </div>
+        <TheCourseInfo class="course__info" :info="course" />
       </div>
     </div>
   </section>
@@ -99,10 +85,6 @@ const infos = computed(() => [
     text: `${1} ${course.value.lessons_count > 0 ? t("local.lesson").toLocaleLowerCase() : t("local.lessons").toLocaleLowerCase()}`,
   },
 ]);
-
-const redirectToLesson = (slug) => {
-  router.push(`/panel/lesson/${slug}`);
-};
 </script>
 
 <style lang="scss" scoped>
@@ -111,21 +93,13 @@ const redirectToLesson = (slug) => {
     display: flex;
     flex-direction: column;
     gap: $gap-xxl;
+    position: relative;
   }
   &__info {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--surface-200);
-    padding: $padding-md;
-    border-radius: $border-r-md;
-    box-shadow: $box-shadow-md;
-    gap: $gap-xl;
     max-width: 320px;
-    height: fit-content;
     width: 100%;
-    &-btn {
-      height: fit-content;
-      width: 100%;
+    &--mobile {
+      display: none;
     }
   }
   &__box {
@@ -137,6 +111,7 @@ const redirectToLesson = (slug) => {
     flex-direction: column;
     gap: $gap-xl;
     flex-grow: 1;
+    position: relative;
   }
   &__hr {
     height: 2px;
@@ -182,6 +157,19 @@ const redirectToLesson = (slug) => {
   }
   &__no-image {
     height: 350px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .course {
+    &__info {
+      width: 100%;
+      max-width: 100%;
+      display: none;
+      &--mobile {
+        display: flex;
+      }
+    }
   }
 }
 </style>

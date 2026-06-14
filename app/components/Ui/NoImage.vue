@@ -40,6 +40,11 @@ const props = defineProps({
     margin: auto;
     height: 100px;
     overflow: hidden;
+    pointer-events: none;
   }
+}
+
+.dark .load__image {
+  filter: invert(50%);
 }
 </style>
