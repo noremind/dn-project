@@ -66,13 +66,21 @@ const infos = computed(() => [
   {
     id: 1,
     icon: "module-i",
-    text: `${props.info.modules_count} ${props.info.modules_count === 1 ? t("local.module").toLocaleLowerCase() : t("local.modules").toLocaleLowerCase()}`,
+    text: `${props.info.modules_count} ${
+      props.info.modules_count === 1
+        ? t("local.module").toLocaleLowerCase()
+        : t("local.modules").toLocaleLowerCase()
+    }`,
     show: props.info.modules_count > 0,
   },
   {
     id: 2,
     icon: "circle-i",
-    text: `${props.info.lessons_count} ${props.info.lessons_count === 1 ? t("local.lesson").toLocaleLowerCase() : t("local.lessons").toLocaleLowerCase()}`,
+    text: `${props.info.lessons_count} ${
+      props.info.lessons_count === 1
+        ? t("local.lesson").toLocaleLowerCase()
+        : t("local.lessons").toLocaleLowerCase()
+    }`,
     show: props.info.lessons_count > 0,
   },
 ]);
