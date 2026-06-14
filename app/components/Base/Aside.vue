@@ -28,7 +28,7 @@
               :deg="asideStore.isOpen ? 'down' : 'right'"
               @click="asideStore.toggle()"
             />
-            <UiDarkMode />
+            <UiDarkMode class="aside__dark aside__dark--mobile" />
             <!-- <UiIcon
               class="aside__icon aside__icon--mobile"
               icon="close"
@@ -157,6 +157,11 @@ watch(
       height: 0px;
     }
   }
+  &__dark {
+    &--mobile {
+      display: none;
+    }
+  }
   &__name {
     font-size: 16px;
     font-weight: 500;
@@ -229,6 +234,11 @@ watch(
     }
     &__wrapper {
       max-width: 450px;
+    }
+    &__dark {
+      &--mobile {
+        display: block;
+      }
     }
     &__text {
       &--hide {

@@ -33,11 +33,12 @@ const props = defineProps({
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 200px;
   }
   &__image {
     // width: 100%;
     margin: auto;
-    height: 200px;
+    height: 100px;
     overflow: hidden;
   }
 }
