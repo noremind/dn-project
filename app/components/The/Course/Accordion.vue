@@ -17,12 +17,17 @@
 
       <div class="accordion__content" v-if="isOpen">
         <nuxt-link
-          class="accordion__content-box"
+          class="accordion__content-link"
           v-for="lesson in info.lessons"
           :key="lesson.id"
           :to="`/lesson/${lesson.slug}`"
+          :class="{ 'accordion__content-link--active': info.is_completed }"
         >
-          <UiIcon icon="play-i" size="size-16" color="black" />
+          <UiIcon
+            icon="play-i"
+            size="size-16"
+            :color="info.is_completed ? 'white' : 'black'"
+          />
           <p class="accordion__content-text">{{ lesson.name }}</p>
         </nuxt-link>
       </div>
@@ -71,7 +76,7 @@ const toggleOpen = () => {
     display: flex;
     flex-direction: column;
     gap: $gap-lg;
-    &-box {
+    &-link {
       display: flex;
       align-items: center;
       gap: $gap-xs;
@@ -81,6 +86,11 @@ const toggleOpen = () => {
       color: var(--black);
       font-size: 14px;
       cursor: pointer;
+      box-shadow: $box-shadow;
+      &--active {
+        background-color: $primary-color;
+        color: $white;
+      }
     }
   }
 }

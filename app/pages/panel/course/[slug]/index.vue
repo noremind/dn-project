@@ -8,7 +8,7 @@
           <img
             v-if="course.image"
             class="course__preview"
-            src=""
+            :src="course.image"
             alt="Preview"
           />
           <UiNoImage v-else class="course__no-image" />
@@ -44,19 +44,24 @@
         <div class="course__info">
           <UiButton
             v-if="course.user_status === 'buy'"
-            class="course__info-btn primary-btn primary-btn--buy"
+            class="course__info-btn primary-btn primary-btn--green"
             :label="t('local.buy')"
           />
           <UiButton
-            v-else
+            v-else-if="course.user_status === 'start'"
+            class="course__info-btn primary-btn"
+            @action="redirectToLesson(course.current_lesson_slug)"
+            :label="t('local.start')"
+          />
+          <UiButton
+            v-else-if="course.user_status === 'continue'"
             class="course__info-btn primary-btn"
             :label="t('local.continue')"
+            @action="redirectToLesson(course.current_lesson_slug)"
           />
           <hr class="course__hr" />
         </div>
       </div>
-
-      <pre>{{ course }}</pre>
     </div>
   </section>
 </template>
@@ -64,6 +69,7 @@
 <script setup>
 const { t } = useI18n();
 const route = useRoute();
+const router = useRouter();
 const titleStore = useTitleStore();
 const course = ref(null);
 
@@ -93,6 +99,10 @@ const infos = computed(() => [
     text: `${1} ${course.value.lessons_count > 0 ? t("local.lesson").toLocaleLowerCase() : t("local.lessons").toLocaleLowerCase()}`,
   },
 ]);
+
+const redirectToLesson = (slug) => {
+  router.push(`/panel/lesson/${slug}`);
+};
 </script>
 
 <style lang="scss" scoped>

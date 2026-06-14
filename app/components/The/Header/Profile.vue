@@ -187,10 +187,15 @@ onUnmounted(() => {
     &__wrapper {
       padding: $padding-xs;
     }
+    &__avatar {
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+    }
     &__name {
       display: none;
       &--mobile {
-        font-size: 14px;
+        font-size: 10px;
         display: block;
       }
     }

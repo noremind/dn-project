@@ -12,6 +12,10 @@ export const useAsideStore = defineStore("aside", () => {
 		isMobileOpen.value = !isMobileOpen.value
 	}
 
+	const mobileClose = () => {
+		isMobileOpen.value = false
+	}
+
 	const setOpen = (value) => {
 		isOpen.value = value;
 		localStorage.setItem("isOpenAside", JSON.stringify(value));
@@ -31,6 +35,7 @@ export const useAsideStore = defineStore("aside", () => {
 		isMobileOpen,
 		toggle,
 		setOpen,
-		mobileToggle
+		mobileToggle,
+		mobileClose
 	};
 });

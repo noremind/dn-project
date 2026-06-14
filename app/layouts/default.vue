@@ -14,6 +14,14 @@
       </div>
     </div>
   </div>
+  <UiPartialModal
+    :is-show="asideStore.isMobileOpen"
+    @close="asideStore.mobileClose"
+  >
+    <template #body>
+      <BaseAside />
+    </template>
+  </UiPartialModal>
 </template>
 
 <script setup>
@@ -76,9 +84,10 @@ watch(
     }
     &__aside {
       &--mobile {
-        position: fixed;
-        top: 0px;
-        right: 0;
+        // position: fixed;
+        // top: 0px;
+        // right: 0;
+        display: none;
       }
     }
     &__main {

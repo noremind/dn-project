@@ -19,6 +19,9 @@
   & .icon {
     background-color: var(--white);
   }
+  &--green {
+    background-color: $green-500;
+  }
 }
 
 .secondary-btn {

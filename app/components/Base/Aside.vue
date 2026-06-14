@@ -28,13 +28,14 @@
               :deg="asideStore.isOpen ? 'down' : 'right'"
               @click="asideStore.toggle()"
             />
-            <UiIcon
+            <UiDarkMode />
+            <!-- <UiIcon
               class="aside__icon aside__icon--mobile"
               icon="close"
               color="black"
               size="size-30"
               @click="asideStore.mobileToggle()"
-            />
+            /> -->
           </li>
           <li class="aside__li" v-for="list in navs" :key="list.name">
             <p
@@ -220,8 +221,8 @@ watch(
     &--mobile {
       max-width: 100%;
       width: 100%;
-      height: 100vh;
-      background-color: var(--white);
+      // height: 100vh;
+      // background-color: var(--white);
       display: flex;
       justify-content: center;
       align-items: center;

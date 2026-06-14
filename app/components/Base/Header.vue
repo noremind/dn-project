@@ -15,7 +15,7 @@
       <div class="header__info">
         <UiLocale class="header__locale" />
 
-        <UiDarkMode />
+        <UiDarkMode class="header__mode" />
 
         <TheHeaderProfile />
 
@@ -48,6 +48,7 @@ const authStore = useAuthStore();
     align-items: center;
     box-shadow: $box-shadow;
   }
+
   &__info {
     display: flex;
     gap: $gap-xxl;
@@ -89,6 +90,9 @@ const authStore = useAuthStore();
       display: none;
     }
     &__locale {
+      display: none;
+    }
+    &__mode {
       display: none;
     }
   }
