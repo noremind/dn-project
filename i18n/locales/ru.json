@@ -32,6 +32,10 @@
 		"all_courses": "Все курсы",
 		"my_courses": "Мой курсы",
 		"total": "Общее количество",
-		"next_lesson": "Следующий урок"
+		"next_lesson": "Следующий урок",
+		"materials": "Материалы",
+		"take_test": "Сдать тест",
+		"download_conspectus": "Скачать конспект",
+		"first_need_to_take_the_test": "Сперва нужно сдать тест"
 	}
 }

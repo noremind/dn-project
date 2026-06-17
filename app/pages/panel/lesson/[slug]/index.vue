@@ -5,7 +5,12 @@
 
       <h2 class="lesson__title">{{ lesson.name }}</h2>
 
-      <UiTabs v-if="tabs?.length > 1" :tabs="tabs" v-model="oneTab" />
+      <UiTabs
+        v-if="tabsVideo?.length > 1"
+        :tabs="tabsVideo"
+        v-model="oneTabVideo"
+        type="line"
+      />
 
       <UiPlayer
         class="lesson__player"
@@ -14,13 +19,33 @@
         "
       />
 
-      <div class="lesson__conspectus">{{ lesson.content }}</div>
+      <div class="lesson__materials">
+        <p class="lesson__text">{{ t("local.materials") }}:</p>
+        <UiLogo v-if="isConverting" />
+        <div
+          id="conspectus"
+          class="lesson__conspectus"
+          v-html="lesson.content"
+        ></div>
+        <UiButton
+          class="secondary-btn"
+          :label="t('local.download_conspectus')"
+          before-icon="download-i"
+          icon-size="size-20"
+          icon-color="primary-color"
+          @action="downloadContectus"
+          :is-loading="isConverting"
+        />
+      </div>
 
       <div class="lesson__btns">
         <div class="lesson__btns-box">
           <UiButton
+            v-for="test in lesson.lesson_tests"
+            :key="test.id"
             class="primary-btn primary-btn--green"
-            :label="t('local.take_test')"
+            :label="`${t('local.take_test')}(${test.title})`"
+            @action="redirectToTest(test)"
           />
           <UiButton
             class="primary-btn"
@@ -28,19 +53,24 @@
             after-icon="chevron"
             icon-size="size-20"
             icon-deg="right"
+            @action="redirectToNextLesson"
+            :is-loading="isLoading"
           />
         </div>
       </div>
     </div>
-    <pre>{{ lesson }}</pre>
   </section>
 </template>
 
 <script setup>
+const config = useRuntimeConfig();
 const { t } = useI18n();
 const router = useRouter();
 const route = useRoute();
 const titleStore = useTitleStore();
+
+const isConverting = ref(false);
+const isLoading = ref(null);
 
 const lesson = ref(null);
 
@@ -58,22 +88,58 @@ const breadcrumb = computed(() => [
   },
 ]);
 
-const tabs = ref([]);
-const oneTab = ref(null);
+const tabsVideo = ref([]);
+const oneTabVideo = ref(null);
 
 await useApi()
-  .client({ url: `/lessons/${route.params.slug}`, method: "get" })
+  .ssr({ url: `/lessons/${route.params.slug}`, method: "get" })
   .then((res) => {
     lesson.value = res.data;
     lesson.value.lesson_videos?.length
       ? lesson.value.lesson_videos.forEach((item) =>
-          tabs.value?.push({ id: item.id, name: item.title, url: item.url }),
+          tabsVideo.value?.push({
+            id: item.id,
+            name: item.title,
+            url: item.url,
+          }),
         )
       : null;
-    oneTab.value = tabs.value?.[0] || null;
+    oneTabVideo.value = tabsVideo.value?.[0] || null;
   });
 
 titleStore.setTitle(lesson.value?.course.name, "/panel/courses");
+
+useSeo({
+  title: `${lesson.value.course.name} > ${lesson.value.name}`,
+});
+
+const downloadContectus = async () => {
+  isConverting.value = true;
+  await useExportToPdf(
+    "conspectus",
+    `${config.public.projectName} - ${lesson.value.course.name} > ${lesson.value.name}`,
+  );
+  isConverting.value = false;
+};
+
+const redirectToTest = (test) => {
+  router.push(`/panel/lesson/test/${test.id}`);
+};
+
+const redirectToNextLesson = async () => {
+  if (!lesson.value?.lesson_tests?.[0].passed) {
+    useNotify({
+      title: "!",
+      text: t("local.first_need_to_take_the_test"),
+      status: "error",
+    });
+    return;
+  }
+  isLoading.value = true;
+  await useApi().client({ url: `/lessons/${lesson.value.slug}/finish` });
+  isLoading.value = false;
+  router.push(`/panel/lesson/${lesson.value.next}`);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -82,6 +148,18 @@ titleStore.setTitle(lesson.value?.course.name, "/panel/courses");
     display: flex;
     flex-direction: column;
     gap: $gap-xxl;
+  }
+  &__text {
+    font-weight: 600;
+  }
+  &__materials {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-md;
+    background-color: var(--surface-100);
+    padding: $padding-md;
+    border-radius: $border-r-md;
+    box-shadow: $box-shadow;
   }
   &__btns {
     display: flex;
@@ -93,6 +171,13 @@ titleStore.setTitle(lesson.value?.course.name, "/panel/courses");
       justify-content: flex-end;
       gap: $gap-md;
       align-items: center;
+    }
+  }
+  &__btn {
+    &--download {
+      background-color: transparent;
+      color: $blue-500;
+      border: 1px solid $blue-500;
     }
   }
 }

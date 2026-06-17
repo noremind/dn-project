@@ -1,9 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	modules: ['@nuxt/image', '@nuxtjs/i18n', '@pinia/nuxt'],
-	plugins: ["~/plugins/maska.js", "~/plugins/plyr.client.js"],
+	plugins: ["~/plugins/maska.js", "~/plugins/plyr.client.js", "~/plugins/html2pdf.client.js", "~/plugins/mathjax.client.js"],
 	css: ['@/assets/scss/index.scss'],
 	vite: {
+		optimizeDeps: {
+      include: [
+        '@capacitor/core',
+        '@capacitor/preferences',
+        '@capacitor/push-notifications',
+        'capacitor-secure-storage-plugin',
+        'html2pdf.js', // CJS
+        'maska',
+        'plyr'
+      ]
+    },
 		css: {
 			preprocessorOptions: {
 				scss: {

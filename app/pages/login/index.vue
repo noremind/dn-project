@@ -12,7 +12,7 @@
         v-model="email"
         :max-length="255"
         :is-error="!!errorMessage"
-        @key.enter="postAuthLogin"
+        @keyup.enter="postAuthLogin"
       />
       <UiInput
         :label="t('local.password')"
@@ -23,7 +23,7 @@
         icon-size="size-20"
         :max-length="255"
         :is-error="!!errorMessage"
-        @key.enter="postAuthLogin"
+        @keyup.enter="postAuthLogin"
       />
       <p class="login__error">{{ errorMessage }}</p>
       <!-- <p class="login__text">
@@ -70,6 +70,7 @@ const postAuthLogin = async () => {
       url: "auth/login",
       method: "post",
       body: { email: email.value, password: password.value },
+      isLoading: false,
     })
     .then(async (res) => {
       await authStore.setToken(res.token, "/panel");

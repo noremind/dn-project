@@ -2,6 +2,7 @@ export async function useFetchSsr(options = {}) {
 	const authStore = useAuthStore()
 	const loaderStore = useLoaderStore()
 	const config = useRuntimeConfig();
+	const router = useRouter()
 
 	const headers = {
 		Accept: "application/json",
@@ -27,12 +28,11 @@ export async function useFetchSsr(options = {}) {
 
 	} catch (error) {
 		loaderStore.setLoader(false)
-		console.log(error)
 		if (
-			error?.statusCode === 401 ||
-			error?.data?.message === "Не авторизован"
+			error?.statusCode === 401
 		) {
-			authStore.logout({ type: 'local' })
+			// authStore.logout()
+			router.push('/login')
 		}
 		throw error;
 	}

@@ -63,7 +63,7 @@ const getCourses = async () => {
   courses.value = null;
   status.value = "pending";
   await useApi()
-    .client({
+    .ssr({
       url: "/courses",
       method: "get",
       query: {

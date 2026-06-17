@@ -1,5 +1,7 @@
 export async function useFetchClient(options = {}) {
 	const authStore = useAuthStore()
+	const loaderStore = useLoaderStore()
+	const router = useRouter()
 
 
 	const headers = {
@@ -10,6 +12,8 @@ export async function useFetchClient(options = {}) {
 		...options?.headers,
 	};
 
+	options?.isLoading === false ? null : loaderStore.setLoader(true)
+
 	try {
 		const response = await $fetch(options.url, {
 			body: options?.data || options?.body,
@@ -19,11 +23,15 @@ export async function useFetchClient(options = {}) {
 			headers,
 		});
 
+		loaderStore.setLoader(false)
+
 		return response;
 
 	} catch (error) {
+		loaderStore.setLoader(false)
 		if (error?.response?.status === 401) {
-			authStore.logout({ type: 'local' })
+			router.push('/login')
+			// authStore.logout()
 		}
 		const normalizedError = error?.response || {
 			statusCode: error?.status || 500,

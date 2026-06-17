@@ -170,3 +170,8 @@ i.icon {
   -webkit-mask-image: url("@/assets/icons/play-i.svg");
   mask-image: url("@/assets/icons/play-i.svg");
 }
+.download-i {
+  @extend i, .icon;
+  -webkit-mask-image: url("@/assets/icons/download-i.svg");
+  mask-image: url("@/assets/icons/download-i.svg");
+}

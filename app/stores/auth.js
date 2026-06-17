@@ -15,19 +15,9 @@ export const useAuthStore = defineStore('auth', () => {
 	const router = useRouter()
 	const isNative = Capacitor.isNativePlatform()
 
-	const accessCookie = useCookie(ACCESS, {
-		maxAge: 60 * 60 * 24 * 30,
-		path: '/',
-		sameSite: 'lax',
-		secure: process.env.NODE_ENV === 'production'
-	})
+	const accessCookie = useCookie(ACCESS)
 
-	const userCookie = useCookie(USER, {
-		maxAge: 60 * 60 * 24 * 30,
-		path: '/',
-		sameSite: 'lax',
-		secure: process.env.NODE_ENV === 'production'
-	})
+	const userCookie = useCookie(USER)
 
 	const isAuth = computed(() => !!(token.value && user.value))
 	const isToken = computed(() => !!token.value)
@@ -212,14 +202,11 @@ export const useAuthStore = defineStore('auth', () => {
 	}
 
 	const logout = async () => {
-		try {
-			await useApi().client({
-				url: '/auth/logout',
-				method: 'post'
-			})
-		} catch (error) {
-			console.error('[auth] logout request failed', error)
-		}
+		useApi().client({
+			url: '/auth/logout',
+			method: 'post'
+		})
+
 
 		token.value = null
 		user.value = null

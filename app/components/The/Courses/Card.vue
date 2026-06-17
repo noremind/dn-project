@@ -37,7 +37,7 @@
           </div>
         </div>
 
-        <UiProgressBar :percent="info.user_progress.progress" />
+        <UiProgressBar :percent="info.user_progress?.progress || 0" />
 
         <div class="card__footer">
           <p class="card__price">{{ formatDigits(10000) }} ₸</p>
