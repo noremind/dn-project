@@ -18,8 +18,10 @@ $surface-600: #404040;
 $white: #ffffff;
 $white-fixed: #ffffff;
 $black: #000000;
+$black-fixed: #000000;
 
 //Blue
+$blue-200: #97b2ff;
 $blue-400: #00a0e3;
 $blue-500: #0646ff;
 $blue-100: #dbeafe;
@@ -82,6 +84,7 @@ $olive-500: #606c38;
   --white: #{$white};
   --white-fixed: #{$white-fixed};
   --black: #{$black};
+  --black-fixed: #{$black-fixed};
 }
 
 html.dark {

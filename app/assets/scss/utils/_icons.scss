@@ -175,3 +175,8 @@ i.icon {
   -webkit-mask-image: url("@/assets/icons/download-i.svg");
   mask-image: url("@/assets/icons/download-i.svg");
 }
+.i-circle {
+  @extend i, .icon;
+  -webkit-mask-image: url("@/assets/icons/i-circle.svg");
+  mask-image: url("@/assets/icons/i-circle.svg");
+}

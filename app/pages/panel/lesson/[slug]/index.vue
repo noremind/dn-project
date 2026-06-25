@@ -123,7 +123,7 @@ const downloadContectus = async () => {
 };
 
 const redirectToTest = (test) => {
-  router.push(`/panel/lesson/test/${test.id}`);
+  router.push(`/panel/lesson/test/${test.id}?lesson_id=${lesson.value.id}`);
 };
 
 const redirectToNextLesson = async () => {

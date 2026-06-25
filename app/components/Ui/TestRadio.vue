@@ -43,7 +43,7 @@ const props = defineProps({
   correctAnswers: Object,
   status: [String, null],
   userAnswers: Object,
-  show: { type: String, default: "title" },
+  show: { type: String, default: "text" },
   type: { type: String, default: "" },
 });
 
