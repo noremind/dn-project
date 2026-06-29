@@ -45,6 +45,8 @@
 		"will_you_complete_the_testing": "Завершите тестирование?",
 		"finish_the_test_alert_information": "If you finish, you will not be able to continue this test later.",
 		"question": "Вопрос",
-		"all_questions": "Все вопросы"
+		"all_questions": "Все вопросы",
+		"enter": "Войти",
+		"error": "Ошибка"
 	}
 }

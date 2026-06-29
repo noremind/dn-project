@@ -38,8 +38,6 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-
 const notifyStore = useNotifyStore();
 const notifications = computed(() => notifyStore.notifications);
 </script>
@@ -59,6 +57,10 @@ const notifications = computed(() => notifyStore.notifications);
   &--hide {
     pointer-events: none;
   }
+}
+
+.dark .notification {
+  background-color: var(--white);
 }
 
 .notification {
@@ -97,7 +99,7 @@ const notifications = computed(() => notifyStore.notifications);
 
   &__title {
     font-size: 15px;
-    color: black;
+    color: var(--black);
     margin: 0 0 5px;
   }
 

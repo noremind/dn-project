@@ -21,12 +21,12 @@
           v-for="lesson in info.lessons"
           :key="lesson.id"
           :to="`/panel/lesson/${lesson.slug}`"
-          :class="{ 'accordion__content-link--active': info.is_completed }"
+          :class="{ 'accordion__content-link--active': lesson.is_completed }"
         >
           <UiIcon
-            :icon="info.is_completed ? 'checkmark-i' : 'play-i'"
+            :icon="lesson.is_completed ? 'checkmark-i' : 'play-i'"
             size="size-16"
-            :color="info.is_completed ? 'white' : 'black'"
+            :color="lesson.is_completed ? 'white' : 'black'"
           />
           <p class="accordion__content-text">{{ lesson.name }}</p>
         </nuxt-link>

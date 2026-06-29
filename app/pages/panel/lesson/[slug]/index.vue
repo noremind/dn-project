@@ -129,7 +129,7 @@ const redirectToTest = (test) => {
 const redirectToNextLesson = async () => {
   if (!lesson.value?.lesson_tests?.[0].passed) {
     useNotify({
-      title: "!",
+      title: t("local.error"),
       text: t("local.first_need_to_take_the_test"),
       status: "error",
     });
@@ -160,6 +160,25 @@ const redirectToNextLesson = async () => {
     padding: $padding-md;
     border-radius: $border-r-md;
     box-shadow: $box-shadow;
+  }
+  &__conspectus {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-md;
+    &:deep(ul) {
+      display: flex;
+      flex-direction: column;
+      gap: $gap-xs;
+    }
+    &:deep(li) {
+      margin-left: 24px;
+    }
+    &:deep(blockquote) {
+      font-style: italic;
+      p {
+        font-style: inherit;
+      }
+    }
   }
   &__btns {
     display: flex;

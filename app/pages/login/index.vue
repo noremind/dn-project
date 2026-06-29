@@ -34,7 +34,7 @@
       </p> -->
       <div class="login__box">
         <UiButton
-          :label="t('local.send')"
+          :label="t('local.enter')"
           class="login__btn primary-btn"
           :is-loading="isLoading"
           @action="postAuthLogin"

@@ -77,12 +77,12 @@ const infos = computed(() => [
   {
     id: 1,
     icon: "module-i",
-    text: `${1} ${course.value.modules_count > 0 ? t("local.module").toLocaleLowerCase() : t("local.modules").toLocaleLowerCase()}`,
+    text: `${course.value.modules_count} ${course.value.modules_count > 0 ? t("local.module").toLocaleLowerCase() : t("local.modules").toLocaleLowerCase()}`,
   },
   {
     id: 2,
     icon: "circle-i",
-    text: `${1} ${course.value.lessons_count > 0 ? t("local.lesson").toLocaleLowerCase() : t("local.lessons").toLocaleLowerCase()}`,
+    text: `${course.value.modules_count} ${course.value.lessons_count > 0 ? t("local.lesson").toLocaleLowerCase() : t("local.lessons").toLocaleLowerCase()}`,
   },
 ]);
 </script>

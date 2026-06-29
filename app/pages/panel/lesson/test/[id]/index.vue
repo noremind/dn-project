@@ -49,8 +49,6 @@
             :label="t('local.finish')"
             class="test__btn test__btn--finish test__btn--finish-mobile secondary-btn"
             @action="setFinishModal(true)"
-            after-icon="close"
-            icon-color="red-300"
           />
         </div>
         <div class="test__info">
@@ -72,8 +70,6 @@
             :label="t('local.finish')"
             class="test__btn test__btn--finish secondary-btn"
             @action="setFinishModal(true)"
-            after-icon="close"
-            icon-color="red-300"
           />
         </div>
       </div>
@@ -134,14 +130,14 @@ const getTestsStart = async () => {
       currentUserAnswer.value = currentQuestion.value.user_answer?.[0]
         ? currentQuestion.value.user_answer[0]
         : null;
+      useSeo({ title: test.value?.title });
     });
 };
-await getTestsStart();
+getTestsStart();
 
-useSeo({ title: test.value?.title });
 titleStore.setTitle(
-  test.value.lesson?.name || "",
-  test.value.lesson?.name ? "/panel/courses" : null,
+  test.value?.lesson?.name || "",
+  test.value?.lesson?.name ? "/panel/courses" : null,
 );
 
 const postTestsIdQuestionsIdAnswer = () => {
@@ -155,7 +151,7 @@ const postTestsIdQuestionsIdAnswer = () => {
       const index = questions.value.findIndex(
         (item) => item.id === currentQuestion.value.id,
       );
-      questions.value[index].user_answer = currentUserAnswer.value;
+      questions.value[index].user_answer = [currentUserAnswer.value];
       questions.value?.[index + 1]
         ? (currentQuestion.value = questions.value?.[index + 1])
         : null;
@@ -243,8 +239,8 @@ watch(
   &__btn {
     &--finish {
       width: 100%;
-      border: 1px solid $red-300;
-      color: $red-300;
+      border: 1px solid $green-500;
+      color: $green-500;
       &-mobile {
         display: none;
       }

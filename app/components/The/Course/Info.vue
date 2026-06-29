@@ -1,7 +1,7 @@
 <template>
   <div class="info">
     <div class="info__wrapper">
-      <UiProgressBar />
+      <UiProgressBar :percent="info.user_progress?.progress" />
 
       <hr
         class="info__hr"

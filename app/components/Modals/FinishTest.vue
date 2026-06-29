@@ -21,8 +21,9 @@
           :label="t('local.finish')"
           class="finish__btn finish__btn--finish secondary-btn"
           :is-loading="isLoading"
-          after-icon="close"
-          icon-color="red-300"
+          after-icon="checkmark-i"
+          icon-size="size-20"
+          icon-color="green-500"
         />
       </div>
     </div>
@@ -63,8 +64,8 @@ const props = defineProps({
       color: var(--surface-300);
     }
     &--finish {
-      border: 1px solid $red-300;
-      color: $red-300;
+      border: 1px solid $green-500;
+      color: $green-500;
     }
   }
 }
