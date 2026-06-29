@@ -82,7 +82,7 @@ const infos = computed(() => [
   {
     id: 2,
     icon: "circle-i",
-    text: `${course.value.modules_count} ${course.value.lessons_count > 0 ? t("local.lesson").toLocaleLowerCase() : t("local.lessons").toLocaleLowerCase()}`,
+    text: `${course.value.lessons_count} ${course.value.lessons_count > 0 ? t("local.lesson").toLocaleLowerCase() : t("local.lessons").toLocaleLowerCase()}`,
   },
 ]);
 </script>
