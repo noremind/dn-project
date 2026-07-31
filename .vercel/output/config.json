@@ -1,0 +1,168 @@
+{
+  "version": 3,
+  "overrides": {},
+  "routes": [
+    {
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      },
+      "src": "/_nuxt/builds/meta/(.*)"
+    },
+    {
+      "headers": {
+        "cache-control": "public, max-age=1, immutable"
+      },
+      "src": "/_nuxt/builds/(.*)"
+    },
+    {
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      },
+      "src": "/_nuxt/(.*)"
+    },
+    {
+      "src": "/_nuxt/builds/meta(.*)",
+      "headers": {
+        "cache-control": "public,max-age=31536000,immutable"
+      },
+      "continue": true
+    },
+    {
+      "src": "/_nuxt/builds(.*)",
+      "headers": {
+        "cache-control": "public,max-age=31536000,immutable"
+      },
+      "continue": true
+    },
+    {
+      "src": "/_nuxt(.*)",
+      "headers": {
+        "cache-control": "public,max-age=31536000,immutable"
+      },
+      "continue": true
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "(?<__isr_route>/__nuxt_error)",
+      "dest": "/__fallback"
+    },
+    {
+      "src": "/panel/profile/edit",
+      "dest": "/panel/profile/edit"
+    },
+    {
+      "src": "/panel/courses",
+      "dest": "/panel/courses"
+    },
+    {
+      "src": "/panel",
+      "dest": "/panel"
+    },
+    {
+      "src": "/login",
+      "dest": "/login"
+    },
+    {
+      "src": "/kz/panel/profile/edit",
+      "dest": "/kz/panel/profile/edit"
+    },
+    {
+      "src": "/kz/panel/courses",
+      "dest": "/kz/panel/courses"
+    },
+    {
+      "src": "/kz/panel",
+      "dest": "/kz/panel"
+    },
+    {
+      "src": "/kz/login",
+      "dest": "/kz/login"
+    },
+    {
+      "src": "/kz",
+      "dest": "/kz"
+    },
+    {
+      "src": "/en/panel/profile/edit",
+      "dest": "/en/panel/profile/edit"
+    },
+    {
+      "src": "/en/panel/courses",
+      "dest": "/en/panel/courses"
+    },
+    {
+      "src": "/en/panel",
+      "dest": "/en/panel"
+    },
+    {
+      "src": "/en/login",
+      "dest": "/en/login"
+    },
+    {
+      "src": "/en",
+      "dest": "/en"
+    },
+    {
+      "src": "/__nuxt_error",
+      "dest": "/__nuxt_error"
+    },
+    {
+      "src": "/",
+      "dest": "/index"
+    },
+    {
+      "src": "/panel/lesson/test/(?<id>[^/]+)",
+      "dest": "/panel/lesson/test/[id]"
+    },
+    {
+      "src": "/panel/lesson/(?<slug>[^/]+)",
+      "dest": "/panel/lesson/[slug]"
+    },
+    {
+      "src": "/panel/course/(?<slug>[^/]+)",
+      "dest": "/panel/course/[slug]"
+    },
+    {
+      "src": "/kz/panel/lesson/test/(?<id>[^/]+)",
+      "dest": "/kz/panel/lesson/test/[id]"
+    },
+    {
+      "src": "/kz/panel/lesson/(?<slug>[^/]+)",
+      "dest": "/kz/panel/lesson/[slug]"
+    },
+    {
+      "src": "/kz/panel/course/(?<slug>[^/]+)",
+      "dest": "/kz/panel/course/[slug]"
+    },
+    {
+      "src": "/en/panel/lesson/test/(?<id>[^/]+)",
+      "dest": "/en/panel/lesson/test/[id]"
+    },
+    {
+      "src": "/en/panel/lesson/(?<slug>[^/]+)",
+      "dest": "/en/panel/lesson/[slug]"
+    },
+    {
+      "src": "/en/panel/course/(?<slug>[^/]+)",
+      "dest": "/en/panel/course/[slug]"
+    },
+    {
+      "src": "/_i18n/(?<hash>[^/]+)/(?<locale>[^/]+)/messages.json",
+      "dest": "/_i18n/[hash]/[locale]/messages.json"
+    },
+    {
+      "src": "/_ipx/(?:.*)",
+      "dest": "/_ipx/[...]"
+    },
+    {
+      "src": "/__nuxt_island/(?:.*)",
+      "dest": "/__nuxt_island/[...]"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/__fallback"
+    }
+  ]
+}

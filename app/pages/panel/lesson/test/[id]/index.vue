@@ -34,6 +34,7 @@
 
           <div class="test__btns">
             <UiButton
+              v-if="hasNextQuestion"
               :label="t('local.next')"
               class="test__btn test__btn--next primary-btn"
               after-icon="chevron"
@@ -91,8 +92,13 @@
 </template>
 
 <script setup>
+import {
+  getNextQuestionId,
+  getQuestionNumber,
+  markQuestionAsAnswered,
+} from "~/utils/testFlow";
+
 const { t } = useI18n();
-const authStore = useAuthStore();
 const titleStore = useTitleStore();
 
 const route = useRoute();
@@ -100,91 +106,153 @@ const router = useRouter();
 
 const test = ref(null);
 
-const questions = ref(null);
+const questions = ref([]);
 const currentQuestion = ref(null);
 const currentUserAnswer = ref(null);
 
 const isOpenFinishModal = ref(false);
-
 const isFinishLoadingBtn = ref(false);
+const isSubmittingAnswer = ref(false);
 
 const currentNumberQuestion = computed(() => {
-  return (
-    questions.value?.findIndex(
-      (item) => item.id === currentQuestion.value?.id,
-    ) + 1 || 0
-  );
+  return getQuestionNumber(questions.value, currentQuestion.value?.id);
 });
 
+const hasNextQuestion = computed(() => {
+  if (!questions.value?.length || !currentQuestion.value?.id) return false;
+
+  return Boolean(getNextQuestionId(questions.value, currentQuestion.value.id));
+});
+
+const getErrorMessage = (error) => {
+  const serverMessage =
+    error?.data?.message || error?.message || error?.statusMessage;
+  return serverMessage || t("local.something_went_wrong");
+};
+
 const getTestsStart = async () => {
-  await useApi()
-    .client({
+  try {
+    const res = await useApi().client({
       url: `/tests/${route.params.id}`,
       method: "get",
       query: { lesson_id: route.query?.lesson_id },
-    })
-    .then((res) => {
-      test.value = res.data;
-      questions.value = test.value?.questions;
-      currentQuestion.value = questions.value?.[0] || null;
-      currentUserAnswer.value = currentQuestion.value.user_answer?.[0]
-        ? currentQuestion.value.user_answer[0]
-        : null;
-      useSeo({ title: test.value?.title });
     });
+
+    test.value = res.data;
+    questions.value = Array.isArray(res.data?.questions)
+      ? res.data.questions
+      : [];
+    currentQuestion.value = questions.value?.[0] || null;
+    currentUserAnswer.value = currentQuestion.value?.user_answer?.[0]
+      ? currentQuestion.value.user_answer[0]
+      : null;
+
+    useSeo({ title: test.value?.title });
+  } catch (error) {
+    useNotify({
+      title: t("local.error"),
+      text: getErrorMessage(error),
+      status: "error",
+    });
+  }
 };
-getTestsStart();
+
+await getTestsStart();
 
 titleStore.setTitle(
   test.value?.lesson?.name || "",
   test.value?.lesson?.name ? "/panel/courses" : null,
 );
 
-const postTestsIdQuestionsIdAnswer = () => {
-  useApi()
-    .client({
+const postTestsIdQuestionsIdAnswer = async () => {
+  if (!currentQuestion.value?.id || !currentUserAnswer.value?.id) {
+    useNotify({
+      title: t("local.error"),
+      text: t("local.please_choose_an_answer"),
+      status: "error",
+    });
+    return;
+  }
+
+  isSubmittingAnswer.value = true;
+
+  try {
+    await useApi().client({
       url: `/tests/${route.params.id}/questions/${currentQuestion.value.id}/answer`,
       method: "post",
       body: { answer_ids: [currentUserAnswer.value.id] },
-    })
-    .then((res) => {
-      const index = questions.value.findIndex(
-        (item) => item.id === currentQuestion.value.id,
-      );
-      questions.value[index].user_answer = [currentUserAnswer.value];
-      questions.value?.[index + 1]
-        ? (currentQuestion.value = questions.value?.[index + 1])
-        : null;
     });
+
+    questions.value = markQuestionAsAnswered(
+      questions.value,
+      currentQuestion.value.id,
+      currentUserAnswer.value,
+    );
+
+    const nextQuestionId = getNextQuestionId(
+      questions.value,
+      currentQuestion.value.id,
+    );
+
+    if (nextQuestionId) {
+      currentQuestion.value = questions.value.find(
+        (item) => item.id === nextQuestionId,
+      );
+      currentUserAnswer.value = currentQuestion.value?.user_answer?.[0] || null;
+      return;
+    }
+
+    currentQuestion.value = null;
+    currentUserAnswer.value = null;
+  } catch (error) {
+    useNotify({
+      title: t("local.error"),
+      text: getErrorMessage(error),
+      status: "error",
+    });
+  } finally {
+    isSubmittingAnswer.value = false;
+  }
 };
 
-const postTestIdSubmit = () => {
+const postTestIdSubmit = async () => {
   isFinishLoadingBtn.value = true;
 
-  useApi()
-    .client({
+  try {
+    await useApi().client({
       url: `/tests/${route.params.id}/submit`,
       method: "post",
       body: { lesson_id: route.query?.lesson_id },
-    })
-    .then((res) => {
-      router.push({ path: "/panel/courses", query: {} });
-    })
-    .finally(() => {
-      isFinishLoadingBtn.value = false;
     });
+
+    await router.push({ path: "/panel/courses", query: {} });
+  } catch (error) {
+    useNotify({
+      title: t("local.error"),
+      text: getErrorMessage(error),
+      status: "error",
+    });
+  } finally {
+    isFinishLoadingBtn.value = false;
+  }
 };
 
 const changeQuestion = (questionId) => {
-  currentQuestion.value = questions.value.find(
+  const selectedQuestion = questions.value.find(
     (item) => item.id === questionId,
   );
+  if (!selectedQuestion) return;
+
+  currentQuestion.value = selectedQuestion;
+  currentUserAnswer.value = selectedQuestion.user_answer?.[0] || null;
 };
+
 const setFinishModal = (value) => {
   isOpenFinishModal.value = value;
 };
+
 const redirectToBack = () => {
-  if (test.value.lesson?.slug) {
+  if (test.value?.lesson?.slug) {
     router.push({ path: `/panel/lesson/${test.value.lesson.slug}` });
   } else {
     router.push("/panel/courses");
@@ -197,14 +265,14 @@ const disabledPostAnswerBtn = computed(() => {
     !currentUserAnswer.value?.id
   ) {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 });
 
 watch(
   () => currentNumberQuestion.value,
-  (newVal) => {
+  () => {
     currentUserAnswer.value = currentQuestion.value?.user_answer?.[0] || null;
   },
 );

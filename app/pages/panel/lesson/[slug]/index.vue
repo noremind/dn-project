@@ -127,7 +127,12 @@ const redirectToTest = (test) => {
 };
 
 const redirectToNextLesson = async () => {
-  if (!lesson.value?.lesson_tests?.[0].passed) {
+  const passedTests = lesson.value?.lesson_tests?.filter(
+    (test) => test?.passed,
+  );
+  const hasPassedCurrentTest = Boolean(passedTests?.length);
+
+  if (!hasPassedCurrentTest) {
     useNotify({
       title: t("local.error"),
       text: t("local.first_need_to_take_the_test"),
@@ -135,10 +140,28 @@ const redirectToNextLesson = async () => {
     });
     return;
   }
+
   isLoading.value = true;
-  await useApi().client({ url: `/lessons/${lesson.value.slug}/finish` });
-  isLoading.value = false;
-  router.push(`/panel/lesson/${lesson.value.next}`);
+
+  try {
+    await useApi().client({
+      url: `/lessons/${lesson.value.slug}/finish`,
+      method: "post",
+    });
+
+    await router.push(`/panel/lesson/${lesson.value.next}`);
+  } catch (error) {
+    useNotify({
+      title: t("local.error"),
+      text:
+        error?.data?.message ||
+        error?.message ||
+        t("local.something_went_wrong"),
+      status: "error",
+    });
+  } finally {
+    isLoading.value = false;
+  }
 };
 </script>
 

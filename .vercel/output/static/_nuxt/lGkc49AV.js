@@ -1,0 +1,1 @@
+import{_ as s,o as t,c as a,a as o}from"./BaKtAisQ.js";const n={class:"index"},_={__name:"index",setup(c){return(r,e)=>(t(),a("section",n,[...e[0]||(e[0]=[o("div",{class:"index__wrapper"},"index.vue",-1)])]))}},i=s(_,[["__scopeId","data-v-425c891e"]]);export{i as default};

@@ -11,7 +11,7 @@
           @click="emit('update', num.id)"
           :class="{
             'pagination__btn--current': current === num.id,
-            'pagination__btn--answered': num.answered,
+            'pagination__btn--answered': isAnswered(num),
             'pagination__btn--error': false,
             'pagination__btn--success': false,
           }"
@@ -58,6 +58,9 @@ const props = defineProps({
 const lastNumber = computed(() =>
   props.total?.length ? props.total[props.total?.length - 1]?.id : false,
 );
+
+const isAnswered = (question) =>
+  Boolean(question?.answered || question?.user_answer?.length);
 </script>
 
 <style lang="scss" scoped>
@@ -87,9 +90,9 @@ const lastNumber = computed(() =>
     color: var(--surface-600);
     border: 1px solid var(--black);
     &--answered {
-      border: 1px solid $primary-color;
-      background-color: rbga($primary-color, 0.5);
-      color: $white;
+      border: 1px solid $green-500;
+      background-color: rgba($green-500, 0.15);
+      color: $green-500;
     }
     &--error {
       background-color: $red-300;
