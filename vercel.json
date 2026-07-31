@@ -1,0 +1,14 @@
+{
+  "version": 3,
+  "framework": {
+    "name": "nuxt"
+  },
+  "functions": {
+    "**/*.mjs": {
+      "runtime": "nodejs22.x"
+    },
+    "**/*.js": {
+      "runtime": "nodejs22.x"
+    }
+  }
+}
