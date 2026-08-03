@@ -1,0 +1,1 @@
+import{u as a}from"./BTGVzVNb.js";import{Q as i}from"./DLdtVauZ.js";function c({title:o,description:t,image:r}){const e=a();let s=`${e.domainURL}/assets/images/logo/DN-Project-Rounded.png`;i({title:`${e.projectName} - ${o}`,ogTitle:`${e.projectName} - ${o}`,description:t,ogDescription:t,image:r||s,ogImage:r||s})}export{c as u};

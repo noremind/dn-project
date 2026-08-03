@@ -1,8 +1,7 @@
 import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import * as Vue from 'vue';
 import { getCurrentScope, onScopeDispose, defineComponent, shallowRef, getCurrentInstance as getCurrentInstance$1, provide, cloneVNode, h, createElementBlock, hasInjectionContext, inject, computed, ref, watch, Suspense, mergeProps, Fragment, customRef, shallowReactive, defineAsyncComponent, unref, useSSRContext, createApp, createVNode, Text, onErrorCaptured, onServerPrefetch, resolveDynamicComponent, reactive, effectScope, toRef, withCtx, nextTick, isRef, toValue, isReadonly, toRaw, isShallow, isReactive } from 'vue';
-import { v as parseURL, i as encodePath, w as decodePath, x as hasProtocol, y as isScriptProtocol, s as joinURL, z as withQuery, A as klona, B as sanitizeStatusCode, C as getContext, D as parse$1, E as getRequestHeader, F as isEqual, G as setCookie, H as getCookie, I as deleteCookie, $ as $fetch$1, J as baseURL, K as defu, n as createError$1, L as hash, M as executeAsync, N as getRequestURL, O as createDefu, P as parsePath, Q as parseQuery, R as withoutTrailingSlash, S as isEqual$1 } from '../nitro/nitro.mjs';
+import { v as parseURL, i as encodePath, w as decodePath, x as hasProtocol, y as isScriptProtocol, s as joinURL, z as withQuery, R as RouterView, A as klona, B as sanitizeStatusCode, C as getContext, D as parse$1, E as getRequestHeader, F as isEqual, G as setCookie, H as getCookie, I as deleteCookie, $ as $fetch$1, J as baseURL, K as useRoute$1, L as defu, n as createError$1, M as hash, N as createMemoryHistory, O as executeAsync, P as createRouter, S as START_LOCATION_NORMALIZED, Q as getRequestURL, T as createDefu, U as parsePath, V as parseQuery, W as withoutTrailingSlash, X as isEqual$1 } from '../nitro/nitro.mjs';
 import { defineStore, setActivePinia, createPinia, shouldHydrate } from 'pinia';
-import { RouterView, useRoute as useRoute$1, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
 import { debounce } from 'perfect-debounce';
 import { isPlainObject as isPlainObject$1 } from '@vue/shared';
 import { vMaska } from 'maska';
@@ -646,17 +645,17 @@ const _routes = [
   {
     name: "panel-lesson-test-id___ru",
     path: "/panel/lesson/test/:id()",
-    component: () => import('./index-gIMlCl6h.mjs')
+    component: () => import('./index-BJ4DPwTQ.mjs')
   },
   {
     name: "panel-lesson-test-id___kz",
     path: "/kz/panel/lesson/test/:id()",
-    component: () => import('./index-gIMlCl6h.mjs')
+    component: () => import('./index-BJ4DPwTQ.mjs')
   },
   {
     name: "panel-lesson-test-id___en",
     path: "/en/panel/lesson/test/:id()",
-    component: () => import('./index-gIMlCl6h.mjs')
+    component: () => import('./index-BJ4DPwTQ.mjs')
   },
   {
     name: "panel-profile-edit___ru",
@@ -691,17 +690,17 @@ const _routes = [
   {
     name: "panel-lesson-slug___ru",
     path: "/panel/lesson/:slug()",
-    component: () => import('./index-BYXy9G3-.mjs')
+    component: () => import('./index-CX3Z5qWD.mjs')
   },
   {
     name: "panel-lesson-slug___kz",
     path: "/kz/panel/lesson/:slug()",
-    component: () => import('./index-BYXy9G3-.mjs')
+    component: () => import('./index-CX3Z5qWD.mjs')
   },
   {
     name: "panel-lesson-slug___en",
     path: "/en/panel/lesson/:slug()",
-    component: () => import('./index-BYXy9G3-.mjs')
+    component: () => import('./index-CX3Z5qWD.mjs')
   },
   {
     name: "panel-courses___ru",
@@ -784,7 +783,7 @@ function generateRouteKey(route) {
   return typeof source === "function" ? source(route) : source;
 }
 function isChangingPage(to, from) {
-  if (to === from || from === START_LOCATION) {
+  if (to === from || from === START_LOCATION_NORMALIZED) {
     return false;
   }
   if (generateRouteKey(to) !== generateRouteKey(from)) {
@@ -832,7 +831,7 @@ const routerOptions0 = {
     if (routeAllowsScrollToTop === false) {
       return false;
     }
-    if (from === START_LOCATION) {
+    if (from === START_LOCATION_NORMALIZED) {
       return _calculatePosition(to, from, savedPosition, hashScrollBehaviour);
     }
     return new Promise((resolve) => {
@@ -6397,7 +6396,7 @@ const plugin$1 = /* @__PURE__ */ defineNuxtPlugin({
     const router = createRouter({
       ...routerOptions,
       scrollBehavior: (to, from, savedPosition) => {
-        if (from === START_LOCATION) {
+        if (from === START_LOCATION_NORMALIZED) {
           startPosition = savedPosition;
           return;
         }
@@ -6409,7 +6408,7 @@ const plugin$1 = /* @__PURE__ */ defineNuxtPlugin({
               (void 0).history.scrollRestoration = "manual";
             });
           }
-          return routerOptions.scrollBehavior(to, START_LOCATION, startPosition || savedPosition);
+          return routerOptions.scrollBehavior(to, START_LOCATION_NORMALIZED, startPosition || savedPosition);
         }
       },
       history,

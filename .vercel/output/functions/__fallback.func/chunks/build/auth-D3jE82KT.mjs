@@ -1,4 +1,4 @@
-import { M as executeAsync } from '../nitro/nitro.mjs';
+import { O as executeAsync } from '../nitro/nitro.mjs';
 import { q as defineNuxtRouteMiddleware, m as useAuthStore, n as navigateTo } from './server.mjs';
 import 'node:http';
 import 'node:https';
@@ -7,10 +7,9 @@ import 'node:buffer';
 import 'node:fs';
 import 'node:path';
 import 'node:crypto';
-import 'vue-router';
+import 'vue';
 import 'node:url';
 import 'ipx';
-import 'vue';
 import 'pinia';
 import 'perfect-debounce';
 import '@vue/shared';

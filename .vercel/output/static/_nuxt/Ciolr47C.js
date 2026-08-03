@@ -1,0 +1,1 @@
+import{_ as e,o as s,c as _,a as n,b as c,an as o}from"./DLdtVauZ.js";const t={},d={class:"landing"},r={class:"landing__wrapper"},i={class:"landing__main"};function l(p,m){const a=o;return s(),_("div",d,[n("div",r,[n("main",i,[c(a)])])])}const g=e(t,[["render",l],["__scopeId","data-v-7d419353"]]);export{g as default};

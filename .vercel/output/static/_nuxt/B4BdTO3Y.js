@@ -1,1 +1,0 @@
-import{R as i,G as o,S as s,U as n}from"./BaKtAisQ.js";const u=i(async()=>{let t,a;const e=o();if(e.initialized||([t,a]=s(()=>e.init()),await t,a()),!e.isToken)return n("/login")});export{u as default};

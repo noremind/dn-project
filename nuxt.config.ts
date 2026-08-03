@@ -53,9 +53,12 @@ export default defineNuxtConfig({
 			{ code: 'en', name: 'En', file: 'en.json', flag: `${ process.env.NUXT_DOMAIN_URL}/assets/images/content/en-flag.png` },
     ],
 		vueI18n: "./i18n.config.ts",
-  },
+  },  
 	nitro: {
     preset: 'vercel',
+    externals: {
+      inline: ['vue-router'],
+    },
     prerender: {
       failOnError: false,
       crawlLinks: false,

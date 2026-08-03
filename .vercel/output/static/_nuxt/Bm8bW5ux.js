@@ -1,0 +1,1 @@
+import{_ as s,C as o,o as t,c as r,a}from"./DLdtVauZ.js";const n={class:"index"},_={__name:"index",setup(c){return o().push("/login"),(p,e)=>(t(),r("div",n,[...e[0]||(e[0]=[a("div",{class:"index__wrapper"},null,-1)])]))}},u=s(_,[["__scopeId","data-v-8662b443"]]);export{u as default};
