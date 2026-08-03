@@ -183,7 +183,10 @@ const postTestsIdQuestionsIdAnswer = async () => {
     await useApi().client({
       url: `/tests/${route.params.id}/questions/${currentQuestion.value.id}/answer`,
       method: "post",
-      body: { answer_ids: [currentUserAnswer.value.id] },
+      body: {
+        answer_ids: [currentUserAnswer.value.id],
+        lesson_id: route.query?.lesson_id,
+      },
     });
 
     questions.value = markQuestionAsAnswered(
