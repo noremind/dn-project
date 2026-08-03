@@ -22,6 +22,7 @@
       <div class="lesson__materials">
         <p class="lesson__text">{{ t("local.materials") }}:</p>
         <UiLogo v-if="isConverting" />
+
         <div
           id="conspectus"
           class="lesson__conspectus"
