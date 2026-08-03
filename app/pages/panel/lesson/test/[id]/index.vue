@@ -174,7 +174,7 @@ const postTestsIdQuestionsIdAnswer = async () => {
       text: t("local.please_choose_an_answer"),
       status: "error",
     });
-    return;
+    return false;
   }
 
   isSubmittingAnswer.value = true;
@@ -205,17 +205,20 @@ const postTestsIdQuestionsIdAnswer = async () => {
         (item) => item.id === nextQuestionId,
       );
       currentUserAnswer.value = currentQuestion.value?.user_answer?.[0] || null;
-      return;
+      return true;
     }
 
-    currentQuestion.value = null;
-    currentUserAnswer.value = null;
+    // Keep the final question visible after answering it so pagination
+    // continues to show the last question information.
+    currentUserAnswer.value = currentQuestion.value?.user_answer?.[0] || null;
+    return true;
   } catch (error) {
     useNotify({
       title: t("local.error"),
       text: getErrorMessage(error),
       status: "error",
     });
+    return false;
   } finally {
     isSubmittingAnswer.value = false;
   }
@@ -223,10 +226,6 @@ const postTestsIdQuestionsIdAnswer = async () => {
 
 const handleAnswerAction = async () => {
   await postTestsIdQuestionsIdAnswer();
-
-  if (!hasNextQuestion.value) {
-    await postTestIdSubmit();
-  }
 };
 
 const postTestIdSubmit = async () => {
