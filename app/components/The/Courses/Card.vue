@@ -88,7 +88,7 @@ const checkStatus = (status) => {
       .then(() => {
         router.push(`/panel/course/${props.info.slug}`);
       });
-  } else if (status === "continue") {
+  } else if (status === "continue" || status === "completed") {
     router.push(`/panel/course/${props.info.slug}`);
   }
 };
