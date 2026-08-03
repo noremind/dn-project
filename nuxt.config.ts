@@ -55,7 +55,6 @@ export default defineNuxtConfig({
 		vueI18n: "./i18n.config.ts",
   },  
 	nitro: {
-    preset: 'vercel',
     externals: {
       inline: ['vue-router'],
     },
