@@ -34,15 +34,14 @@
 
           <div class="test__btns">
             <UiButton
-              v-if="hasNextQuestion"
-              :label="t('local.next')"
+              :label="submitButtonLabel"
               class="test__btn test__btn--next primary-btn"
               after-icon="chevron"
               icon-color="white-fixed"
               icon-size="size-20"
               icon-deg="right"
               :disabled="disabledPostAnswerBtn"
-              @action="postTestsIdQuestionsIdAnswer"
+              @action="handleAnswerAction"
             />
           </div>
 
@@ -122,6 +121,10 @@ const hasNextQuestion = computed(() => {
   if (!questions.value?.length || !currentQuestion.value?.id) return false;
 
   return Boolean(getNextQuestionId(questions.value, currentQuestion.value.id));
+});
+
+const submitButtonLabel = computed(() => {
+  return hasNextQuestion.value ? t("local.next") : t("local.send");
 });
 
 const getErrorMessage = (error) => {
@@ -212,6 +215,14 @@ const postTestsIdQuestionsIdAnswer = async () => {
     });
   } finally {
     isSubmittingAnswer.value = false;
+  }
+};
+
+const handleAnswerAction = async () => {
+  await postTestsIdQuestionsIdAnswer();
+
+  if (!hasNextQuestion.value) {
+    await postTestIdSubmit();
   }
 };
 

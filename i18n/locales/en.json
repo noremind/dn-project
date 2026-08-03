@@ -40,6 +40,7 @@
     "next": "Next",
     "back": "Back",
     "finish": "Finish",
+    "progress": "Progress",
     "expired_at": "End time",
     "cancel": "Cancel",
     "will_you_complete_the_testing": "Do you want to finish the test?",

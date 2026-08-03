@@ -6,6 +6,11 @@
     aria-valuemin="0"
     aria-valuemax="100"
   >
+    <div class="progress-bar__header">
+      <span class="progress-bar__label">{{ t("local.progress") }}</span>
+      <span class="progress-bar__percent">{{ displayPercent }}</span>
+    </div>
+
     <div class="progress-bar__track">
       <div
         class="progress-bar__fill"
@@ -19,6 +24,8 @@
 </template>
 
 <script setup>
+const { t } = useI18n();
+
 const props = defineProps({
   percent: {
     type: Number,
@@ -33,6 +40,8 @@ const safePercent = computed(() => {
   return props.percent;
 });
 
+const displayPercent = computed(() => `${Math.round(safePercent.value)}%`);
+
 const fillOpacity = computed(() => {
   const minOpacity = 0.28;
   const maxOpacity = 1;
@@ -44,6 +53,25 @@ const fillOpacity = computed(() => {
 <style lang="scss" scoped>
 .progress-bar {
   width: 100%;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $gap-sm;
+  }
+
+  &__label {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba($primary-color, 0.65);
+  }
+
+  &__percent {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba($primary-color, 0.65);
+  }
 
   &__track {
     width: 100%;
