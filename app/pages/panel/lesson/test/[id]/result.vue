@@ -32,7 +32,10 @@
       <div v-else class="test-result__body">
         <div class="test-result__summary">
           <div
-            :class="['test-result__metric', item.statusType ? 'test-result__metric--status' : '']"
+            :class="[
+              'test-result__metric',
+              item.statusType ? 'test-result__metric--status' : '',
+            ]"
             v-for="item in summaryItems"
             :key="item.label"
           >
@@ -40,8 +43,12 @@
             <strong
               :class="[
                 'test-result__metric-value',
-                item.statusType === 'passed' ? 'test-result__metric-value--passed' : '',
-                item.statusType === 'failed' ? 'test-result__metric-value--failed' : '',
+                item.statusType === 'passed'
+                  ? 'test-result__metric-value--passed'
+                  : '',
+                item.statusType === 'failed'
+                  ? 'test-result__metric-value--failed'
+                  : '',
               ]"
             >
               {{ item.value }}
@@ -332,6 +339,9 @@ const goCourses = () => {
 
   &__status {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $gap-lg;
   }
 
   &__questions {
@@ -484,6 +494,7 @@ const goCourses = () => {
     display: flex;
     gap: $gap-md;
     flex-wrap: wrap;
+    justify-content: flex-end;
   }
 }
 
