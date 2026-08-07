@@ -238,7 +238,10 @@ const postTestIdSubmit = async () => {
       body: { lesson_id: route.query?.lesson_id },
     });
 
-    await router.push({ path: "/panel/courses", query: {} });
+    await router.push({
+      path: `/panel/lesson/test/${route.params.id}/result`,
+      query: route.query?.lesson_id ? { lesson_id: route.query.lesson_id } : {},
+    });
   } catch (error) {
     useNotify({
       title: t("local.error"),

@@ -46,6 +46,25 @@
     "will_you_complete_the_testing": "Do you want to finish the test?",
     "finish_the_test_alert_information": "If you finish, you will not be able to continue this test later.",
     "question": "Question",
-    "all_questions": "All questions"
+    "all_questions": "All questions",
+    "test_results": "Test results",
+    "test_details": "Test details",
+    "back_to_lesson": "Back to lesson",
+    "back_to_courses": "Back to courses",
+    "percent": "Score",
+    "status": "Status",
+    "passed": "Passed",
+    "failed": "Failed",
+    "total_questions": "Total questions",
+    "correct_answers": "Correct answers",
+    "incorrect_answers": "Incorrect answers",
+    "duration": "Duration",
+    "course": "Course",
+    "question_answers": "Question review",
+    "submitted": "Submitted",
+    "correct_answer": "Correct answer",
+    "correct": "Correct",
+    "incorrect": "Incorrect",
+    "no_result": "No result data available"
   }
 }

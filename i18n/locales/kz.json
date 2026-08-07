@@ -46,6 +46,25 @@
     "will_you_complete_the_testing": "Тестілеуді аяқтайсыз ба?",
     "finish_the_test_alert_information": "Егер аяқтасаңыз, бұл тесті кейін жалғастыра алмайсыз.",
     "question": "Сұрақ",
-    "all_questions": "Барлық сұрақтар"
+    "all_questions": "Барлық сұрақтар",
+    "test_results": "Тесттің нәтижелері",
+    "test_details": "Тест туралы мәліметтер",
+    "back_to_lesson": "Сабаққа оралу",
+    "back_to_courses": "Курстарға оралу",
+    "percent": "Баға",
+    "status": "Күй",
+    "passed": "Оң нәтиже",
+    "failed": "Қате нәтиже",
+    "total_questions": "Барлық сұрақтар",
+    "correct_answers": "Дұрыс жауаптар",
+    "incorrect_answers": "Қате жауаптар",
+    "duration": "Ұзақтық",
+    "course": "Курс",
+    "question_answers": "Сұрақтарға шолу",
+    "submitted": "Жіберілді",
+    "correct_answer": "Дұрыс жауап",
+    "correct": "Дұрыс",
+    "incorrect": "Қате",
+    "no_result": "Нәтиже жоқ"
   }
 }
