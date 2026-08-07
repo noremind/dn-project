@@ -153,6 +153,21 @@ const resultSubtitle = computed(() => {
   );
 });
 
+const getLessonPath = () => {
+  const slug =
+    result.value?.meta?.lesson?.slug ||
+    route.query?.lesson_slug ||
+    route.query?.lesson_id;
+
+  return slug ? `/panel/lesson/${slug}` : "/panel/courses";
+};
+
+const getCoursePath = () => {
+  const slug = result.value?.meta?.course?.slug || route.query?.course_slug;
+
+  return slug ? `/panel/course/${slug}` : "/panel/courses";
+};
+
 const formatDate = (value) => {
   if (!value) return "-";
   const date = new Date(value);
@@ -296,18 +311,11 @@ const getResult = async () => {
 await getResult();
 
 const goLesson = () => {
-  if (route.query?.lesson_id) {
-    router.push({
-      path: `/panel/lesson/${route.query.lesson_id}`,
-      query: { ...route.query },
-    });
-    return;
-  }
-  router.push({ path: "/panel/courses", query: {} });
+  router.push({ path: getLessonPath(), query: {} });
 };
 
 const goCourses = () => {
-  router.push({ path: "/panel/courses", query: {} });
+  router.push({ path: getCoursePath(), query: {} });
 };
 </script>
 

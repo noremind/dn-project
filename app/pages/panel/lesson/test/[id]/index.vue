@@ -30,6 +30,7 @@
             v-if="currentQuestion?.question_type === 1"
             :variants="currentQuestion.answers"
             v-model="currentUserAnswer"
+            :disabled="isCurrentQuestionAnswered"
           />
 
           <div class="test__btns">
@@ -127,10 +128,37 @@ const submitButtonLabel = computed(() => {
   return hasNextQuestion.value ? t("local.next") : t("local.send");
 });
 
+const isCurrentQuestionAnswered = computed(() => {
+  return Boolean(
+    currentQuestion.value?.answered ||
+    currentQuestion.value?.user_answer?.length,
+  );
+});
+
 const getErrorMessage = (error) => {
   const serverMessage =
     error?.data?.message || error?.message || error?.statusMessage;
   return serverMessage || t("local.something_went_wrong");
+};
+
+const getAnswerObject = (question) => {
+  if (!question) return null;
+
+  const answer = question?.user_answer?.[0];
+
+  if (answer && typeof answer === "object" && answer.id) {
+    return answer;
+  }
+
+  if (answer && Array.isArray(question.answers)) {
+    return question.answers.find((variant) => variant.id === answer) || null;
+  }
+
+  return null;
+};
+
+const syncCurrentAnswer = (question = currentQuestion.value) => {
+  currentUserAnswer.value = getAnswerObject(question);
 };
 
 const getTestsStart = async () => {
@@ -146,9 +174,7 @@ const getTestsStart = async () => {
       ? res.data.questions
       : [];
     currentQuestion.value = questions.value?.[0] || null;
-    currentUserAnswer.value = currentQuestion.value?.user_answer?.[0]
-      ? currentQuestion.value.user_answer[0]
-      : null;
+    syncCurrentAnswer(currentQuestion.value);
 
     useSeo({ title: test.value?.title });
   } catch (error) {
@@ -195,6 +221,16 @@ const postTestsIdQuestionsIdAnswer = async () => {
       currentUserAnswer.value,
     );
 
+    const updatedQuestion = questions.value.find(
+      (item) => item.id === currentQuestion.value.id,
+    );
+
+    if (updatedQuestion) {
+      currentQuestion.value = updatedQuestion;
+    }
+
+    syncCurrentAnswer(currentQuestion.value);
+
     const nextQuestionId = getNextQuestionId(
       questions.value,
       currentQuestion.value.id,
@@ -204,13 +240,10 @@ const postTestsIdQuestionsIdAnswer = async () => {
       currentQuestion.value = questions.value.find(
         (item) => item.id === nextQuestionId,
       );
-      currentUserAnswer.value = currentQuestion.value?.user_answer?.[0] || null;
+      syncCurrentAnswer(currentQuestion.value);
       return true;
     }
 
-    // Keep the final question visible after answering it so pagination
-    // continues to show the last question information.
-    currentUserAnswer.value = currentQuestion.value?.user_answer?.[0] || null;
     return true;
   } catch (error) {
     useNotify({
@@ -238,9 +271,19 @@ const postTestIdSubmit = async () => {
       body: { lesson_id: route.query?.lesson_id },
     });
 
+    const query = {};
+
+    if (route.query?.lesson_id) {
+      query.lesson_id = route.query.lesson_id;
+    }
+
+    if (route.query?.lesson_slug) {
+      query.lesson_slug = route.query.lesson_slug;
+    }
+
     await router.push({
       path: `/panel/lesson/test/${route.params.id}/result`,
-      query: route.query?.lesson_id ? { lesson_id: route.query.lesson_id } : {},
+      query,
     });
   } catch (error) {
     useNotify({
@@ -260,7 +303,7 @@ const changeQuestion = (questionId) => {
   if (!selectedQuestion) return;
 
   currentQuestion.value = selectedQuestion;
-  currentUserAnswer.value = selectedQuestion.user_answer?.[0] || null;
+  syncCurrentAnswer(selectedQuestion);
 };
 
 const setFinishModal = (value) => {
@@ -289,7 +332,7 @@ const disabledPostAnswerBtn = computed(() => {
 watch(
   () => currentNumberQuestion.value,
   () => {
-    currentUserAnswer.value = currentQuestion.value?.user_answer?.[0] || null;
+    syncCurrentAnswer(currentQuestion.value);
   },
 );
 </script>
