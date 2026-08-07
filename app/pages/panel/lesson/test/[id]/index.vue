@@ -30,7 +30,6 @@
             v-if="currentQuestion?.question_type === 1"
             :variants="currentQuestion.answers"
             v-model="currentUserAnswer"
-            :disabled="isCurrentQuestionAnswered"
           />
 
           <div class="test__btns">
@@ -126,13 +125,6 @@ const hasNextQuestion = computed(() => {
 
 const submitButtonLabel = computed(() => {
   return hasNextQuestion.value ? t("local.next") : t("local.send");
-});
-
-const isCurrentQuestionAnswered = computed(() => {
-  return Boolean(
-    currentQuestion.value?.answered ||
-    currentQuestion.value?.user_answer?.length,
-  );
 });
 
 const getErrorMessage = (error) => {
