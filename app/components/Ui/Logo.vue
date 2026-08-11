@@ -1,7 +1,7 @@
 <template>
   <div class="logo">
     <nuxt-link
-      to="/"
+      :to="authStore?.isAuth ? '/panel' : '/'"
       class="logo__wrapper"
       :class="{ 'logo__wrapper--horizontal': type === 'horizontal' }"
     >
@@ -22,6 +22,7 @@
 
 <script setup>
 const project = useProjectStore();
+const authStore = useAuthStore();
 const props = defineProps({
   width: String,
   type: {

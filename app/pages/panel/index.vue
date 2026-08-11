@@ -1,6 +1,8 @@
 <template>
   <section class="index">
-    <div class="index__wrapper">index.vue</div>
+    <div class="index__wrapper">
+      <TheMainBanner />
+    </div>
   </section>
 </template>
 

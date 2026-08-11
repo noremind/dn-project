@@ -37,6 +37,7 @@
       <div class="lesson__btns">
         <div class="lesson__btns-box">
           <UiButton
+            v-if="lesson.previous"
             class="lesson__btn lesson__btn--previous primary-btn"
             :label="t('local.previous_lesson')"
             before-icon="chevron"
@@ -52,6 +53,7 @@
             @action="redirectToTest(test)"
           />
           <UiButton
+            v-if="lesson.next"
             class="lesson__btn lesson__btn--next primary-btn"
             :label="t('local.next_lesson')"
             after-icon="chevron"
@@ -122,12 +124,12 @@ try {
   });
 } catch (error) {
   console.error("Failed to load lesson:", error);
-  useNotify({
-    title: t("local.error"),
-    text:
-      error?.statusMessage || error?.message || t("local.something_went_wrong"),
-    status: "error",
-  });
+  // useNotify({
+  //   title: t("local.error"),
+  //   text:
+  //     error?.statusMessage || error?.message || t("local.something_went_wrong"),
+  //   status: "error",
+  // });
   await router.push("/panel/courses");
 }
 

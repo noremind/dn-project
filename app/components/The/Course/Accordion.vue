@@ -20,7 +20,7 @@
           class="accordion__content-link"
           v-for="lesson in info.lessons"
           :key="lesson.id"
-          @click="showNotify"
+          @click="showNotify(lesson)"
           :to="lesson.can_pass ? `/panel/lesson/${lesson.slug}` : ''"
           :class="{ 'accordion__content-link--active': lesson.is_completed }"
         >
