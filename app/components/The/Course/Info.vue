@@ -9,6 +9,11 @@
         :percent="info.user_progress?.progress"
       />
 
+      <p class="info__description" v-if="info.description">
+        {{ t("local.description") }} <br />
+        <span class="info__description-info" v-html="info.description"></span>
+      </p>
+
       <UiButton
         v-if="info.user_status === 'buy'"
         class="info__btn primary-btn primary-btn--green"
@@ -64,6 +69,13 @@ const redirectToLesson = (slug) => {
     height: fit-content;
     width: 100%;
     max-width: 100%;
+  }
+  &__description {
+    font-weight: 500;
+    &-info {
+      color: $surface-400;
+      font-size: 14px;
+    }
   }
 }
 </style>

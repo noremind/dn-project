@@ -65,6 +65,8 @@
     "correct_answer": "Дұрыс жауап",
     "correct": "Дұрыс",
     "incorrect": "Қате",
-    "no_result": "Нәтиже жоқ"
+    "no_result": "Нәтиже жоқ",
+		"previous_lesson": "Алдыңғы сабақ",
+		"description": "Сипаттама"
   }
 }

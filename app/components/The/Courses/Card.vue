@@ -20,9 +20,9 @@
             deg="right"
           />
         </div>
-        <p class="card__description" v-if="info.description">
+        <!-- <p class="card__description" v-if="info.description">
           {{ info.description }}
-        </p>
+        </p> -->
 
         <div class="card__info">
           <div

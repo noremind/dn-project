@@ -65,6 +65,8 @@
     "correct_answer": "Correct answer",
     "correct": "Correct",
     "incorrect": "Incorrect",
-    "no_result": "No result data available"
+    "no_result": "No result data available",
+		"previous_lesson": "Previous lesson",
+		"description": "Description"
   }
 }

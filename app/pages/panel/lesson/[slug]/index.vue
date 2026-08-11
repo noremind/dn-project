@@ -1,6 +1,6 @@
 <template>
   <section class="lesson">
-    <div class="lesson__wrapper">
+    <div class="lesson__wrapper" v-if="lesson">
       <UiBreadcrumb v-if="lesson" :info="breadcrumb" />
 
       <h2 class="lesson__title">{{ lesson.name }}</h2>
@@ -12,12 +12,7 @@
         type="line"
       />
 
-      <UiPlayer
-        class="lesson__player"
-        :video-id="
-          'https://youtu.be/Y_8mUx4VOmo?si=SUNB4RcpiFklyPJN' || oneTab.url
-        "
-      />
+      <UiPlayer class="lesson__player" :video-id="oneTabVideo.url" />
 
       <div class="lesson__materials">
         <p class="lesson__text">{{ t("local.materials") }}:</p>
@@ -42,14 +37,23 @@
       <div class="lesson__btns">
         <div class="lesson__btns-box">
           <UiButton
+            class="lesson__btn lesson__btn--previous primary-btn"
+            :label="t('local.previous_lesson')"
+            before-icon="chevron"
+            icon-size="size-20"
+            icon-deg="left"
+            @action="redirectToPreviousLesson"
+            :is-loading="isLoading"
+          />
+          <UiButton
             v-for="test in lesson.lesson_tests"
             :key="test.id"
-            class="primary-btn primary-btn--green"
+            class="lesson__btn lesson__btn--test primary-btn primary-btn--green"
             :label="`${t('local.take_test')}(${test.title})`"
             @action="redirectToTest(test)"
           />
           <UiButton
-            class="primary-btn"
+            class="lesson__btn lesson__btn--next primary-btn"
             :label="t('local.next_lesson')"
             after-icon="chevron"
             icon-size="size-20"
@@ -92,27 +96,41 @@ const breadcrumb = computed(() => [
 const tabsVideo = ref([]);
 const oneTabVideo = ref(null);
 
-await useApi()
-  .ssr({ url: `/lessons/${route.params.slug}`, method: "get" })
-  .then((res) => {
-    lesson.value = res.data;
-    lesson.value.lesson_videos?.length
-      ? lesson.value.lesson_videos.forEach((item) =>
-          tabsVideo.value?.push({
-            id: item.id,
-            name: item.title,
-            url: item.url,
-          }),
-        )
-      : null;
-    oneTabVideo.value = tabsVideo.value?.[0] || null;
+try {
+  const response = await useApi().ssr({
+    url: `/lessons/${route.params.slug}`,
+    method: "get",
   });
 
-titleStore.setTitle(lesson.value?.course.name, "/panel/courses");
+  lesson.value = response?.data || response;
 
-useSeo({
-  title: `${lesson.value.course.name} > ${lesson.value.name}`,
-});
+  if (lesson.value?.lesson_videos?.length) {
+    lesson.value.lesson_videos.forEach((item) => {
+      tabsVideo.value.push({
+        id: item.id,
+        name: item.title,
+        url: item.url,
+      });
+    });
+  }
+
+  oneTabVideo.value = tabsVideo.value?.[0] || null;
+
+  titleStore.setTitle(lesson.value?.course.name, "/panel/courses");
+
+  useSeo({
+    title: `${lesson.value?.course?.name || ""} > ${lesson.value?.name || ""}`,
+  });
+} catch (error) {
+  console.error("Failed to load lesson:", error);
+  useNotify({
+    title: t("local.error"),
+    text:
+      error?.statusMessage || error?.message || t("local.something_went_wrong"),
+    status: "error",
+  });
+  await router.push("/panel/courses");
+}
 
 const downloadContectus = async () => {
   isConverting.value = true;
@@ -133,19 +151,25 @@ const redirectToTest = (test) => {
   });
 };
 
-const redirectToNextLesson = async () => {
-  const passedTests = lesson.value?.lesson_tests?.filter(
-    (test) => test?.passed,
-  );
-  const hasPassedCurrentTest = Boolean(passedTests?.length);
+const redirectToPreviousLesson = () => {
+  router.push(`/panel/lesson/${lesson.value.previous}`);
+};
 
-  if (!hasPassedCurrentTest) {
-    useNotify({
-      title: t("local.error"),
-      text: t("local.first_need_to_take_the_test"),
-      status: "error",
-    });
-    return;
+const redirectToNextLesson = async () => {
+  // Если есть тесты - проверяем, что они пройдены
+  if (lesson.value?.lesson_tests?.length > 0) {
+    const passedTests = lesson.value.lesson_tests.filter(
+      (test) => test?.passed,
+    );
+
+    if (!passedTests?.length) {
+      useNotify({
+        title: t("local.error"),
+        text: t("local.first_need_to_take_the_test"),
+        status: "error",
+      });
+      return;
+    }
   }
 
   isLoading.value = true;
@@ -213,13 +237,14 @@ const redirectToNextLesson = async () => {
   &__btns {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    width: 100%;
+    // justify-content: flex-start;
     gap: $gap-md;
     &-box {
       display: flex;
-      justify-content: flex-end;
       gap: $gap-md;
       align-items: center;
+      width: 100%;
     }
   }
   &__btn {
@@ -227,6 +252,15 @@ const redirectToNextLesson = async () => {
       background-color: transparent;
       color: $blue-500;
       border: 1px solid $blue-500;
+    }
+    &--previous {
+      margin-right: auto;
+    }
+    &--next {
+      // margin-left: auto;
+    }
+    &--test {
+      // margin-left: auto;
     }
   }
 }
