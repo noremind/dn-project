@@ -20,7 +20,8 @@
           class="accordion__content-link"
           v-for="lesson in info.lessons"
           :key="lesson.id"
-          :to="`/panel/lesson/${lesson.slug}`"
+          @click="showNotify"
+          :to="lesson.can_pass ? `/panel/lesson/${lesson.slug}` : ''"
           :class="{ 'accordion__content-link--active': lesson.is_completed }"
         >
           <UiIcon
@@ -44,6 +45,16 @@ const props = defineProps({
 
 const toggleOpen = () => {
   isOpen.value = !isOpen.value;
+};
+
+const showNotify = (lesson) => {
+  if (!lesson.can_pass) {
+    useNotify({
+      title: "Ошибка",
+      text: "Для прохождения этого урока сначала завершите предыдущий.",
+      status: "error",
+    });
+  }
 };
 </script>
 

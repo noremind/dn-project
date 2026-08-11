@@ -12,7 +12,7 @@
         type="line"
       />
 
-      <UiPlayer class="lesson__player" :video-id="oneTabVideo.url" />
+      <UiPlayer class="lesson__player" :video-id="oneTabVideo?.url" />
 
       <div class="lesson__materials">
         <p class="lesson__text">{{ t("local.materials") }}:</p>
@@ -21,7 +21,7 @@
         <div
           id="conspectus"
           class="lesson__conspectus"
-          v-html="lesson.content"
+          v-html="lesson?.content"
         ></div>
         <UiButton
           class="secondary-btn"
@@ -43,13 +43,12 @@
             icon-size="size-20"
             icon-deg="left"
             @action="redirectToPreviousLesson"
-            :is-loading="isLoading"
           />
           <UiButton
-            v-for="test in lesson.lesson_tests"
+            v-for="test in lesson?.lesson_tests"
             :key="test.id"
             class="lesson__btn lesson__btn--test primary-btn primary-btn--green"
-            :label="`${t('local.take_test')}(${test.title})`"
+            :label="`${t('local.take_test')}`"
             @action="redirectToTest(test)"
           />
           <UiButton
@@ -260,7 +259,20 @@ const redirectToNextLesson = async () => {
       // margin-left: auto;
     }
     &--test {
-      // margin-left: auto;
+      margin-left: auto;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .lesson {
+    &__btns {
+      &-box {
+        flex-direction: column;
+      }
+    }
+    &__btn {
+      width: 100%;
     }
   }
 }

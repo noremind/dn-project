@@ -2,11 +2,13 @@
   <div class="player">
     <div class="player__wrapper">
       <div
+        v-if="videoId"
         ref="player"
         class="player__video"
         data-plyr-provider="youtube"
         :data-plyr-embed-id="videoId"
       ></div>
+      <div v-else class="player__empty">Пока видео еще не загружено</div>
     </div>
   </div>
 </template>
@@ -60,6 +62,17 @@ onMounted(() => {
     border-radius: $border-r-md;
     overflow: hidden;
     box-shadow: $box-shadow;
+  }
+}
+.player {
+  &__empty {
+    padding: $padding-xxl;
+    border-radius: $border-r-md;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--surface-200);
+    color: var(--surface-400);
   }
 }
 </style>
