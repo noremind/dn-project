@@ -50,7 +50,7 @@
             :key="test.id"
             class="lesson__btn lesson__btn--test primary-btn primary-btn--green"
             :label="
-              !test.passed ? 'Посмотреть результат теста' : t('local.take_test')
+              test.passed ? 'Посмотреть результат теста' : t('local.take_test')
             "
             @action="redirectToTest(test)"
           />
@@ -145,9 +145,9 @@ const downloadContectus = async () => {
 };
 
 const redirectToTest = (test) => {
-  if (test.passed) {
+  if (!test.passed) {
     router.push({
-      path: `/lesson/test/${test.id}/result`,
+      path: `/panel/lesson/test/${test.id}/result`,
       query: { lesson_id: lesson.value.id },
     });
   } else {
