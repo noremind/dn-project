@@ -49,7 +49,9 @@
             v-for="test in lesson?.lesson_tests"
             :key="test.id"
             class="lesson__btn lesson__btn--test primary-btn primary-btn--green"
-            :label="`${t('local.take_test')}`"
+            :label="
+              !test.passed ? 'Посмотреть результат теста' : t('local.take_test')
+            "
             @action="redirectToTest(test)"
           />
           <UiButton
@@ -143,13 +145,20 @@ const downloadContectus = async () => {
 };
 
 const redirectToTest = (test) => {
-  router.push({
-    path: `/panel/lesson/test/${test.id}`,
-    query: {
-      lesson_id: lesson.value.id,
-      lesson_slug: lesson.value.slug,
-    },
-  });
+  if (test.passed) {
+    router.push({
+      path: `/lesson/test/${test.id}/result`,
+      query: { lesson_id: lesson.value.id },
+    });
+  } else {
+    router.push({
+      path: `/panel/lesson/test/${test.id}`,
+      query: {
+        lesson_id: lesson.value.id,
+        lesson_slug: lesson.value.slug,
+      },
+    });
+  }
 };
 
 const redirectToPreviousLesson = () => {
