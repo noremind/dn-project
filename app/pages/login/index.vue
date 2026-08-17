@@ -71,6 +71,7 @@ const postAuthLogin = async () => {
       method: "post",
       body: { email: email.value, password: password.value },
       isLoading: false,
+      notify: false,
     })
     .then(async (res) => {
       await authStore.setToken(res.token, "/panel");

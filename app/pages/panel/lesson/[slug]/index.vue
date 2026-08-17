@@ -55,9 +55,10 @@
             @action="redirectToTest(test)"
           />
           <UiButton
-            v-if="lesson.next"
             class="lesson__btn lesson__btn--next primary-btn"
-            :label="t('local.next_lesson')"
+            :label="
+              !lesson.next ? t('local.finish_course') : t('local.next_lesson')
+            "
             after-icon="chevron"
             icon-size="size-20"
             icon-deg="right"
@@ -116,7 +117,6 @@ try {
       });
     });
   }
-
   oneTabVideo.value = tabsVideo.value?.[0] || null;
 
   titleStore.setTitle(lesson.value?.course.name, "/panel/courses");
@@ -125,13 +125,6 @@ try {
     title: `${lesson.value?.course?.name || ""} > ${lesson.value?.name || ""}`,
   });
 } catch (error) {
-  console.error("Failed to load lesson:", error);
-  // useNotify({
-  //   title: t("local.error"),
-  //   text:
-  //     error?.statusMessage || error?.message || t("local.something_went_wrong"),
-  //   status: "error",
-  // });
   await router.push("/panel/courses");
 }
 
@@ -145,7 +138,7 @@ const downloadContectus = async () => {
 };
 
 const redirectToTest = (test) => {
-  if (!test.passed) {
+  if (test.passed) {
     router.push({
       path: `/panel/lesson/test/${test.id}/result`,
       query: { lesson_id: lesson.value.id },
@@ -188,6 +181,7 @@ const redirectToNextLesson = async () => {
     await useApi().client({
       url: `/lessons/${lesson.value.slug}/finish`,
       method: "post",
+      notify: false,
     });
 
     await router.push(`/panel/lesson/${lesson.value.next}`);

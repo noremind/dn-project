@@ -31,12 +31,17 @@
 		"buy": "Купить",
 		"all_courses": "Все курсы",
 		"my_courses": "Мои курсы",
+		"my_certificates": "Мои сертификаты",
+		"certificate_received_at": "Дата выдачи",
+		"certificate_expires_at": "Действует до",
+		"download_certificate": "Скачать сертификат",
 		"total": "Всего",
 		"next_lesson": "Следующий урок",
 		"materials": "Материалы",
 		"take_test": "Сдать тест",
 		"download_conspectus": "Скачать конспект",
 		"first_need_to_take_the_test": "Сперва нужно сдать тест",
+		"complete_previous_lesson": "Для прохождения этого урока сначала завершите предыдущий.",
 		"next": "Следующий",
 		"back": "Назад",
 		"finish": "Завершить",
@@ -69,6 +74,8 @@
 		"enter": "Войти",
 		"error": "Ошибка",
 		"previous_lesson": "Предыдущий урок",
-		"description": "Описание"
+		"description": "Описание",
+		"test": "Тест",
+		"finish_course": "Завершить курс"
 	}
 }

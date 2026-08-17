@@ -38,6 +38,17 @@ export async function useFetchClient(options = {}) {
 			statusMessage: error?.statusMessage || error?.message || "Ошибка запроса",
 			data: error?.data || {},
 		}
+		normalizedError.message =
+			normalizedError?.data?.message ||
+			normalizedError?._data?.message ||
+			normalizedError?.message ||
+			normalizedError?.statusMessage ||
+			"Ошибка запроса"
+
+		if (options?.notify !== false) {
+			useNotify({ title: "Ошибка", text: normalizedError.message, status: "error" })
+		}
+
 		throw normalizedError;
 	}
 };

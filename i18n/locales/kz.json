@@ -30,13 +30,18 @@
     "continue": "Жалғастыру",
     "buy": "Сатып алу",
     "all_courses": "Барлық курстар",
-    "my_courses": "Менің курстарым",
+		"my_courses": "Менің курстарым",
+		"my_certificates": "Менің сертификаттарым",
+		"certificate_received_at": "Берілген күні",
+		"certificate_expires_at": "Жарамды мерзімі",
+		"download_certificate": "Сертификатты жүктеп алу",
     "total": "Жалпы саны",
     "next_lesson": "Келесі сабақ",
     "materials": "Материалдар",
     "take_test": "Тест тапсыру",
     "download_conspectus": "Конспектіні жүктеп алу",
-    "first_need_to_take_the_test": "Алдымен тест тапсыру қажет",
+		"first_need_to_take_the_test": "Алдымен тест тапсыру қажет",
+		"complete_previous_lesson": "Бұл сабаққа өту үшін алдымен алдыңғы сабақты аяқтаңыз.",
     "next": "Келесі",
     "back": "Артқа",
     "finish": "Аяқтау",
@@ -67,6 +72,8 @@
     "incorrect": "Қате",
     "no_result": "Нәтиже жоқ",
 		"previous_lesson": "Алдыңғы сабақ",
-		"description": "Сипаттама"
+		"description": "Сипаттама",
+		"test": "Тест",
+		"finish_course": "Курсты аяқтау"
   }
 }

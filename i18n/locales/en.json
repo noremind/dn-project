@@ -31,12 +31,17 @@
     "buy": "Buy",
     "all_courses": "All courses",
     "my_courses": "My courses",
+    "my_certificates": "My certificates",
+    "certificate_received_at": "Issued on",
+    "certificate_expires_at": "Valid until",
+    "download_certificate": "Download certificate",
     "total": "Total",
     "next_lesson": "Next lesson",
     "materials": "Materials",
     "take_test": "Take test",
     "download_conspectus": "Download notes",
     "first_need_to_take_the_test": "You need to take the test first",
+    "complete_previous_lesson": "Complete the previous lesson first.",
     "next": "Next",
     "back": "Back",
     "finish": "Finish",
@@ -67,6 +72,8 @@
     "incorrect": "Incorrect",
     "no_result": "No result data available",
 		"previous_lesson": "Previous lesson",
-		"description": "Description"
+		"description": "Description",
+		"test": "Test",
+		"finish_course": "Complete the course"
   }
 }

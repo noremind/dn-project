@@ -16,27 +16,38 @@
       </div>
 
       <div class="accordion__content" v-if="isOpen">
-        <nuxt-link
+        <component
+          :is="lesson.can_pass ? 'NuxtLink' : 'div'"
           class="accordion__content-link"
           v-for="lesson in info.lessons"
           :key="lesson.id"
           @click="showNotify(lesson)"
-          :to="lesson.can_pass ? `/panel/lesson/${lesson.slug}` : ''"
-          :class="{ 'accordion__content-link--active': lesson.is_completed }"
+          :to="lesson.can_pass ? `/panel/lesson/${lesson.slug}` : null"
+          :class="{
+            'accordion__content-link--active': lesson.is_completed,
+            'accordion__content-link--disabled': !lesson.can_pass,
+          }"
         >
           <UiIcon
             :icon="lesson.is_completed ? 'checkmark-i' : 'play-i'"
             size="size-16"
-            :color="lesson.is_completed ? 'white' : 'black'"
+            :color="
+              lesson.is_completed
+                ? 'white'
+                : lesson.can_pass
+                  ? 'black'
+                  : 'surface-400'
+            "
           />
           <p class="accordion__content-text">{{ lesson.name }}</p>
-        </nuxt-link>
+        </component>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+const { t } = useI18n();
 const isOpen = ref(false);
 
 const props = defineProps({
@@ -51,7 +62,7 @@ const showNotify = (lesson) => {
   if (!lesson.can_pass) {
     useNotify({
       title: "Ошибка",
-      text: "Для прохождения этого урока сначала завершите предыдущий.",
+      text: t("local.complete_previous_lesson"),
       status: "error",
     });
   }
@@ -102,6 +113,10 @@ const showNotify = (lesson) => {
       &--active {
         background-color: $primary-color;
         color: $white;
+      }
+      &--disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
       }
     }
   }

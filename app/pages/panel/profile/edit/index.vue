@@ -95,6 +95,7 @@ const putAuthProfileUpdate = () => {
         phone: phone.value?.replace(/\D/g, ""),
         birthday: birthDate.value,
       },
+      notify: false,
     })
     .then(async (res) => {
       isLoading.value = true;

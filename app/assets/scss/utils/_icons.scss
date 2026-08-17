@@ -180,3 +180,8 @@ i.icon {
   -webkit-mask-image: url("@/assets/icons/i-circle.svg");
   mask-image: url("@/assets/icons/i-circle.svg");
 }
+.certificate-star-i {
+  @extend i, .icon;
+  -webkit-mask-image: url("@/assets/icons/certificate-star-i.svg");
+  mask-image: url("@/assets/icons/certificate-star-i.svg");
+}

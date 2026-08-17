@@ -112,6 +112,12 @@ const navs = computed(() => {
           path: "/panel/courses",
           icon: "monitor-i",
         },
+        {
+          name: t("local.my_certificates"),
+          route: { path: "/panel/certificates" },
+          path: "/panel/certificates",
+          icon: "certificate-star-i",
+        },
       ],
     },
   ];

@@ -26,6 +26,10 @@ export const useTitleStore = defineStore("title", () => {
 				title.value = t('local.courses')
 				activeRoute.value = '/panel/courses'
 				break;
+			case '/panel/certificates':
+				title.value = t('local.my_certificates')
+				activeRoute.value = '/panel/certificates'
+				break;
 		}
 	}
 

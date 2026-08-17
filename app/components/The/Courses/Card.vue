@@ -1,17 +1,23 @@
 <template>
   <section class="card">
-    <div @click="checkStatus(info.user_status)" class="card__wrapper">
+    <div class="card__wrapper">
       <img
         v-if="info.image"
         class="card__preview"
         :src="info.image"
         alt="Preview"
+        @click="checkStatus(info.user_status)"
       />
 
-      <UiNoImage v-else class="card__no-image" border-radius="none" />
+      <UiNoImage
+        @click="checkStatus(info.user_status)"
+        v-else
+        class="card__no-image"
+        border-radius="none"
+      />
 
       <div class="card__content">
-        <div class="card__content-top">
+        <div class="card__content-top" @click="checkStatus(info.user_status)">
           <h3 class="card__title title-sm">{{ info.name }}</h3>
           <UiIcon
             class="card__icon"
@@ -42,6 +48,16 @@
         <div class="card__footer">
           <p class="card__price">{{ formatDigits(10000) }} ₸</p>
         </div>
+
+        <UiButton
+          v-if="info.user_status === 'completed'"
+          class="card__btn card__btn--certificate secondary-btn"
+          label="Получить сертификат"
+          before-icon="certificate-star-i"
+          icon-size="size-20"
+          icon-color="primary-color"
+          @click="postCourseCertificate(info)"
+        />
       </div>
     </div>
   </section>
@@ -50,6 +66,7 @@
 <script setup>
 const { t } = useI18n();
 const router = useRouter();
+const platform = usePlatformStore();
 const props = defineProps({
   info: Object,
 });
@@ -92,6 +109,44 @@ const checkStatus = (status) => {
     router.push(`/panel/course/${props.info.slug}`);
   }
 };
+
+const getCertificatesIdDownload = (id) => {
+  useApi()
+    .client({
+      url: `certificates/${id}/download`,
+      mehtod: "get",
+      header: {
+        responseType: "blob",
+      },
+    })
+    .then((res) => {
+      const blob = new Blob([res.data], {
+        type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      });
+
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `certificate-${id}.docx`;
+      document.body.appendChild(link);
+      link.click();
+
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    });
+};
+
+const postCourseCertificate = (course) => {
+  useApi()
+    .client({
+      url: `/courses/${course.slug}/get-certificate`,
+      method: "post",
+    })
+    .then((res) => {
+      getCertificatesIdDownload(res.data.id);
+    });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -121,6 +176,9 @@ const checkStatus = (status) => {
   }
   &__icon {
     transition: 0.2s linear;
+  }
+  &__btn {
+    width: 100%;
   }
   &__content {
     padding: 0 $padding-md $padding-md;

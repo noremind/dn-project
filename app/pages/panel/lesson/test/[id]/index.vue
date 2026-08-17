@@ -159,6 +159,7 @@ const getTestsStart = async () => {
       url: `/tests/${route.params.id}`,
       method: "get",
       query: { lesson_id: route.query?.lesson_id },
+      notify: false,
     });
 
     test.value = res.data;
@@ -205,6 +206,7 @@ const postTestsIdQuestionsIdAnswer = async () => {
         answer_ids: [currentUserAnswer.value.id],
         lesson_id: route.query?.lesson_id,
       },
+      notify: false,
     });
 
     questions.value = markQuestionAsAnswered(
@@ -261,6 +263,7 @@ const postTestIdSubmit = async () => {
       url: `/tests/${route.params.id}/submit`,
       method: "post",
       body: { lesson_id: route.query?.lesson_id },
+      notify: false,
     });
 
     const query = {};
