@@ -16,8 +16,7 @@
       </div>
 
       <div class="accordion__content" v-if="isOpen">
-        <component
-          :is="lesson.can_pass ? 'NuxtLink' : 'div'"
+        <nuxt-link
           class="accordion__content-link"
           v-for="lesson in info.lessons"
           :key="lesson.id"
@@ -40,7 +39,7 @@
             "
           />
           <p class="accordion__content-text">{{ lesson.name }}</p>
-        </component>
+        </nuxt-link>
       </div>
     </div>
   </div>
