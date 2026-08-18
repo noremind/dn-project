@@ -42,7 +42,7 @@
               before-icon="download-i"
               icon-color="primary-color"
               icon-size="size-20"
-              @action="postCourseCertificate(certificate.course)"
+              @action="getCertificatesIdDownload(certificate.id)"
             />
           </div>
         </article>
@@ -76,17 +76,6 @@ const getCertificates = async () => {
   } catch {
     status.value = null;
   }
-};
-
-const postCourseCertificate = (course) => {
-  useApi()
-    .client({
-      url: `/courses/${course.slug}/get-certificate`,
-      method: "post",
-    })
-    .then((res) => {
-      getCertificatesIdDownload(res.data.id);
-    });
 };
 
 const getCertificatesIdDownload = (id) => {

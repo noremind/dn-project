@@ -46,7 +46,18 @@
             </div>
           </section>
         </div>
-        <TheCourseInfo class="course__info" :info="course" />
+        <div class="course__aside">
+          <TheCourseInfo class="course__info" :info="course" />
+          <UiButton
+            v-if="course.user_status === 'completed'"
+            class="course__btn course__btn--certificate secondary-btn"
+            label="Получить сертификат"
+            before-icon="certificate-star-i"
+            icon-size="size-20"
+            icon-color="primary-color"
+            @click="router.push('/panel/certificates')"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -157,6 +168,15 @@ const infos = computed(() => [
   }
   &__no-image {
     height: 350px;
+  }
+  &__aside {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-md;
+  }
+  &__btn {
+    height: fit-content;
+    width: 100%;
   }
 }
 

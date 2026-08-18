@@ -56,7 +56,7 @@
           before-icon="certificate-star-i"
           icon-size="size-20"
           icon-color="primary-color"
-          @click="postCourseCertificate(info)"
+          @click="router.push('/panel/certificates')"
         />
       </div>
     </div>
@@ -108,44 +108,6 @@ const checkStatus = (status) => {
   } else if (status === "continue" || status === "completed") {
     router.push(`/panel/course/${props.info.slug}`);
   }
-};
-
-const getCertificatesIdDownload = (id) => {
-  useApi()
-    .client({
-      url: `certificates/${id}/download`,
-      mehtod: "get",
-      header: {
-        responseType: "blob",
-      },
-    })
-    .then((res) => {
-      const blob = new Blob([res.data], {
-        type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      });
-
-      const url = window.URL.createObjectURL(blob);
-
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `certificate-${id}.docx`;
-      document.body.appendChild(link);
-      link.click();
-
-      link.remove();
-      window.URL.revokeObjectURL(url);
-    });
-};
-
-const postCourseCertificate = (course) => {
-  useApi()
-    .client({
-      url: `/courses/${course.slug}/get-certificate`,
-      method: "post",
-    })
-    .then((res) => {
-      getCertificatesIdDownload(res.data.id);
-    });
 };
 </script>
 
