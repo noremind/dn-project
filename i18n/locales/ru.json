@@ -76,6 +76,11 @@
 		"previous_lesson": "Предыдущий урок",
 		"description": "Описание",
 		"test": "Тест",
-		"finish_course": "Завершить курс"
+		"finish_course": "Завершить курс",
+		"in_progress": "В процессе",
+		"completed": "Завершён",
+		"not_started": "Не начат",
+		"available": "Доступен",
+		"certificate": "Сертификат"
 	}
 }

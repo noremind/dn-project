@@ -17,6 +17,7 @@
         :style="{
           width: `${safePercent}%`,
           '--progress-bar-fill-opacity': fillOpacity,
+          '--progress-bar-color': progressColor,
         }"
       ></div>
     </div>
@@ -30,6 +31,10 @@ const props = defineProps({
   percent: {
     type: Number,
     default: 0,
+  },
+  tone: {
+    type: String,
+    default: "primary",
   },
 });
 
@@ -48,6 +53,10 @@ const fillOpacity = computed(() => {
 
   return minOpacity + (safePercent.value / 100) * (maxOpacity - minOpacity);
 });
+
+const progressColor = computed(() =>
+  props.tone === "success" ? "#4db988" : "#f5ac35",
+);
 </script>
 
 <style lang="scss" scoped>
@@ -59,35 +68,48 @@ const fillOpacity = computed(() => {
     align-items: center;
     justify-content: space-between;
     gap: $gap-sm;
+    margin-bottom: 6px;
   }
 
   &__label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
-    color: rgba($primary-color, 0.65);
+    color: var(--surface-400);
+    line-height: 1;
   }
 
   &__percent {
-    font-size: 12px;
-    font-weight: 500;
-    color: rgba($primary-color, 0.65);
+    color: var(--surface-600);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
   }
 
   &__track {
     width: 100%;
-    height: 10px;
+    height: 8px;
     overflow: hidden;
-    border-radius: 999px;
-    background-color: rgba($primary-color, 0.14);
+    padding: 1px;
+    border: 1px solid var(--surface-250);
+    border-radius: 4px;
+    background-color: var(--surface-150);
   }
 
   &__fill {
     height: 100%;
-    border-radius: inherit;
-    background-color: rgba($primary-color, var(--progress-bar-fill-opacity));
+    min-width: 0;
+    border-radius: 2px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--progress-bar-color) 0,
+      var(--progress-bar-color) calc(33.333% - 3px),
+      transparent calc(33.333% - 3px),
+      transparent 33.333%
+    );
+    opacity: var(--progress-bar-fill-opacity);
     transition:
       width 0.3s ease,
-      background-color 0.3s ease;
+      opacity 0.3s ease;
   }
 }
 </style>

@@ -59,17 +59,6 @@ const currentPage = ref(+route.query?.page || 1);
 
 const status = ref(null);
 
-const getAuthProfileCertificates = () => {
-  useApi()
-    .client({
-      url: "/auth/profile/certificates",
-      method: "get",
-      isLoading: false,
-    })
-    .then((res) => {});
-};
-getAuthProfileCertificates();
-
 const getCourses = async () => {
   courses.value = null;
   status.value = "pending";

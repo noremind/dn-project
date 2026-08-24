@@ -74,6 +74,11 @@
 		"previous_lesson": "Previous lesson",
 		"description": "Description",
 		"test": "Test",
-		"finish_course": "Complete the course"
+		"finish_course": "Complete the course",
+		"in_progress": "In progress",
+		"completed": "Completed",
+		"not_started": "Not started",
+		"available": "Available",
+		"certificate": "Certificate"
   }
 }

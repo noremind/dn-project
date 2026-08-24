@@ -74,6 +74,11 @@
 		"previous_lesson": "Алдыңғы сабақ",
 		"description": "Сипаттама",
 		"test": "Тест",
-		"finish_course": "Курсты аяқтау"
+		"finish_course": "Курсты аяқтау",
+		"in_progress": "Оқу үстінде",
+		"completed": "Аяқталды",
+		"not_started": "Басталмаған",
+		"available": "Қолжетімді",
+		"certificate": "Сертификат"
   }
 }
