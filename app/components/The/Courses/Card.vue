@@ -49,7 +49,7 @@
           <p class="card__price">{{ formatDigits(10000) }} ₸</p>
         </div>
 
-        <UiButton
+        <!-- <UiButton
           v-if="info.user_status === 'completed'"
           class="card__btn card__btn--certificate secondary-btn"
           label="Получить сертификат"
@@ -57,7 +57,7 @@
           icon-size="size-20"
           icon-color="primary-color"
           @click="router.push('/panel/certificates')"
-        />
+        /> -->
       </div>
     </div>
   </section>

@@ -11,16 +11,17 @@
         {{ userInitials }}
       </div>
 
-      <div class="profile__user">
-        <p class="profile__name">{{ user.first_name }}</p>
-        <p class="profile__name profile__name--mobile">
-          {{ user.first_name?.trim().split(" ")[0].toUpperCase() || "" }}
-        </p>
-        <p class="profile__role">{{ user.role }}</p>
-      </div>
-
       <transition name="profile-nav">
         <ul class="profile__list" v-show="isOpenDropdown">
+          <li class="profile__li">
+            <div class="profile__user">
+              <p class="profile__name">{{ user.first_name }}</p>
+              <p class="profile__name profile__name--mobile">
+                {{ user.first_name?.trim().split(" ")[0].toUpperCase() || "" }}
+              </p>
+              <p class="profile__role">{{ user.role }}</p>
+            </div>
+          </li>
           <li
             class="profile__li"
             v-for="list in profileList"
@@ -106,11 +107,11 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     gap: $gap-sm;
-    border: 1px solid var(--surface-200);
+    // border: 1px solid var(--surface-200);
     padding: $padding-md;
     width: 100%;
     border-radius: $border-r-md;
-    box-shadow: $box-shadow;
+    // box-shadow: $box-shadow;
     cursor: pointer;
     position: relative;
     width: 100%;
@@ -129,6 +130,7 @@ onUnmounted(() => {
     }
   }
   &__name {
+    white-space: nowrap;
     font-weight: 500;
     &--mobile {
       display: none;
@@ -141,9 +143,9 @@ onUnmounted(() => {
   &__list {
     position: absolute;
     z-index: 2;
-    width: inherit;
+    // width: inherit;
     top: 101%;
-    left: 0;
+    left: -50%;
     display: flex;
     flex-direction: column;
     background-color: var(--white);

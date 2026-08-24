@@ -11,7 +11,7 @@ export async function useFetchSsr(options = {}) {
 		...options?.headers,
 	};
 
-	loaderStore.setLoader(true)
+	options.isLoading ? loaderStore.setLoader(true) : null
 
 	try {
 		const response = await $fetch(options.url, {

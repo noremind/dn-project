@@ -7,7 +7,7 @@
 
       <UiInput
         :label="t('local.email')"
-        placeholder="example@test.com"
+        placeholder=""
         name="tel"
         v-model="email"
         :max-length="255"
@@ -110,18 +110,19 @@ watch(
   &__wrapper {
     display: flex;
     flex-direction: column;
-    gap: $gap-md;
-    max-width: 480px;
+    gap: $gap-xl;
+    max-width: 450px;
     width: 100%;
     box-shadow: $box-shadow-md;
     background-color: var(--white);
-    padding: $padding-xxl $padding-md $padding-md $padding-md;
+    padding: 48px $padding-xxl;
     border-radius: $border-r-md;
   }
   &__logo {
     margin: 0 auto;
   }
   &__title {
+    font-size: 24px;
     text-align: center;
     margin-top: 12px;
   }
@@ -130,7 +131,8 @@ watch(
     color: $red-300;
   }
   &__btn {
-    margin-left: auto;
+    // margin-left: auto;
+    width: 100%;
   }
   &__box {
     display: flex;

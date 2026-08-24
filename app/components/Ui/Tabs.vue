@@ -57,6 +57,9 @@ const props = defineProps({
     justify-content: space-between;
     width: 100%;
     gap: $gap-md;
+    background-color: var(--surface-150);
+    padding: $padding-xs;
+    border-radius: $border-r-lg;
     &--scroll {
       width: 100%;
       overflow-x: scroll;
@@ -64,11 +67,11 @@ const props = defineProps({
     &--line {
       justify-content: flex-start;
       border-bottom: 1.5px solid var(--surface-100);
-      padding: $padding-md 0;
+      padding: $padding-xs;
     }
     &--line-border {
       justify-content: flex-start;
-      padding: $padding-md 0;
+      padding: $padding-xs;
     }
   }
   &__btn {
@@ -113,7 +116,7 @@ const props = defineProps({
     &--line-border {
       padding: $padding-md;
       background-color: transparent;
-      border: 1px solid $primary-color;
+      // border: 1px solid $primary-color;
       color: $surface-400;
     }
     &--active {

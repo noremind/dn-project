@@ -19,7 +19,7 @@ export const useTitleStore = defineStore("title", () => {
 
 		switch (path) {
 			case '/panel':
-				title.value = t('local.main')
+				title.value = ""
 				activeRoute.value = '/panel'
 				break;
 			case '/panel/courses':

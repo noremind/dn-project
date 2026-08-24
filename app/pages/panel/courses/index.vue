@@ -61,7 +61,11 @@ const status = ref(null);
 
 const getAuthProfileCertificates = () => {
   useApi()
-    .client({ url: "/auth/profile/certificates", method: "get" })
+    .client({
+      url: "/auth/profile/certificates",
+      method: "get",
+      isLoading: false,
+    })
     .then((res) => {});
 };
 getAuthProfileCertificates();
@@ -77,6 +81,7 @@ const getCourses = async () => {
         per_page: 12,
         page: currentPage.value,
       },
+      isLoading: false,
     })
     .then((res) => {
       courses.value = res.data;
@@ -100,6 +105,7 @@ const getAuthProfileCourses = async () => {
         per_page: 12,
         page: currentPage.value,
       },
+      isLoading: false,
     })
     .then((res) => {
       courses.value = res.data;
