@@ -4,33 +4,34 @@
       <i class="dashboard__circle dashboard__circle--large" /><i class="dashboard__circle dashboard__circle--small" />
       <div class="dashboard__head">
         <div class="dashboard__avatar">{{ initials }}</div>
-        <div><h1>Қош келдіңіз, {{ profile?.user?.first_name || "" }}!</h1><div class="dashboard__meta"><span>{{ profile?.user?.position || "Пайдаланушы" }}</span><span>{{ profile?.user?.department?.name || "—" }}</span><span>Тіркелген: {{ registeredAt }}</span></div></div>
-        <NuxtLink to="/panel/profile/edit" class="dashboard__settings">⚙ Баптаулар</NuxtLink>
+        <div><h1>{{ t("local.dashboard_welcome", { name: profile?.user?.first_name || "" }) }}</h1><div class="dashboard__meta"><span>{{ profile?.user?.position || t("local.dashboard_user") }}</span><span>{{ profile?.user?.department?.name || "—" }}</span><span>{{ t("local.dashboard_registered") }}: {{ registeredAt }}</span></div></div>
+        <NuxtLink to="/panel/profile/edit" class="dashboard__settings">⚙ {{ t("local.dashboard_settings") }}</NuxtLink>
       </div>
-      <div class="dashboard__details"><div><small>АТЫ-ЖӨНІ</small><b>{{ profile?.user?.full_name || "—" }}</b></div><div><small>ТЕЛЕФОН</small><b>{{ profile?.user?.phone || "—" }}</b></div><div><small>ЖСН</small><b>{{ profile?.user?.iin || "—" }}</b></div><div><small>БОНУС</small><b>—</b></div><div><small>БАЛАНС</small><b>—</b></div></div>
+      <div class="dashboard__details"><div><small>{{ t("local.dashboard_full_name") }}</small><b>{{ profile?.user?.full_name || "—" }}</b></div><div><small>{{ t("local.dashboard_phone") }}</small><b>{{ profile?.user?.phone || "—" }}</b></div><div><small>{{ t("local.dashboard_iin") }}</small><b>{{ profile?.user?.iin || "—" }}</b></div><div><small>{{ t("local.dashboard_bonus") }}</small><b>—</b></div><div><small>{{ t("local.dashboard_balance") }}</small><b>—</b></div></div>
     </div>
 
-    <h2 class="dashboard__title">Жылдам әрекеттер</h2>
+    <h2 class="dashboard__title">{{ t("local.dashboard_quick_actions") }}</h2>
     <div class="dashboard__actions">
-      <NuxtLink to="/panel/courses" class="dashboard__action"><i class="dashboard__icon dashboard__icon--blue">⌑</i><b>Менің курстарым</b><small>Оқу барысын жалғастыру</small></NuxtLink>
-      <NuxtLink to="/panel/certificates" class="dashboard__action"><i class="dashboard__icon dashboard__icon--green">✓</i><b>Менің сертификаттарым</b><small>Алынған құжаттар</small></NuxtLink>
-      <NuxtLink to="/panel/courses" class="dashboard__action"><i class="dashboard__icon dashboard__icon--yellow">$</i><b>Қосымша табыс</b><small>Экономикалық мүмкіндіктер</small></NuxtLink>
+      <NuxtLink to="/panel/courses" class="dashboard__action"><i class="dashboard__icon dashboard__icon--blue">⌑</i><b>{{ t("local.my_courses") }}</b><small>{{ t("local.dashboard_continue_study") }}</small></NuxtLink>
+      <NuxtLink to="/panel/certificates" class="dashboard__action"><i class="dashboard__icon dashboard__icon--green">✓</i><b>{{ t("local.my_certificates") }}</b><small>{{ t("local.dashboard_received_documents") }}</small></NuxtLink>
+      <NuxtLink to="/panel/courses" class="dashboard__action"><i class="dashboard__icon dashboard__icon--yellow">$</i><b>{{ t("local.dashboard_extra_income") }}</b><small>{{ t("local.dashboard_economic_opportunities") }}</small></NuxtLink>
     </div>
 
     <div class="dashboard__bottom">
-      <div class="dashboard__learning"><template v-if="profile?.continue_learning"><i>⌑</i><p>Оқуды жалғастыру</p><h3>{{ profile.continue_learning.course_title }}</h3><small>{{ profile.continue_learning.next_lesson?.title }}</small><NuxtLink :to="`/panel/course/${profile.continue_learning.course_slug}`" class="dashboard__button">Курсты жалғастыру</NuxtLink></template><template v-else><i>⌑</i><p>Белсенді курс жоқ</p><NuxtLink to="/panel/courses" class="dashboard__button">Курстарды қарау</NuxtLink></template></div>
-      <aside class="dashboard__progress"><h2>Менің прогресім</h2><div class="dashboard__stat dashboard__stat--blue"><span>Белсенді курстар</span><b>{{ stats.active_courses_count || 0 }}</b><i>▷</i></div><div class="dashboard__stat dashboard__stat--green"><span>Аяқталған курстар</span><b>{{ stats.completed_courses_count || 0 }}</b><i>✓</i></div><div class="dashboard__stat dashboard__stat--yellow"><span>Алынған сертификаттар</span><b>{{ stats.certificates_count || 0 }}</b><i>✧</i></div><div class="dashboard__total"><div><span>Жалпы оқу прогресі</span><b>0%</b></div><i /><small>Барлық жетістіктеріңіз профильде сақталады</small></div></aside>
+      <div class="dashboard__learning"><template v-if="profile?.continue_learning"><i>⌑</i><p>{{ t("local.dashboard_continue_study") }}</p><h3>{{ profile.continue_learning.course_title }}</h3><small>{{ profile.continue_learning.next_lesson?.title }}</small><NuxtLink :to="`/panel/course/${profile.continue_learning.course_slug}`" class="dashboard__button">{{ t("local.dashboard_continue_course") }}</NuxtLink></template><template v-else><i>⌑</i><p>{{ t("local.dashboard_no_active_course") }}</p><NuxtLink to="/panel/courses" class="dashboard__button">{{ t("local.dashboard_view_courses") }}</NuxtLink></template></div>
+      <aside class="dashboard__progress"><h2>{{ t("local.dashboard_my_progress") }}</h2><div class="dashboard__stat dashboard__stat--blue"><span>{{ t("local.dashboard_active_courses") }}</span><b>{{ stats.active_courses_count || 0 }}</b><i>▷</i></div><div class="dashboard__stat dashboard__stat--green"><span>{{ t("local.dashboard_completed_courses") }}</span><b>{{ stats.completed_courses_count || 0 }}</b><i>✓</i></div><div class="dashboard__stat dashboard__stat--yellow"><span>{{ t("local.dashboard_received_certificates") }}</span><b>{{ stats.certificates_count || 0 }}</b><i>✧</i></div><div class="dashboard__total"><div><span>{{ t("local.dashboard_total_progress") }}</span><b>0%</b></div><i /><small>{{ t("local.dashboard_achievements_note") }}</small></div></aside>
     </div>
   </section>
 </template>
 
 <script setup>
+const { t, locale } = useI18n();
 const profile = ref(null);
 const stats = computed(() => profile.value?.stats || {});
 const initials = computed(() => (profile.value?.user?.full_name || "П").trim().charAt(0).toUpperCase());
 const registeredAt = computed(() => {
   if (!profile.value?.user?.created_at) return "—";
-  return new Intl.DateTimeFormat("kk-KZ", { day: "2-digit", month: "2-digit", year: "numeric" }).format(new Date(profile.value.user.created_at));
+  return new Intl.DateTimeFormat(locale.value === "kz" ? "kk-KZ" : locale.value, { day: "2-digit", month: "2-digit", year: "numeric" }).format(new Date(profile.value.user.created_at));
 });
 
 try {

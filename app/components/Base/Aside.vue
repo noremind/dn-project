@@ -37,20 +37,24 @@
               @click="asideStore.mobileToggle()"
             /> -->
           </li>
-          <li class="aside__li" v-for="list in navs" :key="list.name">
-            <p
-              class="aside__name"
-              :class="{
-                'aside__name--hide': false,
-              }"
+          <li class="aside__group" v-for="list in navs" :key="list.name">
+            <button
+              type="button"
+              class="aside__group-title"
+              :class="{ 'aside__group-title--collapsed': asideStore.isOpen && !asideStore.isMobileOpen }"
+              :aria-expanded="isGeneralOpen"
+              @click="isGeneralOpen = !isGeneralOpen"
             >
-              {{
-                asideStore.isOpen && !asideStore.isMobileOpen
-                  ? "------"
-                  : list.name
-              }}
-            </p>
-            <ul class="aside__list">
+              <span>{{ asideStore.isOpen && !asideStore.isMobileOpen ? "------" : list.name }}</span>
+              <UiIcon
+                v-if="!asideStore.isOpen || asideStore.isMobileOpen"
+                icon="chevron"
+                color="black"
+                size="size-16"
+                :deg="isGeneralOpen ? '' : 'down'"
+              />
+            </button>
+            <ul v-show="isGeneralOpen" class="aside__list">
               <li
                 class="aside__li"
                 :class="{
@@ -93,6 +97,7 @@ const titleStore = useTitleStore();
 const authStore = useAuthStore();
 const user = computed(() => authStore.getUser);
 const { t } = useI18n();
+const isGeneralOpen = ref(true);
 
 const navs = computed(() => {
   let showNav = [
@@ -168,13 +173,24 @@ watch(
       display: none;
     }
   }
-  &__name {
+  &__group {
+    padding: $padding-sm;
+  }
+  &__group-title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0 0 16px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
     font-size: 16px;
     font-weight: 500;
     color: var(--surface-400);
-    margin-bottom: 16px;
     white-space: nowrap;
-    &--hide {
+    &--collapsed {
       opacity: 0;
     }
   }
