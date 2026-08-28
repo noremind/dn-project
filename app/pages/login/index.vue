@@ -41,7 +41,7 @@
 
         <form class="login-form" @submit.prevent="postAuthLogin">
           <label class="field">
-            <span class="field__label">{{ t("local.email") }} {{ t("local.phone_number").toLowerCase() }}</span>
+            <span class="field__label">{{ t("local.email") }}</span>
             <span class="field__control" :class="{ 'field__control--error': !!errorMessage }">
               <svg class="field__icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M4 6.5h16v11H4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
@@ -50,7 +50,7 @@
               <input
                 v-model="email"
                 name="email"
-                type="text"
+                type="email"
                 autocomplete="username"
                 placeholder="you@example.com"
                 maxlength="255"
