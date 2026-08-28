@@ -1,25 +1,123 @@
 <template>
   <section class="dashboard">
     <div class="dashboard__hero">
-      <i class="dashboard__circle dashboard__circle--large" /><i class="dashboard__circle dashboard__circle--small" />
+      <i class="dashboard__circle dashboard__circle--large" /><i
+        class="dashboard__circle dashboard__circle--small"
+      />
       <div class="dashboard__head">
         <div class="dashboard__avatar">{{ initials }}</div>
-        <div><h1>{{ t("local.dashboard_welcome", { name: profile?.user?.first_name || "" }) }}</h1><div class="dashboard__meta"><span>{{ profile?.user?.position || t("local.dashboard_user") }}</span><span>{{ profile?.user?.department?.name || "—" }}</span><span>{{ t("local.dashboard_registered") }}: {{ registeredAt }}</span></div></div>
-        <NuxtLink to="/panel/profile/edit" class="dashboard__settings">⚙ {{ t("local.dashboard_settings") }}</NuxtLink>
+        <div>
+          <h1>
+            {{
+              t("local.dashboard_welcome", {
+                name: profile?.user?.first_name || "",
+              })
+            }}
+          </h1>
+          <div class="dashboard__meta">
+            <span>{{
+              profile?.user?.position || t("local.dashboard_user")
+            }}</span
+            ><span>{{ profile?.user?.department?.name || "—" }}</span
+            ><span
+              >{{ t("local.dashboard_registered") }}: {{ registeredAt }}</span
+            >
+          </div>
+        </div>
+        <!-- <NuxtLink to="/panel/profile/edit" class="dashboard__settings"
+          >⚙ {{ t("local.dashboard_settings") }}</NuxtLink
+        > -->
       </div>
-      <div class="dashboard__details"><div><small>{{ t("local.dashboard_full_name") }}</small><b>{{ profile?.user?.full_name || "—" }}</b></div><div><small>{{ t("local.dashboard_phone") }}</small><b>{{ profile?.user?.phone || "—" }}</b></div><div><small>{{ t("local.dashboard_iin") }}</small><b>{{ profile?.user?.iin || "—" }}</b></div><div><small>{{ t("local.dashboard_bonus") }}</small><b>—</b></div><div><small>{{ t("local.dashboard_balance") }}</small><b>—</b></div></div>
+      <div class="dashboard__details">
+        <div>
+          <small>{{ t("local.dashboard_full_name") }}</small
+          ><b>{{ profile?.user?.full_name || "—" }}</b>
+        </div>
+        <div>
+          <small>{{ t("local.dashboard_phone") }}</small
+          ><b>{{ profile?.user?.phone || "—" }}</b>
+        </div>
+        <div>
+          <small>{{ t("local.dashboard_iin") }}</small
+          ><b>{{ profile?.user?.iin || "—" }}</b>
+        </div>
+        <div>
+          <small>{{ t("local.dashboard_bonus") }}</small
+          ><b>—</b>
+        </div>
+        <div>
+          <small>{{ t("local.dashboard_balance") }}</small
+          ><b>—</b>
+        </div>
+      </div>
     </div>
 
     <h2 class="dashboard__title">{{ t("local.dashboard_quick_actions") }}</h2>
     <div class="dashboard__actions">
-      <NuxtLink to="/panel/courses" class="dashboard__action"><i class="dashboard__icon dashboard__icon--blue">⌑</i><b>{{ t("local.my_courses") }}</b><small>{{ t("local.dashboard_continue_study") }}</small></NuxtLink>
-      <NuxtLink to="/panel/certificates" class="dashboard__action"><i class="dashboard__icon dashboard__icon--green">✓</i><b>{{ t("local.my_certificates") }}</b><small>{{ t("local.dashboard_received_documents") }}</small></NuxtLink>
-      <NuxtLink to="/panel/courses" class="dashboard__action"><i class="dashboard__icon dashboard__icon--yellow">$</i><b>{{ t("local.dashboard_extra_income") }}</b><small>{{ t("local.dashboard_economic_opportunities") }}</small></NuxtLink>
+      <NuxtLink to="/panel/courses" class="dashboard__action"
+        ><i class="dashboard__icon dashboard__icon--blue">⌑</i
+        ><b>{{ t("local.my_courses") }}</b
+        ><small>{{ t("local.dashboard_continue_study") }}</small></NuxtLink
+      >
+      <NuxtLink to="/panel/certificates" class="dashboard__action"
+        ><i class="dashboard__icon dashboard__icon--green">✓</i
+        ><b>{{ t("local.my_certificates") }}</b
+        ><small>{{ t("local.dashboard_received_documents") }}</small></NuxtLink
+      >
+      <NuxtLink to="/panel/courses" class="dashboard__action"
+        ><i class="dashboard__icon dashboard__icon--yellow">$</i
+        ><b>{{ t("local.dashboard_extra_income") }}</b
+        ><small>{{
+          t("local.dashboard_economic_opportunities")
+        }}</small></NuxtLink
+      >
     </div>
 
     <div class="dashboard__bottom">
-      <div class="dashboard__learning"><template v-if="profile?.continue_learning"><i>⌑</i><p>{{ t("local.dashboard_continue_study") }}</p><h3>{{ profile.continue_learning.course_title }}</h3><small>{{ profile.continue_learning.next_lesson?.title }}</small><NuxtLink :to="`/panel/course/${profile.continue_learning.course_slug}`" class="dashboard__button">{{ t("local.dashboard_continue_course") }}</NuxtLink></template><template v-else><i>⌑</i><p>{{ t("local.dashboard_no_active_course") }}</p><NuxtLink to="/panel/courses" class="dashboard__button">{{ t("local.dashboard_view_courses") }}</NuxtLink></template></div>
-      <aside class="dashboard__progress"><h2>{{ t("local.dashboard_my_progress") }}</h2><div class="dashboard__stat dashboard__stat--blue"><span>{{ t("local.dashboard_active_courses") }}</span><b>{{ stats.active_courses_count || 0 }}</b><i>▷</i></div><div class="dashboard__stat dashboard__stat--green"><span>{{ t("local.dashboard_completed_courses") }}</span><b>{{ stats.completed_courses_count || 0 }}</b><i>✓</i></div><div class="dashboard__stat dashboard__stat--yellow"><span>{{ t("local.dashboard_received_certificates") }}</span><b>{{ stats.certificates_count || 0 }}</b><i>✧</i></div><div class="dashboard__total"><div><span>{{ t("local.dashboard_total_progress") }}</span><b>0%</b></div><i /><small>{{ t("local.dashboard_achievements_note") }}</small></div></aside>
+      <div class="dashboard__learning">
+        <template v-if="profile?.continue_learning"
+          ><i>⌑</i>
+          <p>{{ t("local.dashboard_continue_study") }}</p>
+          <h3>{{ profile.continue_learning.course_title }}</h3>
+          <small>{{ profile.continue_learning.next_lesson?.title }}</small
+          ><NuxtLink
+            :to="`/panel/course/${profile.continue_learning.course_slug}`"
+            class="dashboard__button"
+            >{{ t("local.dashboard_continue_course") }}</NuxtLink
+          ></template
+        ><template v-else
+          ><i>⌑</i>
+          <p>{{ t("local.dashboard_no_active_course") }}</p>
+          <NuxtLink to="/panel/courses" class="dashboard__button">{{
+            t("local.dashboard_view_courses")
+          }}</NuxtLink></template
+        >
+      </div>
+      <aside class="dashboard__progress">
+        <h2>{{ t("local.dashboard_my_progress") }}</h2>
+        <div class="dashboard__stat dashboard__stat--blue">
+          <span>{{ t("local.dashboard_active_courses") }}</span
+          ><b>{{ stats.active_courses_count || 0 }}</b
+          ><i>▷</i>
+        </div>
+        <div class="dashboard__stat dashboard__stat--green">
+          <span>{{ t("local.dashboard_completed_courses") }}</span
+          ><b>{{ stats.completed_courses_count || 0 }}</b
+          ><i>✓</i>
+        </div>
+        <div class="dashboard__stat dashboard__stat--yellow">
+          <span>{{ t("local.dashboard_received_certificates") }}</span
+          ><b>{{ stats.certificates_count || 0 }}</b
+          ><i>✧</i>
+        </div>
+        <div class="dashboard__total">
+          <div>
+            <span>{{ t("local.dashboard_total_progress") }}</span
+            ><b>0%</b>
+          </div>
+          <i /><small>{{ t("local.dashboard_achievements_note") }}</small>
+        </div>
+      </aside>
     </div>
   </section>
 </template>
@@ -28,14 +126,22 @@
 const { t, locale } = useI18n();
 const profile = ref(null);
 const stats = computed(() => profile.value?.stats || {});
-const initials = computed(() => (profile.value?.user?.full_name || "П").trim().charAt(0).toUpperCase());
+const initials = computed(() =>
+  (profile.value?.user?.full_name || "П").trim().charAt(0).toUpperCase(),
+);
 const registeredAt = computed(() => {
   if (!profile.value?.user?.created_at) return "—";
-  return new Intl.DateTimeFormat(locale.value === "kz" ? "kk-KZ" : locale.value, { day: "2-digit", month: "2-digit", year: "numeric" }).format(new Date(profile.value.user.created_at));
+  return new Intl.DateTimeFormat(
+    locale.value === "kz" ? "kk-KZ" : locale.value,
+    { day: "2-digit", month: "2-digit", year: "numeric" },
+  ).format(new Date(profile.value.user.created_at));
 });
 
 try {
-  const response = await useApi().client({ url: "/auth/profile/main", method: "get" });
+  const response = await useApi().client({
+    url: "/auth/profile/main",
+    method: "get",
+  });
   profile.value = response?.data || response;
 } catch {}
 
@@ -43,5 +149,368 @@ definePageMeta({ middleware: ["auth"] });
 </script>
 
 <style lang="scss" scoped>
-.dashboard{display:flex;flex-direction:column;gap:28px;color:#26272d}.dashboard__hero{position:relative;overflow:hidden;padding:28px 36px 30px;border-radius:24px;background:linear-gradient(112deg,#1958ef,#2f87f6);color:#fff;box-shadow:0 2px 5px #1648ad44}.dashboard__head{position:relative;z-index:1;display:flex;align-items:flex-start;gap:22px}.dashboard__avatar{display:grid;place-items:center;flex:none;width:92px;height:92px;border-radius:50%;background:#80aaff88;font-size:35px;font-weight:700}.dashboard h1{margin:2px 0 7px;font-size:34px;line-height:1.1}.dashboard__meta{display:flex;flex-wrap:wrap;gap:22px;color:#d8e6ff;font-size:18px}.dashboard__meta span::before{content:"•";margin-right:7px}.dashboard__settings{margin-left:auto;padding:13px 19px;border-radius:15px;background:#9fc3ff66;color:#fff;font-size:17px}.dashboard__details{position:relative;z-index:1;display:flex;gap:12px;margin:27px 0 0 114px}.dashboard__details div{display:flex;flex-direction:column;gap:9px;min-width:192px;padding:18px 22px;border-radius:15px;background:#8ab4ff42}.dashboard__details small{font-size:14px;color:#cbdcff}.dashboard__details b{font-size:18px}.dashboard__circle{position:absolute;border-radius:50%;background:#fff1}.dashboard__circle--large{width:160px;height:160px;right:-20px;top:-32px}.dashboard__circle--small{width:96px;height:96px;right:120px;bottom:-34px}.dashboard__title{font-size:23px;margin:4px 0 -2px}.dashboard__actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.dashboard__action{display:flex;flex-direction:column;align-items:flex-start;min-height:174px;padding:23px;border-radius:22px;background:var(--white);box-shadow:0 2px 5px #00000018}.dashboard__icon{display:grid;place-items:center;width:57px;height:57px;margin-bottom:19px;border-radius:16px;font-size:27px;font-style:normal;font-weight:700}.dashboard__icon--blue{background:#eaf2ff;color:#2765f6}.dashboard__icon--green{background:#ecfff3;color:#00af55}.dashboard__icon--yellow{background:#fff9df;color:#e9a000}.dashboard__action b{font-size:19px}.dashboard__action small{margin-top:5px;color:#898b95;font-size:16px}.dashboard__bottom{display:grid;grid-template-columns:minmax(0,2fr) minmax(350px,1fr);gap:30px}.dashboard__learning{display:flex;min-height:450px;padding:40px;align-items:center;justify-content:center;flex-direction:column;text-align:center;border-radius:22px;background:linear-gradient(135deg,#1958ef,#1b4de7);color:#d6e3ff}.dashboard__learning>i{margin-bottom:18px;color:#91b6ff;font-size:60px;font-style:normal}.dashboard__learning p{font-size:20px;margin:0 0 5px}.dashboard__learning h3{max-width:600px;margin:0 0 6px;color:#fff;font-size:24px}.dashboard__learning>small{margin-bottom:8px;font-size:16px}.dashboard__button{margin-top:16px;padding:15px 34px;border-radius:16px;background:#ffcf00;color:#171717;font-size:18px;font-weight:700}.dashboard__progress{padding:28px;border-radius:22px;background:var(--white);box-shadow:0 2px 5px #00000018}.dashboard__progress h2{font-size:20px;margin-bottom:25px}.dashboard__stat{position:relative;display:flex;flex-direction:column;margin-bottom:17px;padding:20px 23px;border-radius:16px}.dashboard__stat span{font-size:16px;font-weight:600}.dashboard__stat b{margin-top:7px;font-size:42px;line-height:1}.dashboard__stat i{position:absolute;right:22px;top:50%;display:grid;place-items:center;width:55px;height:55px;border-radius:50%;transform:translateY(-50%);font-size:24px;font-style:normal}.dashboard__stat--blue{background:#ebf3ff;color:#2364ed}.dashboard__stat--blue i{background:#d9e9ff}.dashboard__stat--green{background:#edfff3;color:#00a44d}.dashboard__stat--green i{background:#d9fae5}.dashboard__stat--yellow{background:#fffbe4;color:#bd7900}.dashboard__stat--yellow i{background:#fff4bd}.dashboard__total{margin-top:27px;padding-top:25px;border-top:1px solid #555}.dashboard__total>div{display:flex;justify-content:space-between;color:#71737d}.dashboard__total b{color:#2161ef}.dashboard__total>i{display:block;height:14px;margin:12px 0;border-radius:999px;background:#f0f0f2}.dashboard__total small{color:#aaaeb9;font-size:15px}@media(max-width:1100px){.dashboard__details{margin-left:0;flex-wrap:wrap}.dashboard__bottom{grid-template-columns:1fr}.dashboard__learning{min-height:360px}}@media(max-width:720px){.dashboard{gap:22px}.dashboard__hero{padding:22px 18px;border-radius:18px}.dashboard__head{gap:13px}.dashboard__avatar{width:55px;height:55px;font-size:22px}.dashboard h1{font-size:24px}.dashboard__meta{gap:7px;font-size:14px}.dashboard__meta span:last-child{display:none}.dashboard__settings{padding:10px;font-size:0}.dashboard__settings::first-letter{font-size:20px}.dashboard__details{display:grid;grid-template-columns:repeat(2,1fr);margin-top:20px;gap:8px}.dashboard__details div{min-width:0;padding:13px}.dashboard__details b{font-size:14px;overflow:hidden;text-overflow:ellipsis}.dashboard__actions{grid-template-columns:1fr}.dashboard__action{min-height:auto;padding:18px}.dashboard__icon{margin-bottom:12px;width:46px;height:46px}.dashboard__bottom{gap:18px}.dashboard__learning{min-height:280px;padding:28px 18px}.dashboard__progress{padding:20px}.dashboard__title{font-size:21px}}
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  color: #26272d;
+}
+.dashboard__hero {
+  position: relative;
+  overflow: hidden;
+  padding: 28px 36px 30px;
+  border-radius: 24px;
+  background: linear-gradient(112deg, #1958ef, #2f87f6);
+  color: #fff;
+  box-shadow: 0 2px 5px #1648ad44;
+}
+.dashboard__head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+}
+.dashboard__avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: #80aaff88;
+  font-size: 35px;
+  font-weight: 700;
+}
+.dashboard h1 {
+  margin: 2px 0 7px;
+  font-size: 34px;
+  line-height: 1.1;
+}
+.dashboard__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  color: #d8e6ff;
+  font-size: 18px;
+}
+.dashboard__meta span::before {
+  content: "•";
+  margin-right: 7px;
+}
+.dashboard__settings {
+  margin-left: auto;
+  padding: 13px 19px;
+  border-radius: 15px;
+  background: #9fc3ff66;
+  color: #fff;
+  font-size: 17px;
+}
+.dashboard__details {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 12px;
+  margin: 27px 0 0 114px;
+}
+.dashboard__details div {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 192px;
+  padding: 18px 22px;
+  border-radius: 15px;
+  background: #8ab4ff42;
+}
+.dashboard__details small {
+  font-size: 14px;
+  color: #cbdcff;
+}
+.dashboard__details b {
+  font-size: 18px;
+}
+.dashboard__circle {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff1;
+}
+.dashboard__circle--large {
+  width: 160px;
+  height: 160px;
+  right: -20px;
+  top: -32px;
+}
+.dashboard__circle--small {
+  width: 96px;
+  height: 96px;
+  right: 120px;
+  bottom: -34px;
+}
+.dashboard__title {
+  font-size: 23px;
+  margin: 4px 0 -2px;
+}
+.dashboard__actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.dashboard__action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 174px;
+  padding: 23px;
+  border-radius: 22px;
+  background: var(--white);
+  box-shadow: 0 2px 5px #00000018;
+}
+.dashboard__icon {
+  display: grid;
+  place-items: center;
+  width: 57px;
+  height: 57px;
+  margin-bottom: 19px;
+  border-radius: 16px;
+  font-size: 27px;
+  font-style: normal;
+  font-weight: 700;
+}
+.dashboard__icon--blue {
+  background: #eaf2ff;
+  color: #2765f6;
+}
+.dashboard__icon--green {
+  background: #ecfff3;
+  color: #00af55;
+}
+.dashboard__icon--yellow {
+  background: #fff9df;
+  color: #e9a000;
+}
+.dashboard__action b {
+  font-size: 19px;
+}
+.dashboard__action small {
+  margin-top: 5px;
+  color: #898b95;
+  font-size: 16px;
+}
+.dashboard__bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(350px, 1fr);
+  gap: 30px;
+}
+.dashboard__learning {
+  display: flex;
+  min-height: 450px;
+  padding: 40px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #1958ef, #1b4de7);
+  color: #d6e3ff;
+}
+.dashboard__learning > i {
+  margin-bottom: 18px;
+  color: #91b6ff;
+  font-size: 60px;
+  font-style: normal;
+}
+.dashboard__learning p {
+  font-size: 20px;
+  margin: 0 0 5px;
+}
+.dashboard__learning h3 {
+  max-width: 600px;
+  margin: 0 0 6px;
+  color: #fff;
+  font-size: 24px;
+}
+.dashboard__learning > small {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+.dashboard__button {
+  margin-top: 16px;
+  padding: 15px 34px;
+  border-radius: 16px;
+  background: #ffcf00;
+  color: #171717;
+  font-size: 18px;
+  font-weight: 700;
+}
+.dashboard__progress {
+  padding: 28px;
+  border-radius: 22px;
+  background: var(--white);
+  box-shadow: 0 2px 5px #00000018;
+}
+.dashboard__progress h2 {
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+.dashboard__stat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 17px;
+  padding: 20px 23px;
+  border-radius: 16px;
+}
+.dashboard__stat span {
+  font-size: 16px;
+  font-weight: 600;
+}
+.dashboard__stat b {
+  margin-top: 7px;
+  font-size: 42px;
+  line-height: 1;
+}
+.dashboard__stat i {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  font-style: normal;
+}
+.dashboard__stat--blue {
+  background: #ebf3ff;
+  color: #2364ed;
+}
+.dashboard__stat--blue i {
+  background: #d9e9ff;
+}
+.dashboard__stat--green {
+  background: #edfff3;
+  color: #00a44d;
+}
+.dashboard__stat--green i {
+  background: #d9fae5;
+}
+.dashboard__stat--yellow {
+  background: #fffbe4;
+  color: #bd7900;
+}
+.dashboard__stat--yellow i {
+  background: #fff4bd;
+}
+.dashboard__total {
+  margin-top: 27px;
+  padding-top: 25px;
+  border-top: 1px solid #555;
+}
+.dashboard__total > div {
+  display: flex;
+  justify-content: space-between;
+  color: #71737d;
+}
+.dashboard__total b {
+  color: #2161ef;
+}
+.dashboard__total > i {
+  display: block;
+  height: 14px;
+  margin: 12px 0;
+  border-radius: 999px;
+  background: #f0f0f2;
+}
+.dashboard__total small {
+  color: #aaaeb9;
+  font-size: 15px;
+}
+@media (max-width: 1100px) {
+  .dashboard__details {
+    margin-left: 0;
+    flex-wrap: wrap;
+  }
+  .dashboard__bottom {
+    grid-template-columns: 1fr;
+  }
+  .dashboard__learning {
+    min-height: 360px;
+  }
+}
+@media (max-width: 720px) {
+  .dashboard {
+    gap: 22px;
+  }
+  .dashboard__hero {
+    padding: 22px 18px;
+    border-radius: 18px;
+  }
+  .dashboard__head {
+    gap: 13px;
+  }
+  .dashboard__avatar {
+    width: 55px;
+    height: 55px;
+    font-size: 22px;
+  }
+  .dashboard h1 {
+    font-size: 24px;
+  }
+  .dashboard__meta {
+    gap: 7px;
+    font-size: 14px;
+  }
+  .dashboard__meta span:last-child {
+    display: none;
+  }
+  .dashboard__settings {
+    padding: 10px;
+    font-size: 0;
+  }
+  .dashboard__settings::first-letter {
+    font-size: 20px;
+  }
+  .dashboard__details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 20px;
+    gap: 8px;
+  }
+  .dashboard__details div {
+    min-width: 0;
+    padding: 13px;
+  }
+  .dashboard__details b {
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .dashboard__actions {
+    grid-template-columns: 1fr;
+  }
+  .dashboard__action {
+    min-height: auto;
+    padding: 18px;
+  }
+  .dashboard__icon {
+    margin-bottom: 12px;
+    width: 46px;
+    height: 46px;
+  }
+  .dashboard__bottom {
+    gap: 18px;
+  }
+  .dashboard__learning {
+    min-height: 280px;
+    padding: 28px 18px;
+  }
+  .dashboard__progress {
+    padding: 20px;
+  }
+  .dashboard__title {
+    font-size: 21px;
+  }
+}
 </style>
