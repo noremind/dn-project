@@ -24,9 +24,6 @@
             >
           </div>
         </div>
-        <!-- <NuxtLink to="/panel/profile/edit" class="dashboard__settings"
-          >⚙ {{ t("local.dashboard_settings") }}</NuxtLink
-        > -->
       </div>
       <div class="dashboard__details">
         <div>

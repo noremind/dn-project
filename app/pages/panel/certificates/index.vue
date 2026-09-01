@@ -83,12 +83,16 @@ const getCertificatesIdDownload = (id) => {
     .client({
       url: `certificates/${id}/download`,
       mehtod: "get",
-      header: {
+      responseType: "blob",
+
+      headers: {
         responseType: "blob",
+        Accept:
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       },
     })
     .then((res) => {
-      const blob = new Blob([res.data], {
+      const blob = new Blob([res], {
         type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       });
 
