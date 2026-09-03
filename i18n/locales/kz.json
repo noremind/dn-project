@@ -113,5 +113,10 @@
     ,"certificates_expires_in": "Мерзімі аяқталуына"
     ,"certificates_days": "{count} күн"
     ,"locked": "Бұғатталған"
+    ,"lesson_testing": "Сабақ бойынша тестілеу"
+    ,"test_duration": "Уақыты"
+    ,"minutes": "мин"
+    ,"passing_score": "Өту балы"
+    ,"test_passed": "Тест тапсырылды"
   }
 }

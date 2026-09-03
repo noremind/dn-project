@@ -25,26 +25,28 @@
           </div>
         </div>
       </div>
-      <div class="dashboard__details">
-        <div>
-          <small>{{ t("local.dashboard_full_name") }}</small
-          ><b>{{ profile?.user?.full_name || "—" }}</b>
-        </div>
-        <div>
-          <small>{{ t("local.dashboard_phone") }}</small
-          ><b>{{ profile?.user?.phone || "—" }}</b>
-        </div>
-        <div>
-          <small>{{ t("local.dashboard_iin") }}</small
-          ><b>{{ profile?.user?.iin || "—" }}</b>
-        </div>
-        <div>
-          <small>{{ t("local.dashboard_bonus") }}</small
-          ><b>—</b>
-        </div>
-        <div>
-          <small>{{ t("local.dashboard_balance") }}</small
-          ><b>—</b>
+      <div class="dashboard__details-scroll">
+        <div class="dashboard__details">
+          <div>
+            <small>{{ t("local.dashboard_full_name") }}</small
+            ><b>{{ profile?.user?.full_name || "—" }}</b>
+          </div>
+          <div>
+            <small>{{ t("local.dashboard_phone") }}</small
+            ><b>{{ profile?.user?.phone || "—" }}</b>
+          </div>
+          <div>
+            <small>{{ t("local.dashboard_iin") }}</small
+            ><b>{{ profile?.user?.iin || "—" }}</b>
+          </div>
+          <div>
+            <small>{{ t("local.dashboard_bonus") }}</small
+            ><b>—</b>
+          </div>
+          <div>
+            <small>{{ t("local.dashboard_balance") }}</small
+            ><b>—</b>
+          </div>
         </div>
       </div>
     </div>
@@ -204,11 +206,25 @@ definePageMeta({ middleware: ["auth"] });
   font-size: 17px;
 }
 .dashboard__details {
-  position: relative;
-  z-index: 1;
   display: flex;
   gap: 12px;
-  margin: 27px 0 0 114px;
+  width: max-content;
+}
+.dashboard__details-scroll {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin-top: 27px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba($white-fixed, 0.5) transparent;
+}
+.dashboard__details-scroll::-webkit-scrollbar {
+  height: 5px;
+}
+.dashboard__details-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba($white-fixed, 0.5);
 }
 .dashboard__details div {
   display: flex;
@@ -425,10 +441,6 @@ definePageMeta({ middleware: ["auth"] });
   font-size: 15px;
 }
 @media (max-width: 1100px) {
-  .dashboard__details {
-    margin-left: 0;
-    flex-wrap: wrap;
-  }
   .dashboard__bottom {
     grid-template-columns: 1fr;
   }
@@ -470,13 +482,13 @@ definePageMeta({ middleware: ["auth"] });
     font-size: 20px;
   }
   .dashboard__details {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin-top: 20px;
     gap: 8px;
   }
+  .dashboard__details-scroll {
+    margin-top: 20px;
+  }
   .dashboard__details div {
-    min-width: 0;
+    min-width: 168px;
     padding: 13px;
   }
   .dashboard__details b {

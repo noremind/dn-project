@@ -113,5 +113,10 @@
     ,"certificates_expires_in": "Expires in"
     ,"certificates_days": "{count} days"
     ,"locked": "Locked"
+    ,"lesson_testing": "Lesson test"
+    ,"test_duration": "Time"
+    ,"minutes": "min"
+    ,"passing_score": "Passing score"
+    ,"test_passed": "Test passed"
   }
 }

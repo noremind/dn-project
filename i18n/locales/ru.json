@@ -115,5 +115,10 @@
 		,"certificates_expires_in": "Истекает через"
 		,"certificates_days": "{count} дней"
 		,"locked": "Заблокировано"
+		,"lesson_testing": "Тестирование по уроку"
+		,"test_duration": "Время"
+		,"minutes": "мин"
+		,"passing_score": "Проходной балл"
+		,"test_passed": "Тест сдан"
 	}
 }

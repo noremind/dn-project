@@ -33,6 +33,23 @@
         />
       </div>
 
+      <section v-if="lesson?.lesson_tests?.length" class="lesson__tests">
+        <article
+          v-for="test in lesson.lesson_tests"
+          :key="test.id"
+          class="lesson__test-card"
+          :class="{ 'lesson__test-card--passed': test.passed }"
+        >
+          <span class="lesson__test-icon">{{ test.passed ? "✓" : "▶" }}</span>
+          <div class="lesson__test-content">
+            <h3>{{ test.title || t("local.lesson_testing") }}</h3>
+            <p>{{ t("local.test_duration") }}: {{ test.duration || test.duration_minutes || 60 }} {{ t("local.minutes") }} · {{ t("local.passing_score") }}: {{ test.passing_score || test.pass_score || 80 }}%</p>
+          </div>
+          <span v-if="test.passed" class="lesson__test-status">{{ t("local.test_passed") }}</span>
+          <UiButton v-else class="lesson__test-action primary-btn" :label="t('local.take_test')" @action="redirectToTest(test)" />
+        </article>
+      </section>
+
       <div class="lesson__btns">
         <div class="lesson__btns-box">
           <UiButton
@@ -43,15 +60,6 @@
             icon-size="size-20"
             icon-deg="left"
             @action="redirectToPreviousLesson"
-          />
-          <UiButton
-            v-for="test in lesson?.lesson_tests"
-            :key="test.id"
-            class="lesson__btn lesson__btn--test primary-btn primary-btn--green"
-            :label="
-              test.passed ? 'Посмотреть результат теста' : t('local.take_test')
-            "
-            @action="redirectToTest(test)"
           />
           <UiButton
             class="lesson__btn lesson__btn--next primary-btn"
@@ -249,6 +257,59 @@ const redirectToNextLesson = async () => {
       width: 100%;
     }
   }
+  &__tests {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-md;
+    padding: $padding-md 0;
+    border-top: 1px solid var(--surface-200);
+    border-bottom: 1px solid var(--surface-200);
+  }
+  &__test-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: $gap-md;
+    padding: 22px 28px;
+    border: 1px solid var(--surface-200);
+    border-radius: $border-r-lg;
+    background: var(--white);
+    box-shadow: $box-shadow;
+    &--passed .lesson__test-icon {
+      background: rgba($primary-color, 0.13);
+      color: $primary-color;
+    }
+  }
+  &__test-icon {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 15px;
+    background: rgba($primary-color, 0.13);
+    color: $primary-color;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  &__test-content h3 {
+    margin: 0;
+    color: var(--surface-600);
+    font-size: 20px;
+  }
+  &__test-content p {
+    margin: 8px 0 0;
+    color: var(--surface-400);
+    font-size: 16px;
+  }
+  &__test-status {
+    color: $primary-color;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  &__test-action {
+    height: fit-content;
+    white-space: nowrap;
+  }
   &__btn {
     &--download {
       background-color: transparent;
@@ -269,6 +330,15 @@ const redirectToNextLesson = async () => {
 
 @media (max-width: 768px) {
   .lesson {
+    &__test-card {
+      grid-template-columns: auto minmax(0, 1fr);
+      padding: 18px;
+    }
+    &__test-status,
+    &__test-action {
+      grid-column: 2;
+      justify-self: start;
+    }
     &__btns {
       &-box {
         flex-direction: column;
