@@ -486,35 +486,35 @@ const postAuthLogin = async () => {
   border-color: $primary-color !important;
 }
 
-:global(html:not(.dark)) .login-page {
+:global(html:not(.dark) .login-page) {
   background:
     radial-gradient(circle at 84% 12%, rgba($primary-color, 0.12), transparent 28%),
     var(--surface-75);
 }
-:global(html:not(.dark)) .login-card {
+:global(html:not(.dark) .login-card) {
   border-color: var(--surface-200);
   background: var(--white);
   box-shadow: 0 30px 80px rgba(20, 39, 67, 0.12);
   color: var(--surface-600);
 }
-:global(html:not(.dark)) .login-card__intro {
+:global(html:not(.dark) .login-card__intro) {
   background: linear-gradient(145deg, rgba($primary-color, 0.16), rgba($primary-color, 0.04));
   border-right-color: var(--surface-200);
 }
-:global(html:not(.dark)) .login-card__form { background: var(--white); }
-:global(html:not(.dark)) .login-card__logo :deep(.logo__wrapper),
-:global(html:not(.dark)) .login-card__logo :deep(.logo__text),
-:global(html:not(.dark)) .intro-copy h2,
-:global(html:not(.dark)) .form-heading h1 { color: var(--surface-600); }
-:global(html:not(.dark)) .intro-copy p,
-:global(html:not(.dark)) .form-heading p,
-:global(html:not(.dark)) .field__label,
-:global(html:not(.dark)) .login-footer { color: var(--surface-400); }
-:global(html:not(.dark)) .field__control { border-color: var(--surface-250); background: var(--surface-100); }
-:global(html:not(.dark)) .field input { color: var(--surface-600); }
-:global(html:not(.dark)) .field__icon,
-:global(html:not(.dark)) .field__action,
-:global(html:not(.dark)) .field input::placeholder { color: var(--surface-400); }
+:global(html:not(.dark) .login-card__form) { background: var(--white); }
+:global(html:not(.dark) .login-card__logo .logo__wrapper),
+:global(html:not(.dark) .login-card__logo .logo__text),
+:global(html:not(.dark) .intro-copy h2),
+:global(html:not(.dark) .form-heading h1) { color: var(--surface-600); }
+:global(html:not(.dark) .intro-copy p),
+:global(html:not(.dark) .form-heading p),
+:global(html:not(.dark) .field__label),
+:global(html:not(.dark) .login-footer) { color: var(--surface-400); }
+:global(html:not(.dark) .field__control) { border-color: var(--surface-250); background: var(--surface-100); }
+:global(html:not(.dark) .field input) { color: var(--surface-600); }
+:global(html:not(.dark) .field__icon),
+:global(html:not(.dark) .field__action),
+:global(html:not(.dark) .field input::placeholder) { color: var(--surface-400); }
 
 @media (max-width: 768px) {
   .login-page {
