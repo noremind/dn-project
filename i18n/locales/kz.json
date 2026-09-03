@@ -118,5 +118,7 @@
     ,"minutes": "мин"
     ,"passing_score": "Өту балы"
     ,"test_passed": "Тест тапсырылды"
+    ,"retry_test": "Қайта тапсыру"
+    ,"start_testing": "Тестілеуді бастау"
   }
 }

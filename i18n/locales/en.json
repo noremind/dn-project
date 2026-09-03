@@ -118,5 +118,7 @@
     ,"minutes": "min"
     ,"passing_score": "Passing score"
     ,"test_passed": "Test passed"
+    ,"retry_test": "Retry"
+    ,"start_testing": "Start test"
   }
 }

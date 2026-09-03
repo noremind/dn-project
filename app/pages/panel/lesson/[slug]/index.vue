@@ -38,15 +38,15 @@
           v-for="test in lesson.lesson_tests"
           :key="test.id"
           class="lesson__test-card"
-          :class="{ 'lesson__test-card--passed': test.passed }"
+          :class="{ 'lesson__test-card--passed': isTestPassed(test) }"
         >
-          <span class="lesson__test-icon">{{ test.passed ? "✓" : "▶" }}</span>
+          <span class="lesson__test-icon">{{ isTestPassed(test) ? "✓" : "▶" }}</span>
           <div class="lesson__test-content">
             <h3>{{ test.title || t("local.lesson_testing") }}</h3>
             <p>{{ t("local.test_duration") }}: {{ test.duration || test.duration_minutes || 60 }} {{ t("local.minutes") }} · {{ t("local.passing_score") }}: {{ test.passing_score || test.pass_score || 80 }}%</p>
           </div>
-          <span v-if="test.passed" class="lesson__test-status">{{ t("local.test_passed") }}</span>
-          <UiButton v-else class="lesson__test-action primary-btn" :label="t('local.take_test')" @action="redirectToTest(test)" />
+          <span v-if="isTestPassed(test)" class="lesson__test-status">{{ t("local.test_passed") }}</span>
+          <UiButton class="lesson__test-action primary-btn" :label="testState(test).action" @action="redirectToTest(test)" />
         </article>
       </section>
 
@@ -144,7 +144,7 @@ const downloadContectus = async () => {
 };
 
 const redirectToTest = (test) => {
-  if (test.passed) {
+  if (isTestPassed(test)) {
     router.push({
       path: `/panel/lesson/test/${test.id}/result`,
       query: { lesson_id: lesson.value.id },
@@ -159,6 +159,24 @@ const redirectToTest = (test) => {
     });
   }
 };
+
+const testState = (test) => {
+  const status = test.status || (test.passed ? "passed" : "start");
+
+  if (status === "passed") return { action: t("local.test_results") };
+
+  if (status === "failed") {
+    return {
+      action: t("local.retry_test"),
+    };
+  }
+
+  return {
+    action: t("local.start_testing"),
+  };
+};
+
+const isTestPassed = (test) => test.status === "passed" || test.passed === true;
 
 const redirectToPreviousLesson = () => {
   router.push(`/panel/lesson/${lesson.value.previous}`);

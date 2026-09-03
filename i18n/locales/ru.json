@@ -120,5 +120,7 @@
 		,"minutes": "мин"
 		,"passing_score": "Проходной балл"
 		,"test_passed": "Тест сдан"
+		,"retry_test": "Повторить попытку"
+		,"start_testing": "Начать тестирование"
 	}
 }
