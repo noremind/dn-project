@@ -103,5 +103,14 @@
     "dashboard_received_certificates": "Received certificates",
     "dashboard_total_progress": "Overall learning progress",
     "dashboard_achievements_note": "All your achievements are saved in your profile"
+    ,"all": "All"
+    ,"certificates_subtitle": "Verified courses and permit validity period"
+    ,"certificates_valid": "Valid"
+    ,"certificates_expiring_soon": "Expiring soon"
+    ,"certificates_expired": "Expired"
+    ,"certificates_expires_soon": "Expiring soon"
+    ,"certificates_issued": "Issued"
+    ,"certificates_expires_in": "Expires in"
+    ,"certificates_days": "{count} days"
   }
 }

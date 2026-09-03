@@ -20,7 +20,6 @@
           @action="emit('finish')"
           :label="t('local.finish')"
           class="finish__btn finish__btn--finish secondary-btn"
-          :is-loading="isLoading"
           after-icon="checkmark-i"
           icon-size="size-20"
           icon-color="green-500"
@@ -34,9 +33,6 @@
 const { t } = useI18n();
 const emit = defineEmits(["close", "finish"]);
 
-const props = defineProps({
-  isLoading: Boolean,
-});
 </script>
 
 <style lang="scss" scoped>

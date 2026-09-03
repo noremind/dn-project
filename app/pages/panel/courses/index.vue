@@ -19,8 +19,6 @@
         />
       </transition-group>
 
-      <UiStatusRequest v-if="!!status" :status="status" />
-
       <UiPagination
         v-if="!!pagination && pagination?.last_page !== 1"
         v-model="currentPage"
@@ -57,11 +55,8 @@ const courses = ref(null);
 const pagination = ref(null);
 const currentPage = ref(+route.query?.page || 1);
 
-const status = ref(null);
-
 const getCourses = async () => {
   courses.value = null;
-  status.value = "pending";
   await useApi()
     .ssr({
       url: "/courses",
@@ -70,22 +65,17 @@ const getCourses = async () => {
         per_page: 12,
         page: currentPage.value,
       },
-      isLoading: false,
     })
     .then((res) => {
       courses.value = res.data;
       pagination.value = res.meta;
-      courses.value?.length ? (status.value = "completed") : "empty";
     })
-    .catch(() => {
-      status.value = "error";
-    });
+    .catch(() => {});
 };
 getCourses();
 
 const getAuthProfileCourses = async () => {
   courses.value = null;
-  status.value = "pending";
   await useApi()
     .client({
       url: "/auth/profile/courses",
@@ -94,16 +84,12 @@ const getAuthProfileCourses = async () => {
         per_page: 12,
         page: currentPage.value,
       },
-      isLoading: false,
     })
     .then((res) => {
       courses.value = res.data;
       pagination.value = res.meta;
-      courses.value?.length ? (status.value = "completed") : "empty";
     })
-    .catch(() => {
-      status.value = "error";
-    });
+    .catch(() => {});
 };
 
 watch(

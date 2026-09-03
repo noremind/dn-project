@@ -85,7 +85,6 @@
     <ModalsFinishTest
       @close="setFinishModal(false)"
       @finish="postTestIdSubmit"
-      :is-loading="isFinishLoadingBtn"
     />
   </UiModal>
 </template>

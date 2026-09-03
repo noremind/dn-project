@@ -37,7 +37,6 @@
           class="edit__btn primary-btn"
           @action="putAuthProfileUpdate"
           :disabled="disabled"
-          :is-loading="isLoading"
         />
       </div>
     </div>

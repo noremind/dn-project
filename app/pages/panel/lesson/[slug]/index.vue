@@ -30,7 +30,6 @@
           icon-size="size-20"
           icon-color="primary-color"
           @action="downloadContectus"
-          :is-loading="isConverting"
         />
       </div>
 
@@ -63,7 +62,6 @@
             icon-size="size-20"
             icon-deg="right"
             @action="redirectToNextLesson"
-            :is-loading="isLoading"
           />
         </div>
       </div>

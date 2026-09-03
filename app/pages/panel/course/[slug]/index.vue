@@ -3,6 +3,16 @@
     <div class="course__wrapper">
       <h2 class="course__title">{{ course.name }}</h2>
 
+      <UiButton
+        v-if="course.user_status === 'completed'"
+        class="course__btn course__btn--mobile course__btn--certificate secondary-btn"
+        label="Получить сертификат"
+        before-icon="certificate-star-i"
+        icon-size="size-20"
+        icon-color="primary-color"
+        @click="router.push('/panel/certificates')"
+      />
+
       <div class="course__box">
         <div class="course__content">
           <img
@@ -177,6 +187,23 @@ const infos = computed(() => [
   &__btn {
     height: fit-content;
     width: 100%;
+    &--mobile {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .course {
+    &__box {
+      flex-direction: column;
+    }
+    &__btn {
+      display: none;
+      &--mobile {
+        display: flex;
+      }
+    }
   }
 }
 

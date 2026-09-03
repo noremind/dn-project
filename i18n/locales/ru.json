@@ -105,5 +105,14 @@
 		"dashboard_received_certificates": "Полученные сертификаты",
 		"dashboard_total_progress": "Общий прогресс обучения",
 		"dashboard_achievements_note": "Все ваши достижения сохраняются в профиле"
+		,"all": "Все"
+		,"certificates_subtitle": "Подтверждённые курсы и срок действия допуска"
+		,"certificates_valid": "Действуют"
+		,"certificates_expiring_soon": "Истекает скоро"
+		,"certificates_expired": "Истекшие"
+		,"certificates_expires_soon": "Истекает скоро"
+		,"certificates_issued": "Выдан"
+		,"certificates_expires_in": "Истекает через"
+		,"certificates_days": "{count} дней"
 	}
 }

@@ -103,5 +103,14 @@
     "dashboard_received_certificates": "Алынған сертификаттар",
     "dashboard_total_progress": "Жалпы оқу прогресі",
     "dashboard_achievements_note": "Барлық жетістіктеріңіз профильде сақталады"
+    ,"all": "Барлығы"
+    ,"certificates_subtitle": "Расталған курстар және рұқсат мерзімі"
+    ,"certificates_valid": "Қолданыста"
+    ,"certificates_expiring_soon": "Жақында аяқталады"
+    ,"certificates_expired": "Мерзімі өткен"
+    ,"certificates_expires_soon": "Жақында аяқталады"
+    ,"certificates_issued": "Берілген"
+    ,"certificates_expires_in": "Мерзімі аяқталуына"
+    ,"certificates_days": "{count} күн"
   }
 }

@@ -1,193 +1,39 @@
 <template>
-  <section class="card">
-    <div class="card__wrapper">
-      <img
-        v-if="info.image"
-        class="card__preview"
-        :src="info.image"
-        alt="Preview"
-        @click="checkStatus(info.user_status)"
-      />
-
-      <UiNoImage
-        @click="checkStatus(info.user_status)"
-        v-else
-        class="card__no-image"
-        border-radius="none"
-      />
-
-      <div class="card__content">
-        <div class="card__content-top" @click="checkStatus(info.user_status)">
-          <h3 class="card__title title-sm">{{ info.name }}</h3>
-          <UiIcon
-            class="card__icon"
-            icon="chevron"
-            size="size-20"
-            deg="right"
-          />
-        </div>
-        <!-- <p class="card__description" v-if="info.description">
-          {{ info.description }}
-        </p> -->
-
-        <div class="card__info">
-          <div
-            class="card__box"
-            v-for="(item, index) in infos"
-            :key="item.id"
-            v-show="item.show"
-          >
-            <p class="card__point" v-if="index === 1">·</p>
-            <UiIcon :icon="item.icon" size="size-16" />
-            <p class="card__info-text">{{ item.text }}</p>
-          </div>
-        </div>
-
-        <UiProgressBar :percent="info.user_progress?.progress || 0" />
-
-        <div class="card__footer">
-          <p class="card__price">{{ formatDigits(10000) }} ₸</p>
-        </div>
-
-        <!-- <UiButton
-          v-if="info.user_status === 'completed'"
-          class="card__btn card__btn--certificate secondary-btn"
-          label="Получить сертификат"
-          before-icon="certificate-star-i"
-          icon-size="size-20"
-          icon-color="primary-color"
-          @click="router.push('/panel/certificates')"
-        /> -->
-      </div>
+  <article class="course-card" :class="`course-card--${courseState.tone}`">
+    <div class="course-card__visual" @click="openCourse">
+      <span class="course-card__status">{{ courseState.label }}</span>
+      <span class="course-card__symbol" aria-hidden="true">{{ courseState.symbol }}</span>
     </div>
-  </section>
+    <div class="course-card__content">
+      <h3 class="course-card__title" @click="openCourse">{{ info.name }}</h3>
+      <div class="course-card__meta"><span>{{ info.modules_count || 0 }} {{ t("local.modules").toLocaleLowerCase() }}</span><span>{{ info.lessons_count || 0 }} {{ t("local.lessons").toLocaleLowerCase() }}</span></div>
+      <div class="course-card__progress"><div><span>{{ t("local.progress") }}</span><b>{{ safeProgress }}%</b></div><div class="course-card__track"><i :style="{ width: `${safeProgress}%` }" /></div></div>
+      <footer class="course-card__footer"><b class="course-card__price">{{ formatDigits(info.price || 10000) }} ₸</b><button type="button" class="course-card__action" @click="checkStatus(info.user_status)">{{ courseState.action }}</button></footer>
+    </div>
+  </article>
 </template>
 
 <script setup>
 const { t } = useI18n();
 const router = useRouter();
-const platform = usePlatformStore();
-const props = defineProps({
-  info: Object,
+const props = defineProps({ info: { type: Object, required: true } });
+const safeProgress = computed(() => Math.max(0, Math.min(100, Math.round(props.info.user_progress?.progress || 0))));
+const courseState = computed(() => {
+  const status = props.info.user_status;
+  if (status === "completed") return { tone: "completed", symbol: "⌑", label: t("local.completed"), action: t("local.certificate") };
+  if (status === "continue" || status === "in_progress") return { tone: "progress", symbol: "♨", label: t("local.in_progress"), action: t("local.continue") };
+  return { tone: "new", symbol: "ϟ", label: t("local.not_started"), action: t("local.start") };
 });
-
-const infos = computed(() => [
-  {
-    id: 1,
-    icon: "module-i",
-    text: `${props.info.modules_count} ${
-      props.info.modules_count === 1
-        ? t("local.module").toLocaleLowerCase()
-        : t("local.modules").toLocaleLowerCase()
-    }`,
-    show: props.info.modules_count > 0,
-  },
-  {
-    id: 2,
-    icon: "circle-i",
-    text: `${props.info.lessons_count} ${
-      props.info.lessons_count === 1
-        ? t("local.lesson").toLocaleLowerCase()
-        : t("local.lessons").toLocaleLowerCase()
-    }`,
-    show: props.info.lessons_count > 0,
-  },
-]);
-
-const checkStatus = (status) => {
-  if (status === "buy") {
-  } else if (status === "start") {
-    useApi()
-      .client({
-        url: `courses/${props.info.slug}/start`,
-        method: "post",
-      })
-      .then(() => {
-        router.push(`/panel/course/${props.info.slug}`);
-      });
-  } else if (status === "continue" || status === "completed") {
-    router.push(`/panel/course/${props.info.slug}`);
-  }
+const openCourse = () => { if (props.info.user_status !== "buy") router.push(`/panel/course/${props.info.slug}`); };
+const checkStatus = async (status) => {
+  if (status === "buy") return;
+  if (status === "start" || status === "not_started") await useApi().client({ url: `courses/${props.info.slug}/start`, method: "post" });
+  router.push(`/panel/course/${props.info.slug}`);
 };
 </script>
 
 <style lang="scss" scoped>
-.card {
-  &__wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: $gap-md;
-    box-shadow: $box-shadow;
-    border-radius: $border-r-xl;
-    border: 1px solid var(--surface-200);
-    background-color: var(--surface-100);
-    cursor: pointer;
-    transition: 0.25s linear;
-    &:hover {
-      box-shadow: $box-shadow-md;
-      transform: scale(1.0099);
-    }
-    &:hover .card__icon {
-      transform: translateX(7.5px) rotate(90deg);
-    }
-  }
-  &__description {
-    color: $surface-400;
-    font-size: 14px;
-    padding-bottom: $padding-md;
-  }
-  &__icon {
-    transition: 0.2s linear;
-  }
-  &__btn {
-    width: 100%;
-  }
-  &__content {
-    padding: 0 $padding-md $padding-md;
-    display: flex;
-    flex-direction: column;
-    gap: $gap-sm;
-    &-top {
-      display: flex;
-      justify-content: space-between;
-      gap: $gap-md;
-    }
-  }
-  &__no-image,
-  &__preview {
-    border-top-left-radius: $border-r-lg;
-    border-top-right-radius: $border-r-lg;
-  }
-  &__info {
-    display: flex;
-    align-items: center;
-    gap: $gap-md;
-    border-top: 1.5px solid var(--surface-200);
-    padding-top: $padding-md;
-    &-text {
-      font-size: 14px;
-      color: var(--surface-400);
-    }
-  }
-  &__point {
-    color: var(--surface-400);
-  }
-  &__box {
-    display: flex;
-    align-items: center;
-    gap: $gap-xs;
-  }
-  &__footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: $gap-md;
-    margin-top: 12px;
-  }
-  &__btn {
-    &--start {
-      margin-left: auto;
-    }
-  }
-}
+.course-card {--card-bg:#fff;--card-visual:#edf3fb;--card-title:#1d2434;--card-muted:#778196;--card-track:#dce4ef;--card-border:#e2e8f1;--card-accent:#8993a7;overflow:hidden;border:1px solid var(--card-border);border-radius:18px;background:var(--card-bg);box-shadow:0 8px 22px rgba(21,31,47,.09);transition:transform .2s ease,box-shadow .2s ease;&:hover{transform:translateY(-3px);box-shadow:0 13px 28px rgba(21,31,47,.15)}&__visual{position:relative;display:grid;height:180px;place-items:center;cursor:pointer;background:var(--card-visual)}&__status{position:absolute;top:14px;right:14px;padding:6px 10px;border-radius:7px;color:var(--card-accent);background:color-mix(in srgb,var(--card-accent) 14%,transparent);font-size:13px;font-weight:700}&__symbol{color:var(--card-accent);font-size:59px;line-height:1;font-family:Georgia,serif}&__content{padding:21px 20px 18px;background:var(--card-bg)}&__title{min-height:50px;margin:0;color:var(--card-title);font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.38;cursor:pointer}&__meta{display:flex;gap:17px;margin-top:12px;color:var(--card-muted);font-size:14px}&__meta span+span::before{content:"•";margin-right:17px}&__progress{margin-top:20px}&__progress>div:first-child{display:flex;justify-content:space-between;color:var(--card-muted);font-size:13px}&__progress b{color:var(--card-title)}&__track{height:10px;overflow:hidden;margin-top:9px;padding:1px;border:1px solid var(--card-track);border-radius:99px}&__track i{display:block;height:100%;border-radius:5px;background:repeating-linear-gradient(90deg,$primary-color 0,$primary-color calc(33.333% - 4px),transparent calc(33.333% - 4px),transparent 33.333%)}&__footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:26px;padding-top:10px;border-top:1px solid var(--card-border)}&__price{color:var(--card-title);font-size:17px}&__action{padding:11px 16px;border:1px solid color-mix(in srgb,var(--card-accent) 55%,var(--card-border));border-radius:10px;background:transparent;color:var(--card-accent);font-size:14px;font-weight:700;cursor:pointer}&--progress{--card-accent:#efad37;--card-visual:#fff8e8}&--progress .course-card__action{border:0;background:$primary-color;color:var(--white-fixed)}&--completed{--card-accent:#42bd83;--card-visual:#eaf9f1}&--completed .course-card__action{border:0;background:#e1f6eb}}
+:global(html.dark) .course-card{--card-bg:#151b2d;--card-visual:#202940;--card-title:#f3f5fb;--card-muted:#9aa4b7;--card-track:#303b54;--card-border:#29344a;--card-accent:#7f8a9f;box-shadow:0 8px 22px rgba(0,0,0,.22)}
+:global(html.dark) .course-card--progress{--card-visual:#202940}:global(html.dark) .course-card--completed{--card-visual:#202940}@media(max-width:560px){.course-card__visual{height:155px}}
 </style>

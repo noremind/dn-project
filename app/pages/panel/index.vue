@@ -157,9 +157,9 @@ definePageMeta({ middleware: ["auth"] });
   overflow: hidden;
   padding: 28px 36px 30px;
   border-radius: 24px;
-  background: linear-gradient(112deg, #1958ef, #2f87f6);
+  background: $primary-color;
   color: #fff;
-  box-shadow: 0 2px 5px #1648ad44;
+  box-shadow: 0 2px 5px rgba($primary-color, 0.27);
 }
 .dashboard__head {
   position: relative;
@@ -175,7 +175,7 @@ definePageMeta({ middleware: ["auth"] });
   width: 92px;
   height: 92px;
   border-radius: 50%;
-  background: #80aaff88;
+  background: rgba($primary-color, 0.35);
   font-size: 35px;
   font-weight: 700;
 }
@@ -188,7 +188,7 @@ definePageMeta({ middleware: ["auth"] });
   display: flex;
   flex-wrap: wrap;
   gap: 22px;
-  color: #d8e6ff;
+  color: rgba($white-fixed, 0.82);
   font-size: 18px;
 }
 .dashboard__meta span::before {
@@ -199,7 +199,7 @@ definePageMeta({ middleware: ["auth"] });
   margin-left: auto;
   padding: 13px 19px;
   border-radius: 15px;
-  background: #9fc3ff66;
+  background: rgba($white-fixed, 0.24);
   color: #fff;
   font-size: 17px;
 }
@@ -217,11 +217,11 @@ definePageMeta({ middleware: ["auth"] });
   min-width: 192px;
   padding: 18px 22px;
   border-radius: 15px;
-  background: #8ab4ff42;
+  background: rgba($white-fixed, 0.16);
 }
 .dashboard__details small {
   font-size: 14px;
-  color: #cbdcff;
+  color: rgba($white-fixed, 0.76);
 }
 .dashboard__details b {
   font-size: 18px;
@@ -274,8 +274,8 @@ definePageMeta({ middleware: ["auth"] });
   font-weight: 700;
 }
 .dashboard__icon--blue {
-  background: #eaf2ff;
-  color: #2765f6;
+  background: rgba($primary-color, 0.1);
+  color: $primary-color;
 }
 .dashboard__icon--green {
   background: #ecfff3;
@@ -307,12 +307,12 @@ definePageMeta({ middleware: ["auth"] });
   flex-direction: column;
   text-align: center;
   border-radius: 22px;
-  background: linear-gradient(135deg, #1958ef, #1b4de7);
-  color: #d6e3ff;
+  background: $primary-color;
+  color: rgba($white-fixed, 0.82);
 }
 .dashboard__learning > i {
   margin-bottom: 18px;
-  color: #91b6ff;
+  color: rgba($white-fixed, 0.6);
   font-size: 60px;
   font-style: normal;
 }
@@ -380,11 +380,11 @@ definePageMeta({ middleware: ["auth"] });
   font-style: normal;
 }
 .dashboard__stat--blue {
-  background: #ebf3ff;
-  color: #2364ed;
+  background: rgba($primary-color, 0.1);
+  color: $primary-color;
 }
 .dashboard__stat--blue i {
-  background: #d9e9ff;
+  background: rgba($primary-color, 0.14);
 }
 .dashboard__stat--green {
   background: #edfff3;
@@ -411,7 +411,7 @@ definePageMeta({ middleware: ["auth"] });
   color: #71737d;
 }
 .dashboard__total b {
-  color: #2161ef;
+  color: $primary-color;
 }
 .dashboard__total > i {
   display: block;

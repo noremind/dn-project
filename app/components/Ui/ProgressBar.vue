@@ -55,7 +55,7 @@ const fillOpacity = computed(() => {
 });
 
 const progressColor = computed(() =>
-  props.tone === "success" ? "#4db988" : "#f5ac35",
+  props.tone === "success" ? "#00a0e3" : "#00a0e3",
 );
 </script>
 

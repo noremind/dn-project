@@ -9,34 +9,6 @@
     <div class="aside__wrapper">
       <nav class="aside__nav">
         <ul class="aside__list aside__list--block">
-          <li
-            class="aside__li aside__li--first"
-            :class="{
-              'aside__li--end': !asideStore.isOpen || asideStore.isMobileOpen,
-            }"
-          >
-            <UiLocale
-              v-if="!asideStore.isOpen || asideStore.isMobileOpen"
-              class="aside__locale"
-            />
-            <div></div>
-            <UiIcon
-              class="aside__icon"
-              :icon="asideStore.isOpen ? 'hamburger-i' : 'chevron'"
-              color="black"
-              size="size-24"
-              :deg="asideStore.isOpen ? 'down' : 'right'"
-              @click="asideStore.toggle()"
-            />
-            <UiDarkMode class="aside__dark aside__dark--mobile" />
-            <!-- <UiIcon
-              class="aside__icon aside__icon--mobile"
-              icon="close"
-              color="black"
-              size="size-30"
-              @click="asideStore.mobileToggle()"
-            /> -->
-          </li>
           <li class="aside__group" v-for="list in navs" :key="list.name">
             <button
               type="button"
@@ -47,11 +19,12 @@
             >
               <span>{{ asideStore.isOpen && !asideStore.isMobileOpen ? "------" : list.name }}</span>
               <UiIcon
-                v-if="!asideStore.isOpen || asideStore.isMobileOpen"
+                class="aside__aside-toggle"
                 icon="chevron"
                 color="black"
                 size="size-16"
-                :deg="isGeneralOpen ? '' : 'down'"
+                :deg="asideStore.isOpen && !asideStore.isMobileOpen ? 'right' : 'left'"
+                @click.stop="asideStore.toggle()"
               />
             </button>
             <ul v-show="isGeneralOpen" class="aside__list">
@@ -191,8 +164,12 @@ watch(
     color: var(--surface-400);
     white-space: nowrap;
     &--collapsed {
-      opacity: 0;
+      justify-content: center;
+      span { display: none; }
     }
+  }
+  &__aside-toggle {
+    flex-shrink: 0;
   }
   &__list {
     display: flex;
