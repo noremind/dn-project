@@ -114,5 +114,6 @@
 		,"certificates_issued": "Выдан"
 		,"certificates_expires_in": "Истекает через"
 		,"certificates_days": "{count} дней"
+		,"locked": "Заблокировано"
 	}
 }

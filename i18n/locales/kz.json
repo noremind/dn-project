@@ -112,5 +112,6 @@
     ,"certificates_issued": "Берілген"
     ,"certificates_expires_in": "Мерзімі аяқталуына"
     ,"certificates_days": "{count} күн"
+    ,"locked": "Бұғатталған"
   }
 }

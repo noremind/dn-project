@@ -112,5 +112,6 @@
     ,"certificates_issued": "Issued"
     ,"certificates_expires_in": "Expires in"
     ,"certificates_days": "{count} days"
+    ,"locked": "Locked"
   }
 }
