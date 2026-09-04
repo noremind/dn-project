@@ -40,13 +40,26 @@
           class="lesson__test-card"
           :class="{ 'lesson__test-card--passed': isTestPassed(test) }"
         >
-          <span class="lesson__test-icon">{{ isTestPassed(test) ? "✓" : "▶" }}</span>
+          <span class="lesson__test-icon">{{
+            isTestPassed(test) ? "✓" : "▶"
+          }}</span>
           <div class="lesson__test-content">
             <h3>{{ test.title || t("local.lesson_testing") }}</h3>
-            <p>{{ t("local.test_duration") }}: {{ test.duration || test.duration_minutes || 60 }} {{ t("local.minutes") }} · {{ t("local.passing_score") }}: {{ test.passing_score || test.pass_score || 80 }}%</p>
+            <p>
+              {{ t("local.test_duration") }}:
+              {{ test.duration || test.duration_minutes || 60 }}
+              {{ t("local.minutes") }} · {{ t("local.passing_score") }}:
+              {{ test.passing_score || test.pass_score || 80 }}%
+            </p>
           </div>
-          <span v-if="isTestPassed(test)" class="lesson__test-status">{{ t("local.test_passed") }}</span>
-          <UiButton class="lesson__test-action primary-btn" :label="testState(test).action" @action="redirectToTest(test)" />
+          <span v-if="isTestPassed(test)" class="lesson__test-status">{{
+            t("local.test_passed")
+          }}</span>
+          <UiButton
+            class="lesson__test-action primary-btn"
+            :label="testState(test).action"
+            @action="redirectToTest(test)"
+          />
         </article>
       </section>
 
@@ -184,20 +197,20 @@ const redirectToPreviousLesson = () => {
 
 const redirectToNextLesson = async () => {
   // Если есть тесты - проверяем, что они пройдены
-  if (lesson.value?.lesson_tests?.length > 0) {
-    const passedTests = lesson.value.lesson_tests.filter(
-      (test) => test?.passed,
-    );
+  // if (lesson.value?.lesson_tests?.length > 0) {
+  //   const passedTests = lesson.value.lesson_tests.filter(
+  //     (test) => test?.passed,
+  //   );
 
-    if (!passedTests?.length) {
-      useNotify({
-        title: t("local.error"),
-        text: t("local.first_need_to_take_the_test"),
-        status: "error",
-      });
-      return;
-    }
-  }
+  //   if (!passedTests?.length) {
+  //     useNotify({
+  //       title: t("local.error"),
+  //       text: t("local.first_need_to_take_the_test"),
+  //       status: "error",
+  //     });
+  //     return;
+  //   }
+  // }
 
   isLoading.value = true;
 

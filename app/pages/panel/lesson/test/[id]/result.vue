@@ -12,8 +12,7 @@
           @action="router.back"
         />
         <div>
-          <h1 class="test-result__title">{{ t("local.test_results") }}</h1>
-          <p class="test-result__subtitle">{{ resultSubtitle }}</p>
+          <h1 class="test-result__title">{{ resultSubtitle }}</h1>
         </div>
       </div>
 
