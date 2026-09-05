@@ -209,6 +209,9 @@ const postAuthLogin = async () => {
 <style lang="scss" scoped>
 .login-page {
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -237,6 +240,8 @@ const postAuthLogin = async () => {
 
 .login-card {
   width: min(1060px, 100%);
+  max-width: 100%;
+  min-width: 0;
   min-height: 735px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -248,6 +253,7 @@ const postAuthLogin = async () => {
   color: #f4f6fb;
 
   &__intro {
+    min-width: 0;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -280,6 +286,8 @@ const postAuthLogin = async () => {
   }
 
   &__form {
+    min-width: 0;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     padding: 56px 46px 38px;
@@ -394,6 +402,8 @@ const postAuthLogin = async () => {
   display: flex;
   flex-direction: column;
   gap: 19px;
+  min-width: 0;
+  max-width: 100%;
   &__button {
     width: 100%;
     min-height: 50px;
@@ -411,12 +421,17 @@ const postAuthLogin = async () => {
   display: flex;
   flex-direction: column;
   gap: 9px;
+  min-width: 0;
+  max-width: 100%;
   &__label {
     color: #8d97aa;
     font-size: 14px;
     font-weight: 600;
   }
   &__control {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
     height: 52px;
     display: flex;
     align-items: center;
@@ -576,6 +591,7 @@ const postAuthLogin = async () => {
     font-size: 14px;
   }
   .login-card__form {
+    width: 100%;
     padding: 32px 26px 28px;
   }
   .login-card__intro {

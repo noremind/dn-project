@@ -131,11 +131,11 @@ const handleCourseAction = async () => {
 
 <style lang="scss" scoped>
 .course-page {
-  --course-card: #fff;
-  --course-text: #172033;
-  --course-muted: #657187;
-  --course-panel: #f3f6fa;
-  --course-border: #dce4ef;
+  --course-card: var(--white);
+  --course-text: var(--surface-600);
+  --course-muted: var(--surface-400);
+  --course-panel: var(--surface-100);
+  --course-border: var(--surface-200);
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -213,7 +213,7 @@ const handleCourseAction = async () => {
     overflow: hidden;
     margin: 18px 0 20px;
     border-radius: 99px;
-    background: #d5e0eb;
+    background: var(--surface-250);
   }
   &__progress-track i {
     display: block;
@@ -275,13 +275,6 @@ const handleCourseAction = async () => {
     gap: 12px;
     padding: 18px;
   }
-}
-:global(html.dark) .course-page {
-  --course-card: #151b2d;
-  --course-text: #f2f5fb;
-  --course-muted: #a6b0c1;
-  --course-panel: #1c2639;
-  --course-border: #2d3950;
 }
 .course-page :deep(.accordion__wrapper) {
   border-color: var(--course-border);

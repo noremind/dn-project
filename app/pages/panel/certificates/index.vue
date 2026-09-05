@@ -234,21 +234,21 @@ getCertificates();
 
 <style lang="scss" scoped>
 .certificates {
-  --certificate-card: #ffffff;
-  --certificate-content: #ffffff;
-  --certificate-preview: linear-gradient(105deg, #edf3ff, #e4edfc);
+  --certificate-card: var(--white);
+  --certificate-content: var(--white);
+  --certificate-preview: linear-gradient(105deg, var(--surface-100), var(--surface-150));
   --certificate-preview-valid:
     radial-gradient(circle at 78% 16%, #47d89433, transparent 44%),
-    linear-gradient(105deg, #edf3ff, #e4edfc);
+    linear-gradient(105deg, var(--surface-100), var(--surface-150));
   --certificate-preview-soon:
     radial-gradient(circle at 78% 16%, #f4b03c33, transparent 44%),
-    linear-gradient(105deg, #edf3ff, #e4edfc);
+    linear-gradient(105deg, var(--surface-100), var(--surface-150));
   --certificate-preview-danger:
     radial-gradient(circle at 78% 16%, #fa725f30, transparent 44%),
-    linear-gradient(105deg, #edf3ff, #e4edfc);
-  --certificate-title: #202536;
-  --certificate-muted: #737d92;
-  --certificate-track: #dce4f0;
+    linear-gradient(105deg, var(--surface-100), var(--surface-150));
+  --certificate-title: var(--surface-600);
+  --certificate-muted: var(--surface-400);
+  --certificate-track: var(--surface-250);
   &__wrapper {
     display: flex;
     flex-direction: column;
@@ -443,24 +443,6 @@ getCertificates();
     color: #fa725f;
     background: #fa725f;
   }
-}
-
-:global(html.dark) .certificates {
-  --certificate-card: #141a2b;
-  --certificate-content: #151b2d;
-  --certificate-preview: linear-gradient(105deg, #202b43, #1d2334);
-  --certificate-preview-valid:
-    radial-gradient(circle at 78% 16%, #47d89428, transparent 44%),
-    linear-gradient(105deg, #202b43, #1d2334);
-  --certificate-preview-soon:
-    radial-gradient(circle at 78% 16%, #f4b03c26, transparent 44%),
-    linear-gradient(105deg, #202b43, #1d2334);
-  --certificate-preview-danger:
-    radial-gradient(circle at 78% 16%, #fa725f25, transparent 44%),
-    linear-gradient(105deg, #202b43, #1d2334);
-  --certificate-title: #f5f7ff;
-  --certificate-muted: #a5adbd;
-  --certificate-track: #273148;
 }
 
 @media (max-width: 1024px) {

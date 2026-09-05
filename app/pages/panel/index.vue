@@ -152,7 +152,7 @@ definePageMeta({ middleware: ["auth"] });
   display: flex;
   flex-direction: column;
   gap: 28px;
-  color: #26272d;
+  color: var(--surface-600);
 }
 .dashboard__hero {
   position: relative;
@@ -160,7 +160,7 @@ definePageMeta({ middleware: ["auth"] });
   padding: 28px 36px 30px;
   border-radius: 24px;
   background: $primary-color;
-  color: #fff;
+  color: var(--white-fixed);
   box-shadow: 0 2px 5px rgba($primary-color, 0.27);
 }
 .dashboard__head {
@@ -202,7 +202,7 @@ definePageMeta({ middleware: ["auth"] });
   padding: 13px 19px;
   border-radius: 15px;
   background: rgba($white-fixed, 0.24);
-  color: #fff;
+  color: var(--white-fixed);
   font-size: 17px;
 }
 .dashboard__details {
@@ -294,19 +294,19 @@ definePageMeta({ middleware: ["auth"] });
   color: $primary-color;
 }
 .dashboard__icon--green {
-  background: #ecfff3;
-  color: #00af55;
+  background: rgba($primary-color, 0.1);
+  color: $primary-color;
 }
 .dashboard__icon--yellow {
-  background: #fff9df;
-  color: #e9a000;
+  background: rgba($primary-color, 0.1);
+  color: $primary-color;
 }
 .dashboard__action b {
   font-size: 19px;
 }
 .dashboard__action small {
   margin-top: 5px;
-  color: #898b95;
+  color: var(--surface-400);
   font-size: 16px;
 }
 .dashboard__bottom {
@@ -339,7 +339,7 @@ definePageMeta({ middleware: ["auth"] });
 .dashboard__learning h3 {
   max-width: 600px;
   margin: 0 0 6px;
-  color: #fff;
+  color: var(--white-fixed);
   font-size: 24px;
 }
 .dashboard__learning > small {
@@ -350,8 +350,8 @@ definePageMeta({ middleware: ["auth"] });
   margin-top: 16px;
   padding: 15px 34px;
   border-radius: 16px;
-  background: #ffcf00;
-  color: #171717;
+  background: var(--white-fixed);
+  color: $primary-color;
   font-size: 18px;
   font-weight: 700;
 }
@@ -403,28 +403,28 @@ definePageMeta({ middleware: ["auth"] });
   background: rgba($primary-color, 0.14);
 }
 .dashboard__stat--green {
-  background: #edfff3;
-  color: #00a44d;
+  background: rgba($primary-color, 0.1);
+  color: $primary-color;
 }
 .dashboard__stat--green i {
-  background: #d9fae5;
+  background: rgba($primary-color, 0.14);
 }
 .dashboard__stat--yellow {
-  background: #fffbe4;
-  color: #bd7900;
+  background: rgba($primary-color, 0.1);
+  color: $primary-color;
 }
 .dashboard__stat--yellow i {
-  background: #fff4bd;
+  background: rgba($primary-color, 0.14);
 }
 .dashboard__total {
   margin-top: 27px;
   padding-top: 25px;
-  border-top: 1px solid #555;
+  border-top: 1px solid var(--surface-250);
 }
 .dashboard__total > div {
   display: flex;
   justify-content: space-between;
-  color: #71737d;
+  color: var(--surface-400);
 }
 .dashboard__total b {
   color: $primary-color;
@@ -434,10 +434,10 @@ definePageMeta({ middleware: ["auth"] });
   height: 14px;
   margin: 12px 0;
   border-radius: 999px;
-  background: #f0f0f2;
+  background: var(--surface-200);
 }
 .dashboard__total small {
-  color: #aaaeb9;
+  color: var(--surface-400);
   font-size: 15px;
 }
 @media (max-width: 1100px) {
