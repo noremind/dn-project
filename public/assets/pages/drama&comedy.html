@@ -134,6 +134,16 @@ section{
 .genre-card p{font-size:clamp(16px,1.55vw,20px);line-height:1.5;color:#42516a}
 .genre-translation{margin-top:12px;font-size:clamp(15px,1.4vw,18px);font-weight:800;color:#64818a;line-height:1.45}
 .hint{position:absolute;bottom:16px;color:#718097;font-size:13px}
+.practice{
+  background:
+    radial-gradient(circle at 10% 12%,#fff 0 4%,transparent 24%),
+    linear-gradient(135deg,#fff1dd,#f0eaff 52%,#e7f6f7);
+}
+.practice-image{
+  display:block;width:min(1120px,100%);max-height:62vh;
+  object-fit:contain;border:8px solid #ffffffd9;border-radius:22px;
+  box-shadow:0 16px 42px #52648724;
+}
 @media(max-width:760px){
   html{scroll-snap-type:y proximity}
   section{padding:55px 20px}
@@ -143,6 +153,8 @@ section{
   .genre-card{min-height:250px}
   .nav{right:8px}
   .explanation{height:auto;padding-top:65px;padding-bottom:65px}
+  .practice{height:auto;min-height:100svh;padding-top:65px;padding-bottom:65px}
+  .practice-image{max-height:none;border-width:5px;border-radius:14px}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
@@ -154,6 +166,7 @@ section{
   <a href="#home" class="active" aria-label="Title"></a>
   <a href="#words" aria-label="New words"></a>
   <a href="#explanation" aria-label="Explanation"></a>
+  <a href="#practice" aria-label="Practice activity"></a>
 </nav>
 
 <section class="hero" id="home" aria-label="Drama and Comedy title">
@@ -200,6 +213,16 @@ section{
       <div class="genre-translation">Қайғылы оқиғалар туралы шығарма.</div>
     </article>
   </div>
+</section>
+
+<section class="practice" id="practice" aria-label="Drama and Comedy practice activity">
+  <h1 class="section-title">Let's Practice!</h1>
+  <p class="subtitle">Match the words and complete the definitions.</p>
+  <img
+    class="practice-image"
+    src="/assets/images/content/drama-comedy-activities.png"
+    alt="Drama and Comedy worksheet with vocabulary matching and definition exercises"
+  >
 </section>
 
 <script>
